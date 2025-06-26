@@ -234,7 +234,7 @@ Material:
     - _DistanceMaskFade: 15
     - _DistanceMaskStart: 17
     - _DistanceMask_Fade: 10
-    - _DistanceMask_Start: 5
+    - _DistanceMask_Start: 4.5
     - _DistanceNormalStrength: 0.01
     - _DistanceNormalTile: 5.54
     - _DistortionScale: 2
@@ -332,7 +332,7 @@ Material:
     - _SL_GradientDissolve: 0
     - _SL_MaskScale: 4
     - _SL_Speed: 0.05
-    - _SL_Thickness: 0.3
+    - _SL_Thickness: 0.4
     - _SL_TrailFade: 0
     - _SL_Trail_Fade: 1
     - _SL_WaterDepth: 0.3
@@ -388,7 +388,7 @@ Material:
     - _Underwater_Fade: 15
     - _WORLDSPACEDEPTH: 1
     - _WaterDepth: 0.6
-    - _Water_Depth: 0.5
+    - _Water_Depth: 2.77
     - _WaveHeight: 0.01
     - _WaveHeight2nd: 0.01
     - _WaveLength: 10
@@ -433,7 +433,7 @@ Material:
     - _FarColor: {r: 0.15966535, g: 0.6787135, b: 0.8679245, a: 0}
     - _FoamDistortionSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
     - _FresnelColor: {r: 0.2647297, g: 0.116945416, b: 0.82641506, a: 1}
-    - _InterSec_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _InterSec_Color: {r: 0.06341223, g: 0.7075472, b: 0.60172504, a: 0.7607843}
     - _InterSec_Foam_Pan: {r: 0.2, g: 0.5, b: 0, a: 0}
     - _InterSec_Foam_Tile: {r: 1, g: 1, b: 0, a: 0}
     - _IntersectionDistanceTile: {r: 1, g: 1, b: 0, a: 0}
@@ -455,7 +455,7 @@ Material:
     - _ShoreLineMaskPanning: {r: 0, g: 0, b: 0, a: 0}
     - _ShoreLineMaskTile: {r: 3, g: 3, b: 0, a: 0}
     - _Specular_Color: {r: 68.5935, g: 68.5935, b: 68.5935, a: 1}
-    - _SurfFoam_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _SurfFoam_Color: {r: 1, g: 1, b: 1, a: 0.21960784}
     - _SurfFoam_Pan: {r: 0.2, g: 0.1, b: 0, a: 0}
     - _SurfFoam_Tile: {r: 1, g: 1, b: 0, a: 0}
     - _Surface: {r: 1, g: 1, b: 1, a: 1}
