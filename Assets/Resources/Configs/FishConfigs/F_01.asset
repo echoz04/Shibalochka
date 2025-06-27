@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TypeId: F_01
   Title: Shibiriba
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 09259ec5f843c6420825575c23032eee, type: 3}
   Rarity: 0
+  Size: {x: 1, y: 1}
+  DraggableFishPrefab: {fileID: 7541459135212973697, guid: ff49e3593062f4e62902def6f1efcf85, type: 3}

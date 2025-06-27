@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Sources.Gameplay.Configs.Fish;
 
 namespace Sources.Gameplay.Configs
 {
@@ -11,8 +12,8 @@ namespace Sources.Gameplay.Configs
         private const string WindowTitle = "Project Config";
         private const string FishTabTitle = "Fish Configs";
         private const string MenuPath = "Tools/Edit Project Config";
-        private const string FishAssetFolderPath = "Assets/Resources/Config/FishConfigs";
-        private const string FishRarityAssetFolderPath = "Assets/Resources/Config/FishConfigs/Rarity";
+        private const string FishAssetFolderPath = "Assets/Resources/Configs/FishConfigs";
+        private const string FishRarityAssetFolderPath = "Assets/Resources/Configs/FishConfigs/Rarity";
         private const string DefaultFishTitle = "Shibiriba";
         private const string DefaultFishIdPrefix = "F_";
 

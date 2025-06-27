@@ -16,3 +16,5 @@ MonoBehaviour:
   Title: Shibiriba
   Icon: {fileID: 0}
   Rarity: 0
+  Size: {x: 0, y: 0}
+  DraggableFishPrefab: {fileID: 0}

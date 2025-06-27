@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using Sources.Gameplay.Configs.Fish;
 using UnityEngine;
 
 namespace Sources.Gameplay.Configs
