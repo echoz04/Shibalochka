@@ -54,16 +54,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlendDistance: -0.47
+    - _BlendDistance: 1
     - _BlendNoiseScale: 0
-    - _BlendNoiseStrength: 0
+    - _BlendNoiseStrength: -2
     - _BlendTiling: 0
     - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TerrainHeight: 300
+    - _TerrainHeight: 321.1
     m_Colors:
-    - _TerrainSizeOffset: {r: 400, g: 400, b: -125, a: -125}
+    - _TerrainSizeOffset: {r: 400, g: 400, b: 125, a: 125}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8072016378529245922
