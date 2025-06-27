@@ -3,9 +3,10 @@ using System.Linq;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using Sources.Gameplay.Configs.Fish;
+using Sources.Runtime.Gameplay.Configs.Fish;
+using Sources.Runtime.Gameplay.Configs;
 
-namespace Sources.Gameplay.Configs
+namespace Sources.Editor
 {
     public class ProjectConfigEditorWindow : EditorWindow
     {

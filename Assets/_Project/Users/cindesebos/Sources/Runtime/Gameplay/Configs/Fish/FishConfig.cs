@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources.Gameplay.Configs.Fish
+namespace Sources.Runtime.Gameplay.Configs.Fish
 {
     [CreateAssetMenu(fileName = "Fish Config", menuName = "Configs/New Fish Config")]
     public class FishConfig : ScriptableObject

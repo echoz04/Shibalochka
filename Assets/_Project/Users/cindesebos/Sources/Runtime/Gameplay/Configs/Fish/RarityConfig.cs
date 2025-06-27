@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources.Gameplay.Configs.Fish
+namespace Sources.Runtime.Gameplay.Configs.Fish
 {
     [CreateAssetMenu(fileName = "Rarity Config", menuName = "Configs/New Rarity Config")]
     public class RarityConfig : ScriptableObject

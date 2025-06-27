@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Sources.Gameplay.Configs.Fish;
+using Sources.Runtime.Gameplay.Configs.Fish;
 using UnityEngine;
 
-namespace Sources.Gameplay.Configs
+namespace Sources.Runtime.Gameplay.Configs
 {
     [CreateAssetMenu(fileName = "Global Project Config", menuName = "Configs/New Global Project Config")]
     public class ProjectConfig : ScriptableObject
