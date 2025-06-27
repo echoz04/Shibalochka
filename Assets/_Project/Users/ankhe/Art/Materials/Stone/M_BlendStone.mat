@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_S_TerrainBlend
+  m_Name: M_BlendStone
   m_Shader: {fileID: -6465566751694194690, guid: 60279c0737e9a864cbf677d48f2c2d72, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,11 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 5743287131b991345ae23330517872b5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 34a8df7a88d23384384c36cc97107c90, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BlendTexture:
-        m_Texture: {fileID: 2800000, guid: 34a8df7a88d23384384c36cc97107c90, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5743287131b991345ae23330517872b5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TerrainHeightMap:
-        m_Texture: {fileID: 2800000, guid: 269c5ae791511cc40819ee18facbe95d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,19 +54,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlendDistance: 1
+    - _BlendDistance: 1.1
     - _BlendNoiseScale: 0
     - _BlendNoiseStrength: -2
     - _BlendTiling: 0
     - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TerrainHeight: 321.1
+    - _TerrainHeight: 43.8
     m_Colors:
     - _TerrainSizeOffset: {r: 400, g: 400, b: 125, a: 125}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8072016378529245922
+--- !u!114 &6715154853206080329
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
