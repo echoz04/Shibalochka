@@ -25,11 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 34a8df7a88d23384384c36cc97107c90, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5743287131b991345ae23330517872b5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BlendTexture:
-        m_Texture: {fileID: 2800000, guid: 5743287131b991345ae23330517872b5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 34a8df7a88d23384384c36cc97107c90, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
@@ -54,14 +54,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlendDistance: 13.8
+    - _BlendDistance: -0.47
     - _BlendNoiseScale: 0
     - _BlendNoiseStrength: 0
-    - _BlendTiling: -16.5
+    - _BlendTiling: 0
     - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TerrainHeight: 7.53
+    - _TerrainHeight: 300
     m_Colors:
     - _TerrainSizeOffset: {r: 400, g: 400, b: -125, a: -125}
   m_BuildTextureStacks: []
