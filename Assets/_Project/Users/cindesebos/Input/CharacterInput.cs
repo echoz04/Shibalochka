@@ -99,6 +99,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StopMovingPointer"",
+                    ""type"": ""Button"",
+                    ""id"": ""96e7e602-a261-49e8-9aa1-6cbcfccce711"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -112,6 +121,17 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleCursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c1b383f-0887-4093-b814-7d5520adeff6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StopMovingPointer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -121,6 +141,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_ToggleCursor = m_Interaction.FindAction("ToggleCursor", throwIfNotFound: true);
+        m_Interaction_StopMovingPointer = m_Interaction.FindAction("StopMovingPointer", throwIfNotFound: true);
     }
 
     ~@CharacterInput()
@@ -202,6 +223,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Interaction;
     private List<IInteractionActions> m_InteractionActionsCallbackInterfaces = new List<IInteractionActions>();
     private readonly InputAction m_Interaction_ToggleCursor;
+    private readonly InputAction m_Interaction_StopMovingPointer;
     /// <summary>
     /// Provides access to input actions defined in input action map "Interaction".
     /// </summary>
@@ -217,6 +239,10 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Interaction/ToggleCursor".
         /// </summary>
         public InputAction @ToggleCursor => m_Wrapper.m_Interaction_ToggleCursor;
+        /// <summary>
+        /// Provides access to the underlying input action "Interaction/StopMovingPointer".
+        /// </summary>
+        public InputAction @StopMovingPointer => m_Wrapper.m_Interaction_StopMovingPointer;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -246,6 +272,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @ToggleCursor.started += instance.OnToggleCursor;
             @ToggleCursor.performed += instance.OnToggleCursor;
             @ToggleCursor.canceled += instance.OnToggleCursor;
+            @StopMovingPointer.started += instance.OnStopMovingPointer;
+            @StopMovingPointer.performed += instance.OnStopMovingPointer;
+            @StopMovingPointer.canceled += instance.OnStopMovingPointer;
         }
 
         /// <summary>
@@ -260,6 +289,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @ToggleCursor.started -= instance.OnToggleCursor;
             @ToggleCursor.performed -= instance.OnToggleCursor;
             @ToggleCursor.canceled -= instance.OnToggleCursor;
+            @StopMovingPointer.started -= instance.OnStopMovingPointer;
+            @StopMovingPointer.performed -= instance.OnStopMovingPointer;
+            @StopMovingPointer.canceled -= instance.OnStopMovingPointer;
         }
 
         /// <summary>
@@ -307,5 +339,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleCursor(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "StopMovingPointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStopMovingPointer(InputAction.CallbackContext context);
     }
 }

@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 namespace Sources.Runtime.Gameplay.FishingMiniGames
 {
-    public class Fish : MonoBehaviour
+    public enum FishType
     {
-        [field: SerializeField] public FishType Type { get; private set; }
+        Common = 0,
+        Gold = 1
     }
 }

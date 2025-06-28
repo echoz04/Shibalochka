@@ -15,11 +15,6 @@ namespace Sources.Runtime.Services.SceneLoader
             Debug.Log($"LoadingCurtain constructed with sceneLoader: {sceneLoader}");
 
             _sceneLoader = sceneLoader;
-        }
-
-        private void Start()
-        {
-            Debug.Log($"LoadingCurtain started with sceneLoader: {_sceneLoader}");
 
             _sceneLoader.OnLoadingStarted += Show;
             _sceneLoader.OnLoadingEnded += Hide;

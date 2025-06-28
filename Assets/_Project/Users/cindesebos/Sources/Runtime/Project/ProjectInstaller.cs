@@ -1,6 +1,7 @@
 using Zenject;
 using Sources.Runtime.Services.SceneLoader;
 using Sources.Runtime.Services.AssetLoader;
+using Sources.Runtime.Services.ProjectConfigLoader;
 
 namespace Sources.Runtime.Project
 {
@@ -9,6 +10,7 @@ namespace Sources.Runtime.Project
         public override void InstallBindings()
         {
             BindSceneLoader();
+            BindProjectConfigLoader();
             BindAssetLoader();
             BindInput();
         }
@@ -17,6 +19,13 @@ namespace Sources.Runtime.Project
         {
             Container.Bind<ISceneLoader>()
                 .To<SceneLoader>()
+                .AsSingle();
+        }
+
+        private void BindProjectConfigLoader()
+        {
+            Container.Bind<IProjectConfigLoader>()
+                .To<ProjectConfigLoader>()
                 .AsSingle();
         }
 

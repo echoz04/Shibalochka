@@ -9,5 +9,7 @@ namespace Sources.Runtime.Gameplay.Configs
     {
         public List<RarityConfig> RarityConfigs = new();
         public List<FishConfig> FishConfigs = new();
+
+        [field: SerializeField] public UIConfig UIConfig { get; private set; } = new UIConfig();
     }
 }
