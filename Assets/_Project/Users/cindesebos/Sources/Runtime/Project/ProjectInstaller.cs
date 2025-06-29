@@ -2,17 +2,22 @@ using Zenject;
 using Sources.Runtime.Services.SceneLoader;
 using Sources.Runtime.Services.AssetLoader;
 using Sources.Runtime.Services.ProjectConfigLoader;
+using UnityEngine;
+using Sources.Runtime.Gameplay.Camera;
 
 namespace Sources.Runtime.Project
 {
     public class ProjectInstaller : MonoInstaller
     {
+        [SerializeField] private CursorHandler _cursorHandler;
+
         public override void InstallBindings()
         {
             BindSceneLoader();
             BindProjectConfigLoader();
             BindAssetLoader();
             BindInput();
+            BindCursorHandler();
         }
 
         private void BindSceneLoader()
@@ -39,6 +44,13 @@ namespace Sources.Runtime.Project
         private void BindInput()
         {
             Container.BindInterfacesAndSelfTo<CharacterInput>()
+                .AsSingle();
+        }
+
+        private void BindCursorHandler()
+        {
+            Container.Bind<CursorHandler>()
+                .FromInstance(_cursorHandler)
                 .AsSingle();
         }
     }

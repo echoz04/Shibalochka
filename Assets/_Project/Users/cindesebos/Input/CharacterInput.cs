@@ -88,18 +88,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     ""name"": ""CharacterInput"",
     ""maps"": [
         {
-            ""name"": ""Interaction"",
+            ""name"": ""MiniGames"",
             ""id"": ""505a0d2e-1f22-4b49-9db0-008383aa560f"",
             ""actions"": [
-                {
-                    ""name"": ""ToggleCursor"",
-                    ""type"": ""Button"",
-                    ""id"": ""6f048985-2c2c-4aab-9aac-2bf74e48c3bf"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
                 {
                     ""name"": ""StopMovingPointer"",
                     ""type"": ""Button"",
@@ -108,20 +99,18 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowStamina"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bb38e9f-b57a-4b5a-a537-81e5ace522f9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""5b3c5a45-23da-4427-bab1-f34f1a01165e"",
-                    ""path"": ""<Keyboard>/alt"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ToggleCursor"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""5c1b383f-0887-4093-b814-7d5520adeff6"",
@@ -132,21 +121,85 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""StopMovingPointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d76a91a9-1695-4dc1-9794-5f8288f75ff0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowStamina"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""bbc382cc-3667-49eb-947c-a7d258c8e448"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""41c8fca7-35b0-4383-9d32-c541c8886a9e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""9ec32467-e0cd-4b37-8129-268759848a1d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""abf4813b-3cdb-4b70-906a-663285470891"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79520e67-1bd5-4d1b-ad5e-23aefeca9657"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Interaction
-        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
-        m_Interaction_ToggleCursor = m_Interaction.FindAction("ToggleCursor", throwIfNotFound: true);
-        m_Interaction_StopMovingPointer = m_Interaction.FindAction("StopMovingPointer", throwIfNotFound: true);
+        // MiniGames
+        m_MiniGames = asset.FindActionMap("MiniGames", throwIfNotFound: true);
+        m_MiniGames_StopMovingPointer = m_MiniGames.FindAction("StopMovingPointer", throwIfNotFound: true);
+        m_MiniGames_ShowStamina = m_MiniGames.FindAction("ShowStamina", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_ToggleCursor = m_Camera.FindAction("ToggleCursor", throwIfNotFound: true);
+        m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
     }
 
     ~@CharacterInput()
     {
-        UnityEngine.Debug.Assert(!m_Interaction.enabled, "This will cause a leak and performance issues, CharacterInput.Interaction.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MiniGames.enabled, "This will cause a leak and performance issues, CharacterInput.MiniGames.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, CharacterInput.Camera.Disable() has not been called.");
     }
 
     /// <summary>
@@ -219,34 +272,34 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Interaction
-    private readonly InputActionMap m_Interaction;
-    private List<IInteractionActions> m_InteractionActionsCallbackInterfaces = new List<IInteractionActions>();
-    private readonly InputAction m_Interaction_ToggleCursor;
-    private readonly InputAction m_Interaction_StopMovingPointer;
+    // MiniGames
+    private readonly InputActionMap m_MiniGames;
+    private List<IMiniGamesActions> m_MiniGamesActionsCallbackInterfaces = new List<IMiniGamesActions>();
+    private readonly InputAction m_MiniGames_StopMovingPointer;
+    private readonly InputAction m_MiniGames_ShowStamina;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Interaction".
+    /// Provides access to input actions defined in input action map "MiniGames".
     /// </summary>
-    public struct InteractionActions
+    public struct MiniGamesActions
     {
         private @CharacterInput m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public InteractionActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
+        public MiniGamesActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Interaction/ToggleCursor".
+        /// Provides access to the underlying input action "MiniGames/StopMovingPointer".
         /// </summary>
-        public InputAction @ToggleCursor => m_Wrapper.m_Interaction_ToggleCursor;
+        public InputAction @StopMovingPointer => m_Wrapper.m_MiniGames_StopMovingPointer;
         /// <summary>
-        /// Provides access to the underlying input action "Interaction/StopMovingPointer".
+        /// Provides access to the underlying input action "MiniGames/ShowStamina".
         /// </summary>
-        public InputAction @StopMovingPointer => m_Wrapper.m_Interaction_StopMovingPointer;
+        public InputAction @ShowStamina => m_Wrapper.m_MiniGames_ShowStamina;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
+        public InputActionMap Get() { return m_Wrapper.m_MiniGames; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -254,9 +307,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="InteractionActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="MiniGamesActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(MiniGamesActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -264,17 +317,17 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="InteractionActions" />
-        public void AddCallbacks(IInteractionActions instance)
+        /// <seealso cref="MiniGamesActions" />
+        public void AddCallbacks(IMiniGamesActions instance)
         {
-            if (instance == null || m_Wrapper.m_InteractionActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_InteractionActionsCallbackInterfaces.Add(instance);
-            @ToggleCursor.started += instance.OnToggleCursor;
-            @ToggleCursor.performed += instance.OnToggleCursor;
-            @ToggleCursor.canceled += instance.OnToggleCursor;
+            if (instance == null || m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Add(instance);
             @StopMovingPointer.started += instance.OnStopMovingPointer;
             @StopMovingPointer.performed += instance.OnStopMovingPointer;
             @StopMovingPointer.canceled += instance.OnStopMovingPointer;
+            @ShowStamina.started += instance.OnShowStamina;
+            @ShowStamina.performed += instance.OnShowStamina;
+            @ShowStamina.canceled += instance.OnShowStamina;
         }
 
         /// <summary>
@@ -283,24 +336,24 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="InteractionActions" />
-        private void UnregisterCallbacks(IInteractionActions instance)
+        /// <seealso cref="MiniGamesActions" />
+        private void UnregisterCallbacks(IMiniGamesActions instance)
         {
-            @ToggleCursor.started -= instance.OnToggleCursor;
-            @ToggleCursor.performed -= instance.OnToggleCursor;
-            @ToggleCursor.canceled -= instance.OnToggleCursor;
             @StopMovingPointer.started -= instance.OnStopMovingPointer;
             @StopMovingPointer.performed -= instance.OnStopMovingPointer;
             @StopMovingPointer.canceled -= instance.OnStopMovingPointer;
+            @ShowStamina.started -= instance.OnShowStamina;
+            @ShowStamina.performed -= instance.OnShowStamina;
+            @ShowStamina.canceled -= instance.OnShowStamina;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="InteractionActions.UnregisterCallbacks(IInteractionActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MiniGamesActions.UnregisterCallbacks(IMiniGamesActions)" />.
         /// </summary>
-        /// <seealso cref="InteractionActions.UnregisterCallbacks(IInteractionActions)" />
-        public void RemoveCallbacks(IInteractionActions instance)
+        /// <seealso cref="MiniGamesActions.UnregisterCallbacks(IMiniGamesActions)" />
+        public void RemoveCallbacks(IMiniGamesActions instance)
         {
-            if (m_Wrapper.m_InteractionActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -310,27 +363,156 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="InteractionActions.AddCallbacks(IInteractionActions)" />
-        /// <seealso cref="InteractionActions.RemoveCallbacks(IInteractionActions)" />
-        /// <seealso cref="InteractionActions.UnregisterCallbacks(IInteractionActions)" />
-        public void SetCallbacks(IInteractionActions instance)
+        /// <seealso cref="MiniGamesActions.AddCallbacks(IMiniGamesActions)" />
+        /// <seealso cref="MiniGamesActions.RemoveCallbacks(IMiniGamesActions)" />
+        /// <seealso cref="MiniGamesActions.UnregisterCallbacks(IMiniGamesActions)" />
+        public void SetCallbacks(IMiniGamesActions instance)
         {
-            foreach (var item in m_Wrapper.m_InteractionActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_MiniGamesActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_InteractionActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="InteractionActions" /> instance referencing this action map.
+    /// Provides a new <see cref="MiniGamesActions" /> instance referencing this action map.
     /// </summary>
-    public InteractionActions @Interaction => new InteractionActions(this);
+    public MiniGamesActions @MiniGames => new MiniGamesActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_ToggleCursor;
+    private readonly InputAction m_Camera_Look;
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Interaction" which allows adding and removing callbacks.
+    /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
-    /// <seealso cref="InteractionActions.AddCallbacks(IInteractionActions)" />
-    /// <seealso cref="InteractionActions.RemoveCallbacks(IInteractionActions)" />
-    public interface IInteractionActions
+    public struct CameraActions
+    {
+        private @CharacterInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public CameraActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/ToggleCursor".
+        /// </summary>
+        public InputAction @ToggleCursor => m_Wrapper.m_Camera_ToggleCursor;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/Look".
+        /// </summary>
+        public InputAction @Look => m_Wrapper.m_Camera_Look;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="CameraActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="CameraActions" />
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @ToggleCursor.started += instance.OnToggleCursor;
+            @ToggleCursor.performed += instance.OnToggleCursor;
+            @ToggleCursor.canceled += instance.OnToggleCursor;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="CameraActions" />
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @ToggleCursor.started -= instance.OnToggleCursor;
+            @ToggleCursor.performed -= instance.OnToggleCursor;
+            @ToggleCursor.canceled -= instance.OnToggleCursor;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CameraActions.UnregisterCallbacks(ICameraActions)" />.
+        /// </summary>
+        /// <seealso cref="CameraActions.UnregisterCallbacks(ICameraActions)" />
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="CameraActions.AddCallbacks(ICameraActions)" />
+        /// <seealso cref="CameraActions.RemoveCallbacks(ICameraActions)" />
+        /// <seealso cref="CameraActions.UnregisterCallbacks(ICameraActions)" />
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="CameraActions" /> instance referencing this action map.
+    /// </summary>
+    public CameraActions @Camera => new CameraActions(this);
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MiniGames" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MiniGamesActions.AddCallbacks(IMiniGamesActions)" />
+    /// <seealso cref="MiniGamesActions.RemoveCallbacks(IMiniGamesActions)" />
+    public interface IMiniGamesActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "StopMovingPointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStopMovingPointer(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ShowStamina" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShowStamina(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="CameraActions.AddCallbacks(ICameraActions)" />
+    /// <seealso cref="CameraActions.RemoveCallbacks(ICameraActions)" />
+    public interface ICameraActions
     {
         /// <summary>
         /// Method invoked when associated input action "ToggleCursor" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -340,11 +522,11 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleCursor(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "StopMovingPointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnStopMovingPointer(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

@@ -60,14 +60,14 @@ namespace Sources.Runtime.Gameplay.FishingMiniGames
 
             await _view.OnShow();
 
-            _characterInput.Interaction.StopMovingPointer.performed += OnStopMovingPointer;
+            _characterInput.MiniGames.StopMovingPointer.performed += OnStopMovingPointer;
 
             _currentMiniGame.Launch();
         }
 
         private void OnStopMovingPointer(InputAction.CallbackContext context)
         {
-            _characterInput.Interaction.StopMovingPointer.performed -= OnStopMovingPointer;
+            _characterInput.MiniGames.StopMovingPointer.performed -= OnStopMovingPointer;
 
             _currentMiniGame.End();
         }
@@ -78,7 +78,7 @@ namespace Sources.Runtime.Gameplay.FishingMiniGames
 
             foreach (var slot in _fishSlots)
             {
-                if (slot.IsOccupied) continue;
+                if (slot.IsOccupied == true) continue;
 
                 slot.CurrentFish = Instantiate(slot == _fishSlots[goldFishIndex] ? _commonFishPrefab : _goldFishPrefab, slot.SpawnPoint);
                 slot.CurrentFish.transform.SetParent(slot.SpawnPoint);
@@ -89,7 +89,7 @@ namespace Sources.Runtime.Gameplay.FishingMiniGames
 
         private void OnDestroy()
         {
-            _characterInput.Interaction.StopMovingPointer.performed -= OnStopMovingPointer;
+            _characterInput.MiniGames.StopMovingPointer.performed -= OnStopMovingPointer;
         }
     }
 

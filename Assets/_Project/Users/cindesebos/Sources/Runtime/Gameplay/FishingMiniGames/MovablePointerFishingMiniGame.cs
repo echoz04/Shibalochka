@@ -35,7 +35,6 @@ namespace Sources.Runtime.Gameplay.FishingMiniGames
 
         public void Launch()
         {
-
             OnLaunched?.Invoke();
 
             MovePointer();
@@ -78,10 +77,6 @@ namespace Sources.Runtime.Gameplay.FishingMiniGames
 
             _pointerTween.Kill();
             _pointerTween = null;
-        }
-
-        public void SpawnFish(Fish fish)
-        {
         }
     }
 }

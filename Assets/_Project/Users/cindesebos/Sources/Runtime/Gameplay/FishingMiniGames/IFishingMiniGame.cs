@@ -9,7 +9,6 @@ namespace Sources.Runtime.Gameplay.FishingMiniGames
         event Action OnEnded;
 
         void Launch();
-        void SpawnFish(Fish fish);
         void End();
     }
 }

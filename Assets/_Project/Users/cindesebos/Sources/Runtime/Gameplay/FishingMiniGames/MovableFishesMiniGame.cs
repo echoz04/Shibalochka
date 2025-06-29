@@ -27,10 +27,5 @@ namespace Sources.Runtime.Gameplay.FishingMiniGames
         {
             OnEnded?.Invoke();
         }
-
-        public void SpawnFish(Fish fish)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
