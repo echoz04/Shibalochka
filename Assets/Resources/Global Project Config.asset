@@ -18,3 +18,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f01635e99896880d8b88bea6766b3909, type: 2}
   FishConfigs:
   - {fileID: 11400000, guid: 16210ed6fb1ff14c58c23c10997f0b0e, type: 2}
+  <CameraConfig>k__BackingField:
+    <Sensitivity>k__BackingField: 2
+    <MinVerticalAngle>k__BackingField: -25
+    <MaxVerticalAngle>k__BackingField: 25
+  <UIConfig>k__BackingField:
+    <FishingPointerMoveDuration>k__BackingField: 2.45
+    <FishingShowDelayBetweenItems>k__BackingField: 0.225
+    <FishingFadeDuration>k__BackingField: 0.55
+    <SliderTimeToMaxValue>k__BackingField: 1

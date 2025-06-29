@@ -22,21 +22,27 @@ namespace Sources.Runtime.Gameplay.Camera
         {
             _characterInput.Camera.ToggleCursor.started += Unlock;
             _characterInput.Camera.ToggleCursor.canceled += Lock;
+
+            IsInteractable = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void Lock(InputAction.CallbackContext context)
         {
-            if (CanHandle == false) return;
+            //if (CanHandle == false) return;
 
             IsInteractable = false;
+            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
         private void Unlock(InputAction.CallbackContext context)
         {
-            if (CanHandle == false) return;
+            //if (CanHandle == false) return;
 
             IsInteractable = true;
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
 

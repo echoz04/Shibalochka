@@ -1,72 +1,74 @@
 using UnityEngine;
 using Zenject;
 using UnityEngine.InputSystem;
+using Sources.Runtime.Services.ProjectConfigLoader;
+using Sources.Runtime.Gameplay.Configs;
 
 namespace Sources.Runtime.Gameplay.Camera
 {
     public class CameraRotator : MonoBehaviour
     {
-        [SerializeField] private float _rotationSpeed = 100f;
         [SerializeField] private Transform _holder;
+        [SerializeField] private Transform _cameraPivot;
 
         private CharacterInput _characterInput;
         private CursorHandler _cursorHandler;
+        private CameraConfig _cameraConfig;
 
-        private bool _isWorking;
+        private float _xRotation;
+        private bool _canRotate = false;
 
         [Inject]
-        private void Construct(CharacterInput characterInput, CursorHandler cursorHandler)
+        private void Construct(CharacterInput characterInput, CursorHandler cursorHandler, IProjectConfigLoader projectConfigLoader)
         {
             _characterInput = characterInput;
             _cursorHandler = cursorHandler;
+            _cameraConfig = projectConfigLoader.ProjectConfig.CameraConfig;
         }
 
         private void Awake()
         {
-            _characterInput.Camera.ToggleCursor.started += StartWorking;
-            _characterInput.Camera.ToggleCursor.canceled += StopWorking;
+            _characterInput.Camera.Rotate.started += StartWorking;
+            _characterInput.Camera.Rotate.canceled += StopWorking;
         }
 
         private void Update()
         {
-            Debug.Log(GetCameraLook());
-
-            if (_isWorking == false || _cursorHandler.IsInteractable == false)
+            if (_canRotate == false || _cursorHandler.IsInteractable == true)
                 return;
 
-            Rotate();
+            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+            Rotate(mouseDelta);
         }
 
-        private void Rotate()
+        private void Rotate(Vector2 delta)
         {
-            Vector2 mousePosition = Mouse.current.position.ReadValue();
-            float screenMiddle = Screen.width / 2f;
 
-            float direction = 0;
 
-            if (mousePosition.x < screenMiddle - 2f) direction = 1f;
-            else if (mousePosition.x > screenMiddle + 2f) direction = -1f;
+            float mouseX = delta.x * _cameraConfig.Sensitivity * Time.deltaTime;
+            float mouseY = delta.y * _cameraConfig.Sensitivity * Time.deltaTime;
 
-            if (direction != 0)
-            {
-                _holder.Rotate(Vector3.up * direction * _rotationSpeed * Time.deltaTime);
-            }
+            _holder.Rotate(Vector3.up * mouseX);
+
+            _xRotation -= mouseY;
+            _xRotation = Mathf.Clamp(_xRotation, _cameraConfig.MinVerticalAngle, _cameraConfig.MaxVerticalAngle);
+            _cameraPivot.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         }
 
         private void StartWorking(InputAction.CallbackContext context)
         {
-            _isWorking = true;
+            _canRotate = true;
         }
 
         private void StopWorking(InputAction.CallbackContext context)
         {
-            _isWorking = false;
+            _canRotate = false;
         }
 
         private void OnDestroy()
         {
-            _characterInput.Camera.ToggleCursor.started -= StartWorking;
-            _characterInput.Camera.ToggleCursor.canceled -= StopWorking;
+            _characterInput.Camera.Rotate.started -= StartWorking;
+            _characterInput.Camera.Rotate.canceled -= StopWorking;
         }
 
         private float GetCameraLook() => _characterInput.Camera.Look.ReadValue<float>();
