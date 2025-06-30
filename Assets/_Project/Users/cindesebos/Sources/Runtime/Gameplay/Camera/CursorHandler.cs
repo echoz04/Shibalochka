@@ -30,7 +30,8 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Lock(InputAction.CallbackContext context)
         {
-            //if (CanHandle == false) return;
+            if (CanHandle == false)
+                return;
 
             IsInteractable = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -39,7 +40,8 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Unlock(InputAction.CallbackContext context)
         {
-            //if (CanHandle == false) return;
+            if (CanHandle == false)
+                return;
 
             IsInteractable = true;
             Cursor.lockState = CursorLockMode.None;

@@ -27,3 +27,5 @@ MonoBehaviour:
     <FishingShowDelayBetweenItems>k__BackingField: 0.225
     <FishingFadeDuration>k__BackingField: 0.55
     <SliderTimeToMaxValue>k__BackingField: 1
+    <StaminaFillDuration>k__BackingField: 2
+    <StaminaDrainDuration>k__BackingField: 2.5

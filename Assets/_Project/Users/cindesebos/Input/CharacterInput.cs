@@ -92,7 +92,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             ""id"": ""505a0d2e-1f22-4b49-9db0-008383aa560f"",
             ""actions"": [
                 {
-                    ""name"": ""StopMovingPointer"",
+                    ""name"": ""UseMovingPointer"",
                     ""type"": ""Button"",
                     ""id"": ""96e7e602-a261-49e8-9aa1-6cbcfccce711"",
                     ""expectedControlType"": """",
@@ -118,7 +118,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""StopMovingPointer"",
+                    ""action"": ""UseMovingPointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -208,7 +208,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
 }");
         // MiniGames
         m_MiniGames = asset.FindActionMap("MiniGames", throwIfNotFound: true);
-        m_MiniGames_StopMovingPointer = m_MiniGames.FindAction("StopMovingPointer", throwIfNotFound: true);
+        m_MiniGames_UseMovingPointer = m_MiniGames.FindAction("UseMovingPointer", throwIfNotFound: true);
         m_MiniGames_ShowStamina = m_MiniGames.FindAction("ShowStamina", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
@@ -296,7 +296,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     // MiniGames
     private readonly InputActionMap m_MiniGames;
     private List<IMiniGamesActions> m_MiniGamesActionsCallbackInterfaces = new List<IMiniGamesActions>();
-    private readonly InputAction m_MiniGames_StopMovingPointer;
+    private readonly InputAction m_MiniGames_UseMovingPointer;
     private readonly InputAction m_MiniGames_ShowStamina;
     /// <summary>
     /// Provides access to input actions defined in input action map "MiniGames".
@@ -310,9 +310,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// </summary>
         public MiniGamesActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "MiniGames/StopMovingPointer".
+        /// Provides access to the underlying input action "MiniGames/UseMovingPointer".
         /// </summary>
-        public InputAction @StopMovingPointer => m_Wrapper.m_MiniGames_StopMovingPointer;
+        public InputAction @UseMovingPointer => m_Wrapper.m_MiniGames_UseMovingPointer;
         /// <summary>
         /// Provides access to the underlying input action "MiniGames/ShowStamina".
         /// </summary>
@@ -343,9 +343,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Add(instance);
-            @StopMovingPointer.started += instance.OnStopMovingPointer;
-            @StopMovingPointer.performed += instance.OnStopMovingPointer;
-            @StopMovingPointer.canceled += instance.OnStopMovingPointer;
+            @UseMovingPointer.started += instance.OnUseMovingPointer;
+            @UseMovingPointer.performed += instance.OnUseMovingPointer;
+            @UseMovingPointer.canceled += instance.OnUseMovingPointer;
             @ShowStamina.started += instance.OnShowStamina;
             @ShowStamina.performed += instance.OnShowStamina;
             @ShowStamina.canceled += instance.OnShowStamina;
@@ -360,9 +360,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="MiniGamesActions" />
         private void UnregisterCallbacks(IMiniGamesActions instance)
         {
-            @StopMovingPointer.started -= instance.OnStopMovingPointer;
-            @StopMovingPointer.performed -= instance.OnStopMovingPointer;
-            @StopMovingPointer.canceled -= instance.OnStopMovingPointer;
+            @UseMovingPointer.started -= instance.OnUseMovingPointer;
+            @UseMovingPointer.performed -= instance.OnUseMovingPointer;
+            @UseMovingPointer.canceled -= instance.OnUseMovingPointer;
             @ShowStamina.started -= instance.OnShowStamina;
             @ShowStamina.performed -= instance.OnShowStamina;
             @ShowStamina.canceled -= instance.OnShowStamina;
@@ -525,12 +525,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     public interface IMiniGamesActions
     {
         /// <summary>
-        /// Method invoked when associated input action "StopMovingPointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "UseMovingPointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnStopMovingPointer(InputAction.CallbackContext context);
+        void OnUseMovingPointer(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "ShowStamina" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

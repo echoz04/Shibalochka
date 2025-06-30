@@ -6,7 +6,7 @@
             "id": "505a0d2e-1f22-4b49-9db0-008383aa560f",
             "actions": [
                 {
-                    "name": "StopMovingPointer",
+                    "name": "UseMovingPointer",
                     "type": "Button",
                     "id": "96e7e602-a261-49e8-9aa1-6cbcfccce711",
                     "expectedControlType": "",
@@ -32,7 +32,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "StopMovingPointer",
+                    "action": "UseMovingPointer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

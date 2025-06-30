@@ -16,7 +16,8 @@ namespace Sources.Runtime.Gameplay.Camera
         private CameraConfig _cameraConfig;
 
         private float _xRotation;
-        private bool _canRotate = false;
+        private bool _isRotating = false;
+        private bool _canRotate = true;
 
         [Inject]
         private void Construct(CharacterInput characterInput, CursorHandler cursorHandler, IProjectConfigLoader projectConfigLoader)
@@ -34,7 +35,7 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Update()
         {
-            if (_canRotate == false || _cursorHandler.IsInteractable == true)
+            if (_isRotating == false || _canRotate == false || _cursorHandler.IsInteractable == true)
                 return;
 
             Vector2 mouseDelta = Mouse.current.delta.ReadValue();
@@ -43,8 +44,6 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Rotate(Vector2 delta)
         {
-
-
             float mouseX = delta.x * _cameraConfig.Sensitivity * Time.deltaTime;
             float mouseY = delta.y * _cameraConfig.Sensitivity * Time.deltaTime;
 
@@ -55,14 +54,24 @@ namespace Sources.Runtime.Gameplay.Camera
             _cameraPivot.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         }
 
-        private void StartWorking(InputAction.CallbackContext context)
+        public void OnPanelShow()
+        {
+            _canRotate = false;
+        }
+
+        public void OnPanelHide()
         {
             _canRotate = true;
         }
 
+        private void StartWorking(InputAction.CallbackContext context)
+        {
+            _isRotating = true;
+        }
+
         private void StopWorking(InputAction.CallbackContext context)
         {
-            _canRotate = false;
+            _isRotating = false;
         }
 
         private void OnDestroy()

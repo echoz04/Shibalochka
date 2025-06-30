@@ -1,8 +1,5 @@
-using System;
-using Cysharp.Threading.Tasks;
-using TMPro;
+using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Sources.Runtime.Gameplay
@@ -12,7 +9,7 @@ namespace Sources.Runtime.Gameplay
         private CharacterInput _characterInput;
 
         [Inject]
-        private void Construct(CharacterInput characterInput)
+        private void Construct(CharacterInput characterInput, FishingMiniGameBootstrapper fishingMiniGameBootstrapper)
         {
             _characterInput = characterInput;
         }

@@ -1,0 +1,122 @@
+{
+    "name": "CharacterInput",
+    "maps": [
+        {
+            "name": "MiniGames",
+            "id": "505a0d2e-1f22-4b49-9db0-008383aa560f",
+            "actions": [
+                {
+                    "name": "StopMovingPointer",
+                    "type": "Button",
+                    "id": "96e7e602-a261-49e8-9aa1-6cbcfccce711",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShowStamina",
+                    "type": "Button",
+                    "id": "9bb38e9f-b57a-4b5a-a537-81e5ace522f9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5c1b383f-0887-4093-b814-7d5520adeff6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StopMovingPointer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d76a91a9-1695-4dc1-9794-5f8288f75ff0",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShowStamina",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "bbc382cc-3667-49eb-947c-a7d258c8e448",
+            "actions": [
+                {
+                    "name": "ToggleCursor",
+                    "type": "Button",
+                    "id": "41c8fca7-35b0-4383-9d32-c541c8886a9e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "9ec32467-e0cd-4b37-8129-268759848a1d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Button",
+                    "id": "74692b4e-475b-4022-96cf-31d71d3f8d41",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "abf4813b-3cdb-4b70-906a-663285470891",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79520e67-1bd5-4d1b-ad5e-23aefeca9657",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58cf1443-beaa-408d-a390-5781b4d39828",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
