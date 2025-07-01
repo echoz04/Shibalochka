@@ -11,6 +11,7 @@ namespace Sources.Runtime.Gameplay.Configs
         public List<FishConfig> FishConfigs = new();
 
         [field: SerializeField] public CameraConfig CameraConfig { get; private set; } = new CameraConfig();
+        [field: Space(17.5f)]
         [field: SerializeField] public UIConfig UIConfig { get; private set; } = new UIConfig();
     }
 }

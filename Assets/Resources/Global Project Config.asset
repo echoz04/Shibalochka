@@ -24,8 +24,12 @@ MonoBehaviour:
     <MaxVerticalAngle>k__BackingField: 25
   <UIConfig>k__BackingField:
     <FishingPointerMoveDuration>k__BackingField: 2.45
+    <FishesMoveSpeed>k__BackingField: 0.25
     <FishingShowDelayBetweenItems>k__BackingField: 0.225
     <FishingFadeDuration>k__BackingField: 0.55
     <SliderTimeToMaxValue>k__BackingField: 1
+    <ValueToAddOnCommonCatch>k__BackingField: 10
+    <ValueToAddOnGoldCatch>k__BackingField: 15
+    <ValueToRemoveOnMiss>k__BackingField: 5
     <StaminaFillDuration>k__BackingField: 2
     <StaminaDrainDuration>k__BackingField: 2.5
