@@ -164,6 +164,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneToLoad: 1
+  cellPrefab: {fileID: 0}
+  _gridRoot: {fileID: 0}
 --- !u!1 &731874661
 GameObject:
   m_ObjectHideFlags: 0

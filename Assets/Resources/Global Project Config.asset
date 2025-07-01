@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f01635e99896880d8b88bea6766b3909, type: 2}
   FishConfigs:
   - {fileID: 11400000, guid: 16210ed6fb1ff14c58c23c10997f0b0e, type: 2}
+  - {fileID: 11400000, guid: 620c919a09fc5c7b6b8c1a549214cef3, type: 2}
   <CameraConfig>k__BackingField:
     <Sensitivity>k__BackingField: 2
     <MinVerticalAngle>k__BackingField: -25
@@ -33,3 +34,7 @@ MonoBehaviour:
     <ValueToRemoveOnMiss>k__BackingField: 5
     <StaminaFillDuration>k__BackingField: 2
     <StaminaDrainDuration>k__BackingField: 2.5
+  <InventoryConfig>k__BackingField:
+    <InventoryWidth>k__BackingField: 5
+    <InventoryHeigth>k__BackingField: 5
+    <InventoryCellSize>k__BackingField: 110
