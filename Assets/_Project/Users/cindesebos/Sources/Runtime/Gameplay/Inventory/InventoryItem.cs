@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Zenject;
+using Sources.Runtime.Gameplay.Configs;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
@@ -12,7 +13,6 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         [field: SerializeField] public ItemConfig Config { get; private set; }
 
-        public bool IsOccupied { get; private set; }
         public bool IsRotated { get; private set; }
         public Vector2Int LastHoverPosition { get; private set; }
         public bool HasValidHover { get; private set; }
@@ -22,25 +22,15 @@ namespace Sources.Runtime.Gameplay.Inventory
         [SerializeField] private Image _image;
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        private InventoryService _inventory;
+        private InventoryRoot _inventory;
         private Vector3 _originalPosition;
         private Transform _originalParent;
-        private Vector2 _pointerOffset;
-
-        private void OnValidate()
-        {
-            _canvas ??= GetComponentInParent<Canvas>();
-            _canvasGroup ??= GetComponent<CanvasGroup>();
-            _image ??= GetComponent<Image>();
-        }
 
         [Inject]
-        private void Construct(InventoryService inventory)
+        private void Construct(InventoryRoot inventory)
         {
             _inventory = inventory;
-
             CurrentCells = new List<InventoryCell>();
-
             IsRotated = false;
             HasValidHover = false;
         }
@@ -48,48 +38,55 @@ namespace Sources.Runtime.Gameplay.Inventory
         private void Awake()
         {
             _image.sprite = Config.Icon;
+            _image.alphaHitTestMinimumThreshold = 0.1f;
+
+            var rt = GetComponent<RectTransform>();
+            rt.anchorMin = rt.anchorMax = new Vector2(0, 1);
+            rt.pivot = new Vector2(0, 1);
+
+            _originalPosition = transform.position;
+            _originalParent = transform.parent;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             _inventory.TryRemoveItem(this);
-
             CurrentDragging = this;
 
-            _originalPosition = transform.position;
-            _originalParent = transform.parent;
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out _pointerOffset);
-
-            transform.SetParent(_canvas.transform, true);
             _canvasGroup.blocksRaycasts = false;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            Vector3 globalPoint;
-
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            _canvas.transform as RectTransform, eventData.position, eventData.pressEventCamera, out globalPoint))
-        {
-            transform.position = globalPoint - new Vector3(_pointerOffset.x, _pointerOffset.y, 0f);
-        }
+            transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (HasValidHover)
+            if (HasValidHover && _inventory.CanPlaceItem(Config, LastHoverPosition, IsRotated, out var cells))
             {
-                _inventory.TryPlaceItem(this);
+                _inventory.TryRemoveItem(this);
+
+                foreach (var cell in cells)
+                    cell.SetOccupied(this);
+
+                CurrentCells = cells;
+
+                transform.SetParent(_inventory.ItemsContainer, false);
+                SnapToCells(cells);
             }
             else
             {
-                transform.SetParent(_canvas.transform, false);
-                transform.position = eventData.position;
-
+                transform.SetParent(_originalParent, false);
+                transform.position = _originalPosition;
                 CurrentCells.Clear();
             }
+
+            HasValidHover = false;
+            _inventory.ClearHighlight();
+            _canvasGroup.blocksRaycasts = true;
+            CurrentDragging = null;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -109,19 +106,27 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public void ClearHover() => HasValidHover = false;
 
-        public void OnPlaced(List<InventoryCell> cells)
+        private void SnapToCells(List<InventoryCell> cells)
         {
-            CurrentCells = cells;
+            float cellSize = _inventory.CellSize;
+            float spacing = _inventory.Spacing;
 
-            transform.SetParent(cells[0].transform, false);
-            transform.localPosition = Vector3.zero;
-        }
+            Vector2Int min = new Vector2Int(int.MaxValue, int.MaxValue);
 
-        public void CancelPlacement()
-        {
-            transform.SetParent(_originalParent, false);
+            foreach (var cell in cells)
+            {
+                if (cell.X < min.x) min.x = cell.X;
+                if (cell.Y < min.y) min.y = cell.Y;
+            }
 
-            transform.position = _originalPosition;
+            var rt = GetComponent<RectTransform>();
+            rt.anchorMin = rt.anchorMax = new Vector2(0, 1);
+            rt.pivot = new Vector2(0, 1);
+
+            float totalCellSize = cellSize + spacing;
+
+            Vector2 pos = new Vector2(min.x * totalCellSize, -min.y * totalCellSize);
+            rt.anchoredPosition = pos;
         }
     }
 }

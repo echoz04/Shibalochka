@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Sources.Runtime.Gameplay.Configs.Fish
+namespace Sources.Runtime.Gameplay.Configs
 {
     [System.Serializable]
     public class UIConfig
@@ -10,6 +10,7 @@ namespace Sources.Runtime.Gameplay.Configs.Fish
         [field: SerializeField] public float FishesMoveSpeed { get; private set; } = 0.25f;
         [field: SerializeField] public float FishingShowDelayBetweenItems { get; private set; } = 0.225f;
         [field: SerializeField] public float FishingFadeDuration { get; private set; } = 0.55f;
+        [field: SerializeField] public float FishingClickCooldown { get; private set; } = 0.1f;
         [field: Space(17.5f)]
 
         [field: SerializeField] public float SliderTimeToMaxValue { get; private set; } = 1f;

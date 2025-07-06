@@ -11,7 +11,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             get => _value;
             set
             {
-                _value = value;
+                _value = Mathf.Clamp(value, 0, 100);
 
                 _slider.value = Value;
                 Debug.Log($"{Mathf.RoundToInt(Value)}%     Value is {Value} ");

@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 using Zenject;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using DG.Tweening;
-using Cysharp.Threading.Tasks;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 
 namespace Sources.Runtime.Gameplay.MiniGames
@@ -15,7 +14,6 @@ namespace Sources.Runtime.Gameplay.MiniGames
         [SerializeField] private GameObject _stamina;
         [SerializeField] private Image _sliderImage;
 
-        private CursorHandler _cursorHandler;
         private CharacterInput _characterInput;
         private IProjectConfigLoader _projectConfigLoader;
         private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
@@ -25,10 +23,9 @@ namespace Sources.Runtime.Gameplay.MiniGames
         private bool _hasAlreadyShown;
 
         [Inject]
-        private void Construct(CursorHandler cursorHandler, CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
+        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
         FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator)
         {
-            _cursorHandler = cursorHandler;
             _characterInput = characterInput;
             _projectConfigLoader = projectConfigLoader;
             _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
@@ -37,18 +34,15 @@ namespace Sources.Runtime.Gameplay.MiniGames
 
         private void Start()
         {
-            _characterInput.MiniGames.ShowStamina.started += Show;
-            _characterInput.MiniGames.ShowStamina.canceled += Hide;
-
-            _fishingMiniGameBootstrapper.OnEnded += ResetShownState;
+            _characterInput.MiniGames.ShowStamina.started += Handle;
+            _characterInput.MiniGames.ShowStamina.canceled += BoostrapFishingMiniGame;
         }
 
-        private void Show(InputAction.CallbackContext context)
+        private void Handle(InputAction.CallbackContext context)
         {
-            if (_hasAlreadyShown == true || _cursorHandler.IsInteractable == true)
+            if (_hasAlreadyShown == true)
                 return;
 
-            _cursorHandler.SetCanHandle(false);
             _cameraRotator.OnPanelShow();
 
             _stamina.SetActive(true);
@@ -60,7 +54,7 @@ namespace Sources.Runtime.Gameplay.MiniGames
                 .SetLoops(-1);
         }
 
-        private void Hide(InputAction.CallbackContext context)
+        private void BoostrapFishingMiniGame(InputAction.CallbackContext context)
         {
             if (_hasAlreadyShown)
                 return;
@@ -74,17 +68,15 @@ namespace Sources.Runtime.Gameplay.MiniGames
 
             _stamina.SetActive(false);
 
-            _fishingMiniGameBootstrapper.LaunchRandomMiniGame(result).Forget();
+            _fishingMiniGameBootstrapper.Launch(result);
         }
 
-        private void ResetShownState() => _hasAlreadyShown = false;
+        public void ResetShownState() => _hasAlreadyShown = false;
 
         private void OnDestroy()
         {
-            _characterInput.MiniGames.ShowStamina.started -= Show;
-            _characterInput.MiniGames.ShowStamina.canceled -= Hide;
-
-            _fishingMiniGameBootstrapper.OnEnded -= ResetShownState;
+            _characterInput.MiniGames.ShowStamina.started -= Handle;
+            _characterInput.MiniGames.ShowStamina.canceled -= BoostrapFishingMiniGame;
 
             if (_staminaTween != null && _staminaTween.IsActive())
                 _staminaTween.Kill();

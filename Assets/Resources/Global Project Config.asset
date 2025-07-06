@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: Global Project Config
   m_EditorClassIdentifier: 
   RarityConfigs:
-  - {fileID: 11400000, guid: 5da8edcc32bbb2c6aa96eac99e5e30ef, type: 2}
-  - {fileID: 11400000, guid: 20dd9e17327ef473c91062f016285069, type: 2}
-  - {fileID: 11400000, guid: f01635e99896880d8b88bea6766b3909, type: 2}
-  FishConfigs:
-  - {fileID: 11400000, guid: 16210ed6fb1ff14c58c23c10997f0b0e, type: 2}
-  - {fileID: 11400000, guid: 620c919a09fc5c7b6b8c1a549214cef3, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ItemConfigs:
+  - {fileID: 11400000, guid: e7c752c3e4fc7cb52b65df6075d83cca, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   <CameraConfig>k__BackingField:
     <Sensitivity>k__BackingField: 2
     <MinVerticalAngle>k__BackingField: -25
@@ -28,6 +32,7 @@ MonoBehaviour:
     <FishesMoveSpeed>k__BackingField: 0.25
     <FishingShowDelayBetweenItems>k__BackingField: 0.225
     <FishingFadeDuration>k__BackingField: 0.55
+    <ClickCooldown>k__BackingField: 0.25
     <SliderTimeToMaxValue>k__BackingField: 1
     <ValueToAddOnCommonCatch>k__BackingField: 10
     <ValueToAddOnGoldCatch>k__BackingField: 15
@@ -35,6 +40,7 @@ MonoBehaviour:
     <StaminaFillDuration>k__BackingField: 2
     <StaminaDrainDuration>k__BackingField: 2.5
   <InventoryConfig>k__BackingField:
-    <InventoryWidth>k__BackingField: 5
-    <InventoryHeigth>k__BackingField: 5
-    <InventoryCellSize>k__BackingField: 110
+    <InventoryWidth>k__BackingField: 8
+    <InventoryHeigth>k__BackingField: 7
+    <InventoryCellSize>k__BackingField: 108
+    <InventorySpacing>k__BackingField: 4

@@ -12,17 +12,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [SerializeField] private GameObject _miniGame;
 
         private IProjectConfigLoader _projectConfigLoader;
-        private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
 
-        public void Initialize(IProjectConfigLoader projectConfigLoader, FishingMiniGameBootstrapper fishingMiniGameBootstrapper)
+        public void Initialize(IProjectConfigLoader projectConfigLoader)
         {
             _projectConfigLoader = projectConfigLoader;
-            _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
-
-            _fishingMiniGameBootstrapper.OnEnded += OnEnded;
         }
 
-        public async UniTask OnShow()
+        public async UniTask Show()
         {
             _miniGame.gameObject.SetActive(true);
 
@@ -70,7 +66,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             await UniTask.WhenAll(fadeTask, scaleTask);
         }
 
-        private void OnEnded()
+        public void Hide()
         {
             _miniGame.gameObject.SetActive(false);
         }
@@ -78,11 +74,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         private void SetItemAlpha(FishingCanvasItem item, float alpha)
         {
             item.CanvasGroup.alpha = alpha;
-        }
-
-        private void OnDestroy()
-        {
-            _fishingMiniGameBootstrapper.OnEnded -= OnEnded;
         }
     }
 

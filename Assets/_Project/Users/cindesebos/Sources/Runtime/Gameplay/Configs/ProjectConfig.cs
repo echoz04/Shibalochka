@@ -8,7 +8,9 @@ namespace Sources.Runtime.Gameplay.Configs
     public class ProjectConfig : ScriptableObject
     {
         public List<RarityConfig> RarityConfigs = new();
-        public List<FishConfig> FishConfigs = new();
+        public List<ItemConfig> ItemConfigs = new();
+
+        [field: Space(17.5f)]
 
         [field: SerializeField] public CameraConfig CameraConfig { get; private set; } = new CameraConfig();
         [field: Space(17.5f)]

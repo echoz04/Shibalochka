@@ -13,64 +13,48 @@ namespace Sources.Runtime.Gameplay.Inventory
         [SerializeField] private Image _highlightImage;
         [SerializeField] private Image _backgroundImage;
 
-        private InventoryService _inventory;
+        private InventoryRoot _inventory;
         private float _size;
 
-        private Color _defaultColor = new Color(1f, 1f, 1f, 0.1f);
-        private Color _occupiedColor = new Color(1f, 0f, 0f, 0.3f);
-
-        public void Initialize(int x, int y, InventoryService inventory, float cellSize)
+        public void Initialize(int x, int y, InventoryRoot inventory, float cellSize)
         {
-            X = x;
-            Y = y;
+            X = x; Y = y;
             _inventory = inventory;
             _size = cellSize;
 
-            var rectTransform = GetComponent<RectTransform>();
-            rectTransform.anchoredPosition = new Vector2(X * _size, Y * _size);
-            rectTransform.sizeDelta = new Vector2(_size, _size);
+            var rt = GetComponent<RectTransform>();
+            rt.anchoredPosition = new Vector2(X * _size, -Y * _size);
+            rt.sizeDelta = new Vector2(_size, _size);
 
             IsOccupied = false;
             _highlightImage.enabled = false;
-            _backgroundImage.color = _defaultColor;
+            _backgroundImage.color = Color.white;
         }
 
         public void SetOccupied(InventoryItem item)
         {
             IsOccupied = true;
-            _backgroundImage.color = _occupiedColor;
-
-            item.transform.SetParent(transform, false);
-            item.transform.localPosition = Vector3.zero;
+            _backgroundImage.color = Color.red;
         }
 
         public void ClearOccupied()
         {
             IsOccupied = false;
-            _backgroundImage.color = _defaultColor;
+            _backgroundImage.color = Color.white;
         }
 
-        public void SetHighlight(bool enable)
-        {
-            _highlightImage.enabled = enable;
-        }
+        public void SetHighlight(bool enable) => _highlightImage.enabled = enable;
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (InventoryItem.CurrentDragging == null)
-                return;
-
-            var drag = InventoryItem.CurrentDragging;
-            Vector2Int basePosition = new Vector2Int(X, Y);
-            drag.SetHover(basePosition);
-            _inventory.HighlightCells(drag.Config, basePosition, drag.IsRotated);
+            if (InventoryItem.CurrentDragging == null) return;
+            InventoryItem.CurrentDragging.SetHover(new Vector2Int(X, Y));
+            _inventory.HighlightCells(InventoryItem.CurrentDragging.Config, new Vector2Int(X, Y), InventoryItem.CurrentDragging.IsRotated);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (InventoryItem.CurrentDragging == null)
-                return;
-
+            if (InventoryItem.CurrentDragging == null) return;
             InventoryItem.CurrentDragging.ClearHover();
             _inventory.ClearHighlight();
         }
