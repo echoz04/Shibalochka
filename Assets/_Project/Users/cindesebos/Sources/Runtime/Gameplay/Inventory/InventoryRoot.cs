@@ -16,10 +16,12 @@ namespace Sources.Runtime.Gameplay.Inventory
         public float Spacing => _config.InventorySpacing;
 
         [SerializeField] private RectTransform _content;
+        [SerializeField] private RectTransform _draggingContainer;
         [SerializeField] private InventoryCell _cellPrefab;
 
         private InventoryConfig _config;
         private InventoryCell[,] _currentGrid;
+        [SerializeField] private List<InventoryItem> _currentItems;
 
         [Inject]
         private void Construct(IProjectConfigLoader projectConfigLoader)
@@ -27,9 +29,6 @@ namespace Sources.Runtime.Gameplay.Inventory
             _config = projectConfigLoader.ProjectConfig.InventoryConfig;
         }
 
-        /// <summary>
-        /// Построить сетку вручную при вызове.
-        /// </summary>
         public void BuildGrid()
         {
             _currentGrid = new InventoryCell[Width, Height];
@@ -45,7 +44,24 @@ namespace Sources.Runtime.Gameplay.Inventory
             }
         }
 
-        public bool CanPlaceItem(ItemConfig config, Vector2Int basePos, bool rotated, out List<InventoryCell> cells)
+        public void StartDraggingItem(InventoryItem item)
+        {
+            foreach (var currentItem in _currentItems)
+            {
+                if (currentItem == item)
+                    currentItem.SetRaycastValue(true);
+                else
+                    currentItem.SetRaycastValue(false);
+            }
+        }
+
+        public void EndDraggingItem()
+        {
+            foreach (var currentItem in _currentItems)
+                currentItem.SetRaycastValue(true);
+        }
+
+        public bool TryPlaceItem(ItemConfig config, Vector2Int basePos, bool rotated, out List<InventoryCell> cells)
         {
             cells = new List<InventoryCell>();
 
@@ -67,24 +83,6 @@ namespace Sources.Runtime.Gameplay.Inventory
             return true;
         }
 
-        public bool TryPlaceItem(InventoryItem item, out List<InventoryCell> cells)
-        {
-            cells = new List<InventoryCell>();
-
-            if (!item.HasValidHover)
-                return false;
-
-            if (!CanPlaceItem(item.Config, item.LastHoverPosition, item.IsRotated, out cells))
-                return false;
-
-            TryRemoveItem(item);
-
-            foreach (var cell in cells)
-                cell.SetOccupied(item);
-
-            return true;
-        }
-
         public bool TryRemoveItem(InventoryItem item)
         {
             if (item.CurrentCells == null || item.CurrentCells.Count == 0)
@@ -94,6 +92,7 @@ namespace Sources.Runtime.Gameplay.Inventory
                 cell.ClearOccupied();
 
             item.CurrentCells.Clear();
+            _currentItems.Remove(item);
             return true;
         }
 
@@ -101,11 +100,22 @@ namespace Sources.Runtime.Gameplay.Inventory
         {
             ClearHighlight();
 
-            if (CanPlaceItem(config, basePos, rotated, out var cells))
+            if (TryPlaceItem(config, basePos, rotated, out var cells))
             {
                 foreach (var cell in cells)
                     cell.SetHighlight(true);
             }
+        }
+
+        public void AddItem(InventoryItem item) =>
+            _currentItems.Add(item);
+
+        public void RemoveItem(InventoryItem item) =>
+            _currentItems.Remove(item);
+
+        public void MoveToDraggingContainer(InventoryItem item)
+        {
+            item.transform.SetParent(_draggingContainer);
         }
 
         public void ClearHighlight()

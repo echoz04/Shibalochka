@@ -20,7 +20,6 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Image _image;
-        [SerializeField] private CanvasGroup _canvasGroup;
 
         private InventoryRoot _inventory;
         private Vector3 _originalPosition;
@@ -50,11 +49,12 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            _inventory.StartDraggingItem(this);
+
             _inventory.TryRemoveItem(this);
             CurrentDragging = this;
 
-
-            _canvasGroup.blocksRaycasts = false;
+            _inventory.MoveToDraggingContainer(this);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -64,29 +64,32 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (HasValidHover && _inventory.CanPlaceItem(Config, LastHoverPosition, IsRotated, out var cells))
+            if (HasValidHover == true && _inventory.TryPlaceItem(Config, LastHoverPosition, IsRotated, out var cells) == true)
             {
                 _inventory.TryRemoveItem(this);
 
                 foreach (var cell in cells)
-                    cell.SetOccupied(this);
+                    cell.SetOccupied();
 
                 CurrentCells = cells;
 
                 transform.SetParent(_inventory.ItemsContainer, false);
                 SnapToCells(cells);
+
+                _inventory.AddItem(this);
             }
             else
             {
                 transform.SetParent(_originalParent, false);
                 transform.position = _originalPosition;
                 CurrentCells.Clear();
+                _inventory.RemoveItem(this);
             }
 
             HasValidHover = false;
             _inventory.ClearHighlight();
-            _canvasGroup.blocksRaycasts = true;
             CurrentDragging = null;
+            _inventory.EndDraggingItem();
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -105,6 +108,9 @@ namespace Sources.Runtime.Gameplay.Inventory
         }
 
         public void ClearHover() => HasValidHover = false;
+
+        public void SetRaycastValue(bool value) =>
+            _image.raycastTarget = value;
 
         private void SnapToCells(List<InventoryCell> cells)
         {

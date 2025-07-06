@@ -16,13 +16,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  ItemConfigs:
-  - {fileID: 11400000, guid: e7c752c3e4fc7cb52b65df6075d83cca, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  ItemConfigs: []
   <CameraConfig>k__BackingField:
     <Sensitivity>k__BackingField: 2
     <MinVerticalAngle>k__BackingField: -25
@@ -32,7 +26,7 @@ MonoBehaviour:
     <FishesMoveSpeed>k__BackingField: 0.25
     <FishingShowDelayBetweenItems>k__BackingField: 0.225
     <FishingFadeDuration>k__BackingField: 0.55
-    <ClickCooldown>k__BackingField: 0.25
+    <FishingClickCooldown>k__BackingField: 0.1
     <SliderTimeToMaxValue>k__BackingField: 1
     <ValueToAddOnCommonCatch>k__BackingField: 10
     <ValueToAddOnGoldCatch>k__BackingField: 15

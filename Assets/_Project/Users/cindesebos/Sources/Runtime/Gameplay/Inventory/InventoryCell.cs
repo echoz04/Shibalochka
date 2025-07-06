@@ -31,7 +31,7 @@ namespace Sources.Runtime.Gameplay.Inventory
             _backgroundImage.color = Color.white;
         }
 
-        public void SetOccupied(InventoryItem item)
+        public void SetOccupied()
         {
             IsOccupied = true;
             _backgroundImage.color = Color.red;
