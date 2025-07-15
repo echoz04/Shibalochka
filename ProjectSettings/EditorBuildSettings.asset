@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Project/Users/cindesebos/Scenes/Gameplay.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Project/Users/cindesebos/Scenes/Bootstrap.unity
     guid: d9916013d112c5f34b98ae1b87fba0c8
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Users/herynax/Scenes/MainIsland_herynax.unity
     guid: 2eb3f1317f48e0345b05833654d1f67f
   m_configObjects:

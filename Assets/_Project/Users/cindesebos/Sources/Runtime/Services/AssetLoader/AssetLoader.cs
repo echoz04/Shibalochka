@@ -33,9 +33,9 @@ namespace Sources.Runtime.Services.AssetLoader
             _container.InjectGameObject(instance);
 
             return new Disposable<T>(instance as T, () =>
-            {
-                Addressables.ReleaseInstance(instance);
-            });
+                {
+                    Addressables.ReleaseInstance(instance);
+                });
         }
     }
 }

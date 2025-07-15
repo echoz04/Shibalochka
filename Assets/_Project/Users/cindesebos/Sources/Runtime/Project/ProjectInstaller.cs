@@ -10,9 +10,8 @@ namespace Sources.Runtime.Project
 {
     public class ProjectInstaller : MonoInstaller
     {
-        [SerializeField] private CursorHandler _cursorHandler;
+        [SerializeField] private CursorView _cursorView;
         [SerializeField] private InventoryCell _cellPrefab;
-        [SerializeField] private RectTransform _gridRoot;
 
         public override void InstallBindings()
         {
@@ -20,8 +19,7 @@ namespace Sources.Runtime.Project
             BindProjectConfigLoader();
             BindAssetLoader();
             BindInput();
-            BindCursorHandler();
-            BindInventory();
+            BindCursorView();
         }
 
         private void BindSceneLoader()
@@ -51,18 +49,11 @@ namespace Sources.Runtime.Project
                 .AsSingle();
         }
 
-        private void BindCursorHandler()
+        private void BindCursorView()
         {
-            Container.Bind<CursorHandler>()
-                .FromInstance(_cursorHandler)
+            Container.Bind<CursorView>()
+                .FromInstance(_cursorView)
                 .AsSingle();
-        }
-
-        private void BindInventory()
-        {
-            Container.BindInterfacesAndSelfTo<InventoryService>()
-                .AsSingle()
-                .WithArguments(_cellPrefab, _gridRoot);
         }
     }
 }

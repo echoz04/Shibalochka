@@ -12,7 +12,7 @@ namespace Sources.Runtime.Gameplay.Camera
         [SerializeField] private Transform _cameraPivot;
 
         private CharacterInput _characterInput;
-        private CursorHandler _cursorHandler;
+        private CursorView _cursorView;
         private CameraConfig _cameraConfig;
 
         private float _xRotation;
@@ -20,10 +20,10 @@ namespace Sources.Runtime.Gameplay.Camera
         private bool _canRotate = true;
 
         [Inject]
-        private void Construct(CharacterInput characterInput, CursorHandler cursorHandler, IProjectConfigLoader projectConfigLoader)
+        private void Construct(CharacterInput characterInput, CursorView cursorView, IProjectConfigLoader projectConfigLoader)
         {
             _characterInput = characterInput;
-            _cursorHandler = cursorHandler;
+            _cursorView = cursorView;
             _cameraConfig = projectConfigLoader.ProjectConfig.CameraConfig;
         }
 
@@ -35,7 +35,7 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Update()
         {
-            if (_isRotating == false || _canRotate == false || _cursorHandler.IsInteractable == true)
+            if (_isRotating == false || _canRotate == false)
                 return;
 
             Vector2 mouseDelta = Mouse.current.delta.ReadValue();
@@ -66,11 +66,15 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void StartWorking(InputAction.CallbackContext context)
         {
+            _cursorView.Hide();
+
             _isRotating = true;
         }
 
         private void StopWorking(InputAction.CallbackContext context)
         {
+            _cursorView.Show();
+
             _isRotating = false;
         }
 
