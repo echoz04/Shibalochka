@@ -1,3 +1,4 @@
+using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
 using Zenject;

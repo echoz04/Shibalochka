@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: 34a8df7a88d23384384c36cc97107c90, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa94fe6f5e5c95346822de6435853172, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Moss:
@@ -59,12 +59,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Contrast: 2.5
+    - _Contrast: 0.33
+    - _Float: -1
     - _Mask: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Intencity: {r: 0, g: 1.3, b: 0, a: 0}
+    - _Intencity: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -5701,7 +5701,7 @@
                 "m_Node": {
                     "m_Id": "caddc2ff6da0402aadc268a0179d33f5"
                 },
-                "m_SlotId": 2
+                "m_SlotId": 1
             },
             "m_InputSlot": {
                 "m_Node": {
@@ -7024,7 +7024,7 @@
     "m_Title": "New Group",
     "m_Position": {
         "x": 842.0,
-        "y": 812.9999389648438
+        "y": 813.0
     }
 }
 
@@ -7074,8 +7074,8 @@
     "m_ObjectId": "01defb588fa045a3ae1a91d0133e99b8",
     "m_Title": "Reflection Add",
     "m_Position": {
-        "x": 8535.9990234375,
-        "y": 350.99993896484377
+        "x": 8536.0,
+        "y": 351.0
     }
 }
 
@@ -8516,8 +8516,8 @@
     "m_ObjectId": "0bc54e4499aa4f8896d50dd59d92f253",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 6276.99951171875,
-        "y": -310.9999694824219
+        "x": 6277.0,
+        "y": -311.0
     }
 }
 
@@ -9649,8 +9649,8 @@
     "m_ObjectId": "154bb27d6a3e4953bd3358ce4a44826a",
     "m_Title": "Surface Foam Alpha",
     "m_Position": {
-        "x": 5722.99951171875,
-        "y": -64.99999237060547
+        "x": 5723.0,
+        "y": -65.0
     }
 }
 
@@ -10235,7 +10235,7 @@
     "m_Title": "ShoreFade",
     "m_Position": {
         "x": 930.0,
-        "y": -400.9999694824219
+        "y": -401.0
     }
 }
 
@@ -10786,7 +10786,7 @@
     "m_Title": "Depth Color",
     "m_Position": {
         "x": 13.0,
-        "y": 508.99993896484377
+        "y": 509.0
     }
 }
 
@@ -10824,7 +10824,7 @@
     "m_ObjectId": "1df6a98043794b4bb7755987135e636c",
     "m_Title": "Surface Foam Color",
     "m_Position": {
-        "x": 6115.99951171875,
+        "x": 6116.0,
         "y": 732.0
     }
 }
@@ -11494,7 +11494,7 @@
     "m_Title": "underwater color",
     "m_Position": {
         "x": 1538.0,
-        "y": 827.9999389648438
+        "y": 828.0
     }
 }
 
@@ -12158,8 +12158,8 @@
     "m_ObjectId": "2692779876ea4db795e6989af1339864",
     "m_Title": "Surface Foam Switch",
     "m_Position": {
-        "x": 6476.99951171875,
-        "y": 358.99993896484377
+        "x": 6477.0,
+        "y": 359.0
     }
 }
 
@@ -13515,8 +13515,8 @@
     "m_ObjectId": "32e6acb1e86249b89ce358cf7c1215ef",
     "m_Title": "Shoreline Switch",
     "m_Position": {
-        "x": 4936.99951171875,
-        "y": 426.99993896484377
+        "x": 4937.0,
+        "y": 427.0
     }
 }
 
@@ -13526,7 +13526,7 @@
     "m_ObjectId": "32fc518f6bc44a51ab47b0b8ae584683",
     "m_Title": "Lighting",
     "m_Position": {
-        "x": 8600.9990234375,
+        "x": 8601.0,
         "y": 1113.0
     }
 }
@@ -13558,8 +13558,8 @@
     "m_ObjectId": "33b176647d7c4477b0caec25f66cd7e1",
     "m_Title": "ReflectionProbe",
     "m_Position": {
-        "x": 7444.99951171875,
-        "y": 1981.9998779296875
+        "x": 7445.0,
+        "y": 1982.0
     }
 }
 
@@ -13778,8 +13778,8 @@
     "m_ObjectId": "34fe60a6364941e88d663d3e7f4af492",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 375.00054931640627,
-        "y": 2136.999755859375
+        "x": 375.0,
+        "y": 2137.0
     }
 }
 
@@ -14067,7 +14067,7 @@
     "m_ObjectId": "36d3155f0f1142abbb6355749f2363c7",
     "m_Title": "Surface Foam Mask",
     "m_Position": {
-        "x": -2158.9990234375,
+        "x": -2159.0,
         "y": 1483.0
     }
 }
@@ -14214,8 +14214,8 @@
     "m_ObjectId": "39168f0701334be99199b1d954308a49",
     "m_Title": "Surface Alpha",
     "m_Position": {
-        "x": 6525.99951171875,
-        "y": -74.99999237060547
+        "x": 6526.0,
+        "y": -75.0
     }
 }
 
@@ -15120,8 +15120,8 @@
     "m_ObjectId": "3fca0daee6f4401ba2aca5b09ba46f72",
     "m_Title": "Foam Shadow Distance mask",
     "m_Position": {
-        "x": 1074.0001220703125,
-        "y": 2334.999755859375
+        "x": 1074.0,
+        "y": 2335.0
     }
 }
 
@@ -16827,7 +16827,7 @@
     "m_Title": "underwater switch",
     "m_Position": {
         "x": 2166.0,
-        "y": 450.9999084472656
+        "y": 451.0
     }
 }
 
@@ -17305,7 +17305,7 @@
     "m_ObjectId": "4e6f9ab7957d496e8d65a0e8b644571e",
     "m_Title": "Planner Reflections",
     "m_Position": {
-        "x": 7165.99951171875,
+        "x": 7166.0,
         "y": 1357.0
     }
 }
@@ -17414,7 +17414,7 @@
     "m_ObjectId": "4f38ca8c5c78488bbff8f9846ad99619",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 2556.000732421875,
+        "x": 2556.0,
         "y": 1732.0
     }
 }
@@ -17962,8 +17962,8 @@
     "m_ObjectId": "5303193c22de465d9b2a5a3279e8d96b",
     "m_Title": "Refraction switch",
     "m_Position": {
-        "x": 7140.99951171875,
-        "y": 281.99993896484377
+        "x": 7141.0,
+        "y": 282.0
     }
 }
 
@@ -19255,8 +19255,8 @@
     "m_ObjectId": "5c154b70255049b79ee6604466eca63f",
     "m_Title": "Water Depth",
     "m_Position": {
-        "x": -4133.99853515625,
-        "y": 2171.999755859375
+        "x": -4134.0,
+        "y": 2172.0
     }
 }
 
@@ -21295,8 +21295,8 @@
     "m_ObjectId": "696fac96715649e9b88351b5e1f0bce2",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 7.000551223754883,
-        "y": 746.9999389648438
+        "x": 7.0,
+        "y": 747.0
     }
 }
 
@@ -21613,7 +21613,7 @@
     "m_Title": "New Group",
     "m_Position": {
         "x": -4715.0,
-        "y": 2321.999755859375
+        "y": 2322.0
     }
 }
 
@@ -22998,8 +22998,8 @@
     "m_ObjectId": "76059f4e1ecf44b09a85d9c9cbdfac23",
     "m_Title": "Shadow Mask",
     "m_Position": {
-        "x": 9395.9990234375,
-        "y": 726.9999389648438
+        "x": 9396.0,
+        "y": 727.0
     }
 }
 
@@ -24074,7 +24074,7 @@
     "m_Title": "New Group",
     "m_Position": {
         "x": -1982.0,
-        "y": 4529.00048828125
+        "y": 4529.0
     }
 }
 
@@ -26389,8 +26389,8 @@
     "m_ObjectId": "90c7060b4c1f409d9c6437eaea4467d3",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 1770.0001220703125,
-        "y": 1737.9998779296875
+        "x": 1770.0,
+        "y": 1738.0
     }
 }
 
@@ -26400,8 +26400,8 @@
     "m_ObjectId": "90ef9525b29f46f1906687104683a8ec",
     "m_Title": "Wave top color ",
     "m_Position": {
-        "x": 5180.99951171875,
-        "y": 765.9999389648438
+        "x": 5181.0,
+        "y": 766.0
     }
 }
 
@@ -26607,7 +26607,7 @@
     "m_Title": "surface foam underwater",
     "m_Position": {
         "x": -146.0,
-        "y": 2944.999755859375
+        "y": 2945.0
     }
 }
 
@@ -27042,7 +27042,7 @@
     "m_Title": "Intersection foam color",
     "m_Position": {
         "x": 3359.0,
-        "y": 755.9999389648438
+        "y": 756.0
     }
 }
 
@@ -27342,7 +27342,7 @@
     "m_Title": "SHORELINE COLOR",
     "m_Position": {
         "x": 4360.0,
-        "y": 729.9998779296875
+        "y": 730.0
     }
 }
 
@@ -27504,7 +27504,7 @@
     "m_ObjectId": "9908635327f34707808a0d4797dae540",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 6836.99951171875,
+        "x": 6837.0,
         "y": 1907.0
     }
 }
@@ -27566,8 +27566,8 @@
     "m_ObjectId": "99c2438bfa4f45bcbc9af9d4c4811df4",
     "m_Title": "Normal Map",
     "m_Position": {
-        "x": -5980.9990234375,
-        "y": 2566.99951171875
+        "x": -5981.0,
+        "y": 2567.0
     }
 }
 
@@ -27708,7 +27708,7 @@
     "m_ObjectId": "9aba86143a43419293b762f8deaee1e5",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 8586.9990234375,
+        "x": 8587.0,
         "y": 1488.0
     }
 }
@@ -27765,7 +27765,7 @@
     "m_ObjectId": "9b091062163947a88c5cfa1e1f59316a",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 4946.99951171875,
+        "x": 4947.0,
         "y": 1080.0
     }
 }
@@ -27902,8 +27902,8 @@
     "m_ObjectId": "9bd3556c7160496991708c1889497dcb",
     "m_Title": "Causistics",
     "m_Position": {
-        "x": -863.9989013671875,
-        "y": 4377.99951171875
+        "x": -864.0,
+        "y": 4378.0
     }
 }
 
@@ -28937,8 +28937,8 @@
     "m_ObjectId": "a515c156225649f0a02074144d5cdc38",
     "m_Title": "Specular Add",
     "m_Position": {
-        "x": 9343.9990234375,
-        "y": 298.99993896484377
+        "x": 9344.0,
+        "y": 299.0
     }
 }
 
@@ -28973,8 +28973,8 @@
     "m_ObjectId": "a53e55a9393a40cab65bfbfca2011824",
     "m_Title": "caustics depth",
     "m_Position": {
-        "x": -1464.9990234375,
-        "y": 4714.99951171875
+        "x": -1465.0,
+        "y": 4715.0
     }
 }
 
@@ -30194,8 +30194,8 @@
     "m_ObjectId": "ab96eec88e224003b5d8a0af26f7be63",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 5950.99951171875,
-        "y": 1050.0001220703125
+        "x": 5951.0,
+        "y": 1050.0
     }
 }
 
@@ -31224,8 +31224,8 @@
     "m_ObjectId": "b1523481cdf94edf9e2ebb05eeca1e7b",
     "m_Title": "New Group",
     "m_Position": {
-        "x": -624.9989013671875,
-        "y": 3269.999267578125
+        "x": -625.0,
+        "y": 3270.0
     }
 }
 
@@ -31552,7 +31552,7 @@
     "m_Title": "Shoreline alpha",
     "m_Position": {
         "x": 4270.0,
-        "y": -88.99999237060547
+        "y": -89.0
     }
 }
 
@@ -32268,7 +32268,7 @@
     "m_Title": "Intersection Switch",
     "m_Position": {
         "x": 3802.0,
-        "y": 400.99993896484377
+        "y": 401.0
     }
 }
 
@@ -32424,8 +32424,8 @@
     "m_ObjectId": "b82d19742bfa40cdb59f047cff6c3250",
     "m_Title": "reflection fresnel",
     "m_Position": {
-        "x": 7607.99951171875,
-        "y": 1010.9998779296875
+        "x": 7608.0,
+        "y": 1011.0
     }
 }
 
@@ -33032,7 +33032,7 @@
     "m_ObjectId": "bcb8aae9c64f441cb0b33d45a071486e",
     "m_Title": "ShadowMix",
     "m_Position": {
-        "x": 9860.9990234375,
+        "x": 9861.0,
         "y": 254.0
     }
 }
@@ -33483,8 +33483,8 @@
     "m_ObjectId": "bf68b1e8d6f544a2a51248d4f682ef07",
     "m_Title": "wave top switch",
     "m_Position": {
-        "x": 5779.99951171875,
-        "y": 436.99993896484377
+        "x": 5780.0,
+        "y": 437.0
     }
 }
 
@@ -34103,7 +34103,7 @@
     "m_Title": "Caustic Add",
     "m_Position": {
         "x": 1097.0,
-        "y": 522.9999389648438
+        "y": 523.0
     }
 }
 
@@ -34177,7 +34177,7 @@
     "m_Title": "New Group",
     "m_Position": {
         "x": -1815.0,
-        "y": 3069.99951171875
+        "y": 3070.0
     }
 }
 
@@ -35018,8 +35018,8 @@
     "m_ObjectId": "cae5b02a44f740778621a44f79114774",
     "m_Title": "Refrection",
     "m_Position": {
-        "x": -4770.9990234375,
-        "y": 2547.99951171875
+        "x": -4771.0,
+        "y": 2548.0
     }
 }
 
@@ -35686,8 +35686,8 @@
     "m_ObjectId": "d1f0901a970d42cdaa4fa1b101dd5893",
     "m_Title": "Refraction Alpha",
     "m_Position": {
-        "x": 7895.99951171875,
-        "y": -131.99998474121095
+        "x": 7896.0,
+        "y": -132.0
     }
 }
 
@@ -36755,7 +36755,7 @@
     "m_Title": "Water Depth mask",
     "m_Position": {
         "x": 351.0,
-        "y": -237.99996948242188
+        "y": -238.0
     }
 }
 
@@ -38149,7 +38149,7 @@
     "m_Title": "Surface Distortion",
     "m_Position": {
         "x": -2754.0,
-        "y": 1925.9998779296875
+        "y": 1926.0
     }
 }
 
@@ -38853,7 +38853,7 @@
     "m_Title": "Global Distance mask",
     "m_Position": {
         "x": -6314.0,
-        "y": 2294.999755859375
+        "y": 2295.0
     }
 }
 
@@ -39543,7 +39543,7 @@
     "m_Title": "IntersectionAlpha",
     "m_Position": {
         "x": 3135.0,
-        "y": -130.99998474121095
+        "y": -131.0
     }
 }
 
@@ -39635,7 +39635,7 @@
     "m_Title": "under water depth",
     "m_Position": {
         "x": -1510.0,
-        "y": 2904.99951171875
+        "y": 2905.0
     }
 }
 
@@ -40566,8 +40566,8 @@
     "m_ObjectId": "f92b39001a634adfa35de9b193661292",
     "m_Title": "New Group",
     "m_Position": {
-        "x": 7079.99951171875,
-        "y": 642.9998779296875
+        "x": 7080.0,
+        "y": 643.0
     }
 }
 
@@ -40899,8 +40899,8 @@
     "m_ObjectId": "fbf6a0162a824bfdb169c102f15d79e2",
     "m_Title": "underwater Intersection mask",
     "m_Position": {
-        "x": -235.9990234375,
-        "y": 2366.999755859375
+        "x": -236.0,
+        "y": 2367.0
     }
 }
 

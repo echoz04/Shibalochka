@@ -47,6 +47,9 @@ TagManager:
   - name: Rain
     uniqueID: 2882276551
     locked: 0
+  - name: UI
+    uniqueID: 2060661931
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
