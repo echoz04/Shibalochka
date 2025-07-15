@@ -1,35 +1,70 @@
-using System.Collections.Generic;
-using Sources.Runtime.Gameplay.Configs;
-using Sources.Runtime.Services.ProjectConfigLoader;
+using System;
 using UnityEngine;
+using Sources.Runtime.Gameplay.Inventory.Item;
+using System.Collections.Generic;
 using Zenject;
+using Sources.Runtime.Services.ProjectConfigLoader;
+using UnityEngine.InputSystem;
+using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Gameplay.MiniGames;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
+    [RequireComponent(typeof(InventoryView))]
     public class InventoryRoot : MonoBehaviour
     {
-        [field: SerializeField] public RectTransform ItemsContainer { get; private set; }
+        public event Action<List<InventoryCell>> OnBuildCells;
+        public event Action OnItemAdded;
+        public event Action OnItemRemoved;
 
-        public int Width => _config.InventoryWidth;
-        public int Height => _config.InventoryHeigth;
-        public float CellSize => _config.InventoryCellSize;
-        public float Spacing => _config.InventorySpacing;
+        public bool IsVisible => _canvas.enabled;
 
-        [SerializeField] private RectTransform _content;
-        [SerializeField] private RectTransform _draggingContainer;
+        public int Width => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryWidth;
+        public int Height => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryHeigth;
+        public float CellSize => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryCellSize;
+        public float Spacing => _projectConfigLoader.ProjectConfig.InventoryConfig.InventorySpacing;
+
+        [SerializeField] private Canvas _canvas;
+        [SerializeField] private InventoryView _view;
         [SerializeField] private InventoryCell _cellPrefab;
+        [SerializeField] private RectTransform _gridContent;
+        [SerializeField] private GameObject _controlButtons;
 
-        private InventoryConfig _config;
+        private CharacterInput _characterInput;
+        private IProjectConfigLoader _projectConfigLoader;
+        private StaminaHandler _staminaHandler;
+
+        private ItemRoot _previousSelectedItem;
+        private ItemRoot _selectedItem;
+
         private InventoryCell[,] _currentGrid;
-        [SerializeField] private List<InventoryItem> _currentItems;
+        private List<InventoryCell> _allCells = new List<InventoryCell>();
 
         [Inject]
-        private void Construct(IProjectConfigLoader projectConfigLoader)
+        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, StaminaHandler staminaHandler)
         {
-            _config = projectConfigLoader.ProjectConfig.InventoryConfig;
+            _characterInput = characterInput;
+            _projectConfigLoader = projectConfigLoader;
+            _staminaHandler = staminaHandler;
         }
 
-        public void BuildGrid()
+        public void Initialize()
+        {
+            _characterInput.UI.ToggleInventoryVisibility.performed += ToggleVisibility;
+
+            _view.Initialize(this, _projectConfigLoader);
+
+            BuildGrid();
+
+            _canvas.enabled = true;
+        }
+
+        private void OnDestroy()
+        {
+            _characterInput.UI.ToggleInventoryVisibility.performed -= ToggleVisibility;
+        }
+
+        private void BuildGrid()
         {
             _currentGrid = new InventoryCell[Width, Height];
 
@@ -37,91 +72,143 @@ namespace Sources.Runtime.Gameplay.Inventory
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    var cell = Instantiate(_cellPrefab, _content);
-                    cell.Initialize(x, y, this, CellSize);
+                    var cell = Instantiate(_cellPrefab, _gridContent);
+                    cell.Initialize(x, y, CellSize, this);
                     _currentGrid[x, y] = cell;
+                    _allCells.Add(cell);
+
                 }
             }
         }
 
-        public void StartDraggingItem(InventoryItem item)
+        public void ToggleVisibility(InputAction.CallbackContext context)
         {
-            foreach (var currentItem in _currentItems)
+            if (_staminaHandler.IsStarted == true)
+                return;
+
+            _canvas.enabled = !_canvas.enabled;
+
+            if (_canvas.enabled == true)
+                OnBuildCells?.Invoke(_allCells);
+        }
+
+        public void HightligchCells(ItemRoot itemRoot)
+        {
+            ProcessItemPlacement(itemRoot, true);
+        }
+
+        public bool TryPlaceItem(ItemRoot itemRoot)
+        {
+            return ProcessItemPlacement(itemRoot, false);
+        }
+
+        public bool TryToggleControlButtons(ItemRoot itemRoot)
+        {
+            if (_selectedItem == itemRoot)
             {
-                if (currentItem == item)
-                    currentItem.SetRaycastValue(true);
-                else
-                    currentItem.SetRaycastValue(false);
-            }
-        }
+                itemRoot.SetSelection(false);
+                _controlButtons.SetActive(false);
+                _selectedItem = null;
+                _previousSelectedItem = null;
 
-        public void EndDraggingItem()
-        {
-            foreach (var currentItem in _currentItems)
-                currentItem.SetRaycastValue(true);
-        }
-
-        public bool TryPlaceItem(ItemConfig config, Vector2Int basePos, bool rotated, out List<InventoryCell> cells)
-        {
-            cells = new List<InventoryCell>();
-
-            foreach (var offset in config.CellOffSets)
-            {
-                Vector2Int off = rotated ? new Vector2Int(-offset.y, offset.x) : offset;
-                Vector2Int pos = basePos + off;
-
-                if (pos.x < 0 || pos.y < 0 || pos.x >= Width || pos.y >= Height)
-                    return false;
-
-                var cell = _currentGrid[pos.x, pos.y];
-                if (cell.IsOccupied)
-                    return false;
-
-                cells.Add(cell);
-            }
-
-            return true;
-        }
-
-        public bool TryRemoveItem(InventoryItem item)
-        {
-            if (item.CurrentCells == null || item.CurrentCells.Count == 0)
                 return false;
+            }
 
-            foreach (var cell in item.CurrentCells)
-                cell.ClearOccupied();
+            if (_selectedItem != null)
+            {
+                itemRoot.SetSelection(false);
+                _previousSelectedItem = _selectedItem;
+            }
 
-            item.CurrentCells.Clear();
-            _currentItems.Remove(item);
+            _selectedItem = itemRoot;
+            itemRoot.SetSelection(true);
+            _controlButtons.SetActive(true);
+
+            if (_previousSelectedItem != null)
+                _previousSelectedItem.SetSelection(false);
+
             return true;
         }
 
-        public void HighlightCells(ItemConfig config, Vector2Int basePos, bool rotated)
+        public void RotateItem()
         {
-            ClearHighlight();
+            if (_selectedItem == null)
+                return;
 
-            if (TryPlaceItem(config, basePos, rotated, out var cells))
+            _selectedItem.Rotate();
+        }
+
+        private bool ProcessItemPlacement(ItemRoot itemRoot, bool highlightOnly)
+        {
+            itemRoot.ClearOccupiedInventoryCells();
+            float radius = CellSize / 1.35f;
+
+            List<InventoryCell> matchedCells = new List<InventoryCell>();
+            bool allValid = true;
+
+            foreach (var point in itemRoot.CellsPoints)
             {
-                foreach (var cell in cells)
-                    cell.SetHighlight(true);
+                InventoryCell nearestCell = FindNearestCell(point.Transform.position, radius);
+
+                if (nearestCell == null || nearestCell.IsOccupied == true)
+                {
+                    allValid = false;
+                    continue;
+                }
+
+                matchedCells.Add(nearestCell);
             }
+
+            foreach (var cell in matchedCells)
+            {
+                itemRoot.AddOccupiedInventoryCells(cell);
+
+                if (highlightOnly)
+                {
+                    if (allValid)
+                        cell.HighlightValid();
+                    else
+                        cell.HighlightInvalid();
+                }
+                else
+                {
+                    cell.SetOccupied(allValid);
+
+                    if (allValid)
+                        cell.HighlightValid();
+                    else
+                        cell.HighlightInvalid();
+                }
+            }
+
+            return allValid;
         }
 
-        public void AddItem(InventoryItem item) =>
-            _currentItems.Add(item);
-
-        public void RemoveItem(InventoryItem item) =>
-            _currentItems.Remove(item);
-
-        public void MoveToDraggingContainer(InventoryItem item)
+        private InventoryCell FindNearestCell(Vector3 worldPos, float radius)
         {
-            item.transform.SetParent(_draggingContainer);
+            foreach (var cell in GetAllCells())
+            {
+                Vector3 cellPos = cell.transform.position;
+
+                float dx = Mathf.Abs(worldPos.x - cellPos.x);
+                float dy = Mathf.Abs(worldPos.y - cellPos.y);
+
+                if (dx <= radius && dy <= radius)
+                    return cell;
+            }
+
+            return null;
         }
 
-        public void ClearHighlight()
+        private IEnumerable<InventoryCell> GetAllCells()
         {
-            foreach (var cell in _currentGrid)
-                cell.SetHighlight(false);
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    yield return _currentGrid[x, y];
+                }
+            }
         }
     }
 }

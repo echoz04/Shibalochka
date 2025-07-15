@@ -6,11 +6,14 @@ using Zenject;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using DG.Tweening;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Gameplay.Inventory;
 
 namespace Sources.Runtime.Gameplay.MiniGames
 {
     public class StaminaHandler : MonoBehaviour
     {
+        public bool IsStarted => _canHandle == false;
+
         [SerializeField] private GameObject _stamina;
         [SerializeField] private Image _sliderImage;
 
@@ -18,29 +21,33 @@ namespace Sources.Runtime.Gameplay.MiniGames
         private IProjectConfigLoader _projectConfigLoader;
         private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         private CameraRotator _cameraRotator;
+        private InventoryRoot _inventoryRoot;
 
         private Tween _staminaTween;
-        private bool _hasAlreadyShown;
+        [SerializeField] private bool _canHandle = true;
 
         [Inject]
         private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
-        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator)
+        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator, InventoryRoot inventoryRoot)
         {
             _characterInput = characterInput;
             _projectConfigLoader = projectConfigLoader;
             _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
             _cameraRotator = cameraRotator;
+            _inventoryRoot = inventoryRoot;
         }
 
         private void Start()
         {
+            _canHandle = true;
+
             _characterInput.MiniGames.ShowStamina.started += Handle;
             _characterInput.MiniGames.ShowStamina.canceled += BoostrapFishingMiniGame;
         }
 
         private void Handle(InputAction.CallbackContext context)
         {
-            if (_hasAlreadyShown == true)
+            if (_canHandle == false || _inventoryRoot.IsVisible == true)
                 return;
 
             _cameraRotator.OnPanelShow();
@@ -56,22 +63,22 @@ namespace Sources.Runtime.Gameplay.MiniGames
 
         private void BoostrapFishingMiniGame(InputAction.CallbackContext context)
         {
-            if (_hasAlreadyShown)
+            if (_canHandle == false || _inventoryRoot.IsVisible == true)
                 return;
 
             if (_staminaTween != null && _staminaTween.IsActive())
-                    _staminaTween.Kill();
-
-            _hasAlreadyShown = true;
+                _staminaTween.Kill();
 
             float result = _sliderImage.fillAmount;
+
+            _canHandle = false;
 
             _stamina.SetActive(false);
 
             _fishingMiniGameBootstrapper.Launch(result);
         }
 
-        public void ResetShownState() => _hasAlreadyShown = false;
+        public void AllowHandle() => _canHandle = true;
 
         private void OnDestroy()
         {

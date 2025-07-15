@@ -1,62 +1,63 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
-    public class InventoryCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class InventoryCell : MonoBehaviour
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
-        public bool IsOccupied { get; private set; }
+        [field: SerializeField] public bool IsOccupied { get; private set; }
+        [field: SerializeField] public RectTransform RectTransform { get; private set; }
 
-        [SerializeField] private Image _highlightImage;
-        [SerializeField] private Image _backgroundImage;
+        public Vector2Int Position => new Vector2Int(_x, _y);
 
+        [SerializeField] private Image _image;
+
+        private int _x;
+        private int _y;
         private InventoryRoot _inventory;
-        private float _size;
 
-        public void Initialize(int x, int y, InventoryRoot inventory, float cellSize)
+        private Color _defaultColor;
+        private Color _validColor = new Color(0f, 1f, 0f, 0.4f);
+        private Color _invalidColor = new Color(1f, 0f, 0f, 0.4f);
+
+        private void OnValidate()
         {
-            X = x; Y = y;
+            RectTransform ??= GetComponent<RectTransform>();
+            _image ??= GetComponent<Image>();
+        }
+
+        public void Initialize(int indexByX, int indexByY, float cellSize, InventoryRoot inventory)
+        {
+            _defaultColor = _image.color;
+
+            _x = indexByX;
+            _y = indexByY;
             _inventory = inventory;
-            _size = cellSize;
 
-            var rt = GetComponent<RectTransform>();
-            rt.anchoredPosition = new Vector2(X * _size, -Y * _size);
-            rt.sizeDelta = new Vector2(_size, _size);
-
-            IsOccupied = false;
-            _highlightImage.enabled = false;
-            _backgroundImage.color = Color.white;
+            transform.localScale = Vector3.one;
         }
 
-        public void SetOccupied()
+        public void SetOccupied(bool state)
         {
-            IsOccupied = true;
-            _backgroundImage.color = Color.red;
+            IsOccupied = state;
+
+            if (IsOccupied == false)
+                ClearHighlight();
         }
 
-        public void ClearOccupied()
+        public void HighlightValid()
         {
-            IsOccupied = false;
-            _backgroundImage.color = Color.white;
+            _image.color = _validColor;
         }
 
-        public void SetHighlight(bool enable) => _highlightImage.enabled = enable;
-
-        public void OnPointerEnter(PointerEventData eventData)
+        public void HighlightInvalid()
         {
-            if (InventoryItem.CurrentDragging == null) return;
-            InventoryItem.CurrentDragging.SetHover(new Vector2Int(X, Y));
-            _inventory.HighlightCells(InventoryItem.CurrentDragging.Config, new Vector2Int(X, Y), InventoryItem.CurrentDragging.IsRotated);
+            _image.color = _invalidColor;
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public void ClearHighlight()
         {
-            if (InventoryItem.CurrentDragging == null) return;
-            InventoryItem.CurrentDragging.ClearHover();
-            _inventory.ClearHighlight();
+            _image.color = _defaultColor;
         }
     }
 }

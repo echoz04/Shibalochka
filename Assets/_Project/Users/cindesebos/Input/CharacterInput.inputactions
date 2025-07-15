@@ -116,6 +116,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "469c89d5-7cb0-4ac0-82fa-a2bc9f131fb9",
+            "actions": [
+                {
+                    "name": "ToggleInventoryVisibility",
+                    "type": "Button",
+                    "id": "8d8a1fad-0384-4095-898e-127174f7a273",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e48c66ab-d1ea-40b3-9996-d365a250460f",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleInventoryVisibility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

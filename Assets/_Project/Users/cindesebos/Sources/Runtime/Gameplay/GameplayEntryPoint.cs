@@ -22,7 +22,7 @@ namespace Sources.Runtime.Gameplay
         private void Awake()
         {
             _characterInput.Enable();
-            _inventoryRoot.BuildGrid();
+            _inventoryRoot.Initialize();
             _fishingMiniGameBootstrapper.Initialize();
         }
 

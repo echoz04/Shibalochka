@@ -4,9 +4,9 @@ namespace Sources.Runtime.Services.AssetLoader
 {
     public class Disposable<T> : IDisposable where T : UnityEngine.Object
     {
-        public T Value { get; }
+        public readonly T Value;
         
-        private Action _onDispose;
+        private readonly Action _onDispose;
 
         public Disposable(T value, Action onDispose)
         {

@@ -25,7 +25,7 @@ namespace Sources.Runtime.Bootstrap
 
         public async void Initialize()
         {
-            using (var loadingCanvas = await _assetLoader.LoadDisposable<GameObject>(AssetsConstants.LoadingCanvas))
+            using (await _assetLoader.LoadDisposable<GameObject>(AssetsConstants.LoadingCanvas))
             {
                 await _projectConfigLoader.LoadProjectConfigAsync();
                 await _sceneLoader.LoadSceneAsync(_sceneToLoad);

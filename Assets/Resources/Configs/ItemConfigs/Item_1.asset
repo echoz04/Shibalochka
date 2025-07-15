@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TypeId>k__BackingField: Item_1
   <TitleLid>k__BackingField: "\u0428\u044B\u0431\u0430\u0440\u043E\u0447\u043A\u0430"
-  <CellOffSets>k__BackingField:
-  - {x: 0, y: 0}
-  - {x: 1, y: 0}
-  <Icon>k__BackingField: {fileID: 29652964, guid: 245a4e80919486c25bad3a869c728f50, type: 3}
+  <Icon>k__BackingField: {fileID: -208598361, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
+  <ItemCellPointPrefab>k__BackingField: {fileID: 5684752095224147114, guid: dadf362f63410de9e8bf0e517f48e7b2, type: 3}
+  _cellPointsPosition:
+  - {x: -59, y: 56, z: 0}
+  - {x: 54, y: 56, z: 0}
+  - {x: 54, y: -56, z: 0}

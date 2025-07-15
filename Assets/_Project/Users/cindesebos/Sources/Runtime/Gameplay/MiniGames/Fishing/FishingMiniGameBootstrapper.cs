@@ -43,7 +43,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         public void OnEnded()
         {
-            _staminaHandler.ResetShownState();
+            _staminaHandler.AllowHandle();
             _dependencies.View.Hide();
 
             _dependencies.StateMachine.EndState.OnEnded -= OnEnded;
