@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f4fc1d4f-41c5-4404-ac45-dca8a1f2810b}">
+		<property name="assetPath">
+			<value>SBAb_5 Meters From Shore Early Morning 005.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>192</value>
+		</property>
+		<property name="channelCount">
+			<value>4</value>
+		</property>
+		<property name="length">
+			<value>230.39975000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{14778586-ae97-4de5-b6d6-3bb984689e05}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Utilities;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 {
@@ -26,6 +28,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         private readonly Dictionary<Transform, FishSlot> _fishMap = new();
 
         private List<Tweener> _fishTweeners = new();
+
+        private EventInstance _loopedSound;
 
         public MovableFishesMiniGame(IEnumerable<FishSlot> fishSlots, Transform[] edgePoints, IProjectConfigLoader projectConfigLoader,
         Slider pointerSlider, UnityEngine.Camera camera)
@@ -49,6 +53,10 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         public void Launch()
         {
             OnLaunched?.Invoke();
+
+            _loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
+            _loopedSound.start();
+            _loopedSound.setParameterByName("FishingMiniGame", 1);
 
             MoveFishes();
         }
@@ -91,6 +99,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 
         public void End(bool isWin)
         {
+            _loopedSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            _loopedSound.release();
+
             OnEnded?.Invoke(isWin);
 
             foreach (var tweener in _fishTweeners)

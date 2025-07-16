@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using Sources.Runtime.Core.StateMachine;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
@@ -19,6 +20,15 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         public override void Enter()
         {
             UnityEngine.Debug.Log("GAmeplay result is " + _gameplayResult);
+
+            if (_gameplayResult )
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Win");
+            }
+            else
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Lose");
+            }
 
             _dependencies.StateMachine.CurrentMiniGame.End(_gameplayResult);
             

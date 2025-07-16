@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{4fd55f82-7f50-49b3-b618-a4929ed6020d}">
+		<property name="name">
+			<value>FishingMiniGame</value>
+		</property>
+		<relationship name="folder">
+			<destination>{237864fc-5e50-4063-a466-83662470f7da}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{3ec998b3-31f0-4c51-9d0e-4b0ecc926093}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{3ec998b3-31f0-4c51-9d0e-4b0ecc926093}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>1</value>
+		</property>
+	</object>
+</objects>

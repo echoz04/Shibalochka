@@ -1,3 +1,4 @@
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,11 +34,15 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         public void AddValue(float newValue)
         {
             Value += newValue;
+            RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
+            RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Success");
         }
 
         public void RemoveValue(float newValue)
         {
             Value -= newValue;
+            RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
+            RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Failure");
         }
 
         public void SetValue(float newValue)

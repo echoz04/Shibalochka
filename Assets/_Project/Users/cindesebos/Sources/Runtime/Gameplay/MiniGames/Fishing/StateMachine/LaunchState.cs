@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using FMODUnity;
 using Sources.Runtime.Core.ObjectPool;
 using Sources.Runtime.Core.StateMachine;
 using Sources.Runtime.Gameplay.MiniGames.Fishing.Types;
@@ -49,6 +50,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             int randomIndex = UnityEngine.Random.Range(0, 2);
 
             Debug.Log("Random Mini Game Index is " + randomIndex);
+
+            RuntimeManager.PlayOneShot("event:/SFX/GameSFX/Fishing_Rod");
 
             if (randomIndex == 0)
                 _dependencies.StateMachine.CurrentMiniGame = _movablePointerFishingMiniGame;

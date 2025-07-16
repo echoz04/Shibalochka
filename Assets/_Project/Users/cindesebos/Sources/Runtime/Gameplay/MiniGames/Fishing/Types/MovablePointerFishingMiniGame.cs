@@ -4,6 +4,8 @@ using Sources.Runtime.Services.ProjectConfigLoader;
 using TMPro;
 using UnityEngine.UI;
 using Sources.Runtime.Gameplay.MiniGames;
+using FMODUnity;
+using FMOD.Studio;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 {
@@ -21,6 +23,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 
         private Tween _pointerTween;
 
+        private EventInstance _loopedSound;
+
         public MovablePointerFishingMiniGame(Slider pointerSlider, CharacterInput characterInput, IProjectConfigLoader projectConfigLoader)
         {
             _pointerSlider = pointerSlider;
@@ -31,6 +35,10 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         public void Launch()
         {
             OnLaunched?.Invoke();
+
+            _loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
+            _loopedSound.start();
+            _loopedSound.setParameterByName("FishingMiniGame", 1);
 
             MovePointer();
         }
@@ -65,6 +73,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 
         public void End(bool isWin)
         {
+            _loopedSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            _loopedSound.release();
+
             OnEnded?.Invoke(isWin);
 
             if (_pointerTween == null)
