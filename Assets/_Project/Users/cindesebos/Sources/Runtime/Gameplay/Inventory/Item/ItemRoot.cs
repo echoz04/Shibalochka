@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FMODUnity;
 using Sources.Runtime.Gameplay.Configs;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -69,6 +70,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         public void OnBeginDrag(PointerEventData eventData)
         {
             _dragger.BeginDrag();
+            RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Open");
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -97,6 +99,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
                 }
 
                 _canSelect = true;
+                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Close");
             }
             else
             {
@@ -111,9 +114,18 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             if (_occupiedInventoryCells.Count == 0 || _canSelect == false)
                 return;
 
-            _dragger.PointClick();
-
             bool isSelected = _inventoryRoot.TryToggleControlButtons(this);
+
+            if (isSelected)
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Select");
+            }
+            else
+            {
+                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Deselect");
+            }
+
+            _dragger.PointClick();
         }
 
         public void AddOccupiedInventoryCells(InventoryCell inventoryCell)
@@ -134,6 +146,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void Rotate()
         {
+            RuntimeManager.PlayOneShot("event:/SFX/UI/UI_PointerEnter");
             transform.Rotate(0f, 0f, -90f);
         }
 
