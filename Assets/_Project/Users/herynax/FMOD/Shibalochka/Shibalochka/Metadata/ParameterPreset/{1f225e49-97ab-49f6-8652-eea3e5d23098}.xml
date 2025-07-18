@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{1f225e49-97ab-49f6-8652-eea3e5d23098}">
+		<property name="name">
+			<value>FishingMiniGameProgress</value>
+		</property>
+		<relationship name="folder">
+			<destination>{80490081-f034-4cef-a352-163eb3e78964}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{21eafd1d-0487-4243-aaf7-502561349273}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{21eafd1d-0487-4243-aaf7-502561349273}">
+		<property name="maximum">
+			<value>100</value>
+		</property>
+		<property name="isGlobal">
+			<value>true</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

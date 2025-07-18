@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{6ee03c46-f626-434f-b183-c2c964512401}">
+		<property name="assetPath">
+			<value>DM-CGS-47.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.23965986394557823</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{14778586-ae97-4de5-b6d6-3bb984689e05}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{23f0eaef-c981-4e7d-9831-61a24a27ad04}">
+		<property name="assetPath">
+			<value>MG_Success2.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.60575963718820858</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{14778586-ae97-4de5-b6d6-3bb984689e05}</destination>
+		</relationship>
+	</object>
+</objects>

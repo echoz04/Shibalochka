@@ -12,14 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafba38aaaa7c5bb991e4ba8ed853b93, type: 3}
   m_Name: Global Project Config
   m_EditorClassIdentifier: 
-  RarityConfigs:
-  - {fileID: 11400000, guid: 6a6e4a2f7112d756b94206a2e918acb4, type: 2}
-  - {fileID: 11400000, guid: a827be4936b5a2c09bceda356c40f222, type: 2}
-  - {fileID: 11400000, guid: d381e156cb544c80d95eb3cde2a745a2, type: 2}
-  FishConfigs:
-  - {fileID: 11400000, guid: f3f5f82f37d30b84aa23eb55ed69f5dd, type: 2}
-  - {fileID: 11400000, guid: de043c893a5bebd36ba9f0fce8596a2b, type: 2}
-  - {fileID: 11400000, guid: bdfa15c1bd5fa3c8087b440a0d6d041d, type: 2}
-  - {fileID: 11400000, guid: 3a4dddbb44bc9714fb20c9a4324760b6, type: 2}
-  - {fileID: 11400000, guid: d95a54d6cf1708b938559bc6e62cee0d, type: 2}
-  - {fileID: 11400000, guid: c22f986305cd268fab9f74123fc3be5e, type: 2}
+  <CameraConfig>k__BackingField:
+    _sensitivity: 2
+    _minVerticalAngle: -25
+    _maxVerticalAngle: 25
+  <UIConfig>k__BackingField:
+    _fishingPointerMoveDuration: 2.45
+    _fishesMoveSpeed: 0.25
+    _fishingShowDelayBetweenItems: 0.225
+    _fishingFadeDuration: 0.55
+    _fishingClickCooldown: 0.1
+    _sliderTimeToMaxValue: 1
+    _valueToAddOnCommonCatch: 10
+    _valueToAddOnGoldCatch: 15
+    _valueToRemoveOnMiss: 25
+    _staminaFillDuration: 2
+    _staminaDrainDuration: 2.5
+  <InventoryConfig>k__BackingField:
+    _inventoryWidth: 8
+    _inventoryHeight: 7
+    _cellSize: 108
+    _spacing: 4
+    _cellsSpawnAnimationDuration: 0.15
+    _delayBetweenCellsSpawnAnimation: 0.025
