@@ -29,8 +29,24 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Awake()
         {
-            _characterInput.Camera.Rotate.started += StartWorking;
-            _characterInput.Camera.Rotate.canceled += StopWorking;
+            Initialize();
+
+            _characterInput.Camera.Rotate.started += StopWorking;
+            _characterInput.Camera.Rotate.canceled += StartWorking;
+        }
+
+        private void OnDestroy()
+        {
+            _characterInput.Camera.Rotate.started -= StopWorking;
+            _characterInput.Camera.Rotate.canceled -= StartWorking;
+        }
+
+        private void Initialize()
+        {
+            _isRotating = true;
+            _canRotate = true;
+
+            _cursorView.Hide();
         }
 
         private void Update()
@@ -39,6 +55,7 @@ namespace Sources.Runtime.Gameplay.Camera
                 return;
 
             Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+
             Rotate(mouseDelta);
         }
 
@@ -77,13 +94,5 @@ namespace Sources.Runtime.Gameplay.Camera
 
             _isRotating = false;
         }
-
-        private void OnDestroy()
-        {
-            _characterInput.Camera.Rotate.started -= StartWorking;
-            _characterInput.Camera.Rotate.canceled -= StopWorking;
-        }
-
-        private float GetCameraLook() => _characterInput.Camera.Look.ReadValue<float>();
     }
 }

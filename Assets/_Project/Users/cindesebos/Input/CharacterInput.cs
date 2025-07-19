@@ -193,7 +193,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""58cf1443-beaa-408d-a390-5781b4d39828"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/alt"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

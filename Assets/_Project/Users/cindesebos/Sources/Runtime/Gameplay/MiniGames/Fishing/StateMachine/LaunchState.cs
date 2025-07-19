@@ -47,7 +47,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         {
             InitializeView();
 
-            int randomIndex = UnityEngine.Random.Range(0, 2);
+            int randomIndex = 1; //UnityEngine.Random.Range(0, 2);
 
             Debug.Log("Random Mini Game Index is " + randomIndex);
 

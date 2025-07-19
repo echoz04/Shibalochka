@@ -25,5 +25,13 @@ namespace Sources.Runtime.Gameplay.Configs
 
         [SerializeField, MinValue(0), MaxValue(50), LabelText("Delay Between Cells Spawn Animation")] private float _delayBetweenCellsSpawnAnimation = 0.20f;
         public float DelayBetweenCellsSpawnAnimation => 100 * _delayBetweenCellsSpawnAnimation;
+
+        [Title("Items UI Settings")]
+
+        [SerializeField, MinValue(0), MaxValue(5), LabelText("Item Dragging Animations Duration")] private float _itemAnimationsDuration = 0.25f;
+        public float ItemAnimationsDuration => _itemAnimationsDuration;
+
+        [SerializeField, MinValue(0), MaxValue(2), LabelText("Item Scale While Dragging")] private float _itemDraggingScale = 1.1f;
+        public float ItemDraggingScale => _itemDraggingScale;
     }
 }
