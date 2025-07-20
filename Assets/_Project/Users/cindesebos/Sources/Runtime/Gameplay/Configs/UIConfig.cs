@@ -28,6 +28,9 @@ namespace Sources.Runtime.Gameplay.Configs
         private float _fishingClickCooldown = 0.1f;
         public float FishingClickCooldown => _fishingClickCooldown;
 
+        [SerializeField, LabelText("Slider delay Duration"), MinValue(0f)]
+        private float _delayDuration = 2.45f;
+
         [Space(17.5f)]
 
         [SerializeField, LabelText("Slider Time To Max"), MinValue(0f)]

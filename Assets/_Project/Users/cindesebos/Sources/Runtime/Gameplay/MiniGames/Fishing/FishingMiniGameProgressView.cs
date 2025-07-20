@@ -2,6 +2,7 @@ using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
@@ -14,14 +15,27 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             {
                 _value = Mathf.Clamp(value, 0, 100);
 
-                _slider.value = Value;
-                Debug.Log($"{Mathf.RoundToInt(Value)}%     Value is {Value} ");
-                _text.text = $"{Mathf.RoundToInt(Value)}%";
+                _slider.value = _value;
+
+                // Отменяем прошлый твин, если есть
+                _delayedSlider.DOKill();
+
+                // Запускаем отставание
+                DOVirtual.DelayedCall(_delay, () =>
+                {
+                    _delayedSlider.DOValue(_value, _delayDuration).SetEase(Ease.OutQuad);
+                });
+
+                _text.text = $"{Mathf.RoundToInt(_value)}%";
             }
         }
 
         [SerializeField] private Slider _slider;
+        [SerializeField] private Slider _delayedSlider;
         [SerializeField] private TextMeshProUGUI _text;
+
+        [SerializeField] private float _delay = 0.1f; 
+        [SerializeField] private float _delayDuration = 0.5f;
 
         private float _value;
 
@@ -29,6 +43,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         {
             _slider ??= GetComponentInChildren<Slider>();
             _text ??= GetComponentInChildren<TextMeshProUGUI>();
+
+            if (_delayedSlider == null)
+            {
+                var sliders = GetComponentsInChildren<Slider>();
+                if (sliders.Length > 1)
+                    _delayedSlider = sliders[1]; // автонастройка второго слайдера
+            }
         }
 
         public void AddValue(float newValue)
