@@ -21,7 +21,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         {
             UnityEngine.Debug.Log("GAmeplay result is " + _gameplayResult);
 
-            if (_gameplayResult )
+            if (_gameplayResult)
             {
                 RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Win");
             }
@@ -31,7 +31,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             }
 
             _dependencies.StateMachine.CurrentMiniGame.End(_gameplayResult);
-            
+
             OnEnded?.Invoke();
         }
 
