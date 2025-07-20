@@ -3932,12 +3932,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 365973910}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1041762, y: -0.507947, z: 0.06297558, w: 0.8527433}
-  m_LocalPosition: {x: -504.3356, y: 6.6198273, z: -720.856}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1786899475}
+  m_Father: {fileID: 1524005522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &365973912
 MonoBehaviour:
@@ -6472,6 +6472,7 @@ MonoBehaviour:
   _cellPrefab: {fileID: 8572484534902859831, guid: 68010fa9af18fc439be3bf9195188dd7, type: 3}
   _gridContent: {fileID: 38570089}
   _controlButtons: {fileID: 337792036}
+  _rewardsPanel: {fileID: 0}
 --- !u!114 &650771062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13915,6 +13916,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 104013897}
+  - {fileID: 365973911}
   m_Father: {fileID: 80708800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1528009488
@@ -16257,7 +16259,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 365973911}
   - {fileID: 80708800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
