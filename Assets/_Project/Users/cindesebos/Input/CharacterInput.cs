@@ -108,6 +108,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CatchFish"",
+                    ""type"": ""Button"",
+                    ""id"": ""1370c978-c915-4ca4-9196-fad2897adf9c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ShowStamina"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca415b5a-b922-456b-8cdd-818138121805"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatchFish"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -238,6 +258,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_MiniGames = asset.FindActionMap("MiniGames", throwIfNotFound: true);
         m_MiniGames_UseMovingPointer = m_MiniGames.FindAction("UseMovingPointer", throwIfNotFound: true);
         m_MiniGames_ShowStamina = m_MiniGames.FindAction("ShowStamina", throwIfNotFound: true);
+        m_MiniGames_CatchFish = m_MiniGames.FindAction("CatchFish", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_ToggleCursor = m_Camera.FindAction("ToggleCursor", throwIfNotFound: true);
@@ -330,6 +351,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private List<IMiniGamesActions> m_MiniGamesActionsCallbackInterfaces = new List<IMiniGamesActions>();
     private readonly InputAction m_MiniGames_UseMovingPointer;
     private readonly InputAction m_MiniGames_ShowStamina;
+    private readonly InputAction m_MiniGames_CatchFish;
     /// <summary>
     /// Provides access to input actions defined in input action map "MiniGames".
     /// </summary>
@@ -349,6 +371,10 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "MiniGames/ShowStamina".
         /// </summary>
         public InputAction @ShowStamina => m_Wrapper.m_MiniGames_ShowStamina;
+        /// <summary>
+        /// Provides access to the underlying input action "MiniGames/CatchFish".
+        /// </summary>
+        public InputAction @CatchFish => m_Wrapper.m_MiniGames_CatchFish;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -381,6 +407,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @ShowStamina.started += instance.OnShowStamina;
             @ShowStamina.performed += instance.OnShowStamina;
             @ShowStamina.canceled += instance.OnShowStamina;
+            @CatchFish.started += instance.OnCatchFish;
+            @CatchFish.performed += instance.OnCatchFish;
+            @CatchFish.canceled += instance.OnCatchFish;
         }
 
         /// <summary>
@@ -398,6 +427,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @ShowStamina.started -= instance.OnShowStamina;
             @ShowStamina.performed -= instance.OnShowStamina;
             @ShowStamina.canceled -= instance.OnShowStamina;
+            @CatchFish.started -= instance.OnCatchFish;
+            @CatchFish.performed -= instance.OnCatchFish;
+            @CatchFish.canceled -= instance.OnCatchFish;
         }
 
         /// <summary>
@@ -666,6 +698,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnShowStamina(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CatchFish" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCatchFish(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.

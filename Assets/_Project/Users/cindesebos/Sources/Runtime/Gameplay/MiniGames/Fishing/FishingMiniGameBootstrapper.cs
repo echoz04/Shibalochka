@@ -5,14 +5,23 @@ using System;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Core.ObjectPool;
+using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
     public class FishingMiniGameBootstrapper : MonoBehaviour
     {
+        public event Action OnCatchTimeStarted;
+        public event Action OnCatchTiming;
+        public event Action OnCatchTimeEnded;
+
         [SerializeField] private FishingMiniGameDependencies _dependencies;
 
         private StaminaHandler _staminaHandler;
+
+        private bool _isAlreadyLaunched = false;
+        private bool _isSubscribed = false;
 
         [Inject]
         private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, CameraRotator cameraRotator,
@@ -29,13 +38,63 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _dependencies.Camera ??= UnityEngine.Camera.main;
 
             _dependencies.StateMachine = new FishingMiniGameStateMachine(_dependencies);
+            _dependencies.View.Initialize(this, _dependencies.ProjectConfigLoader);
         }
 
-        public void Launch(float force)
+        public async UniTask Launch(float force)
         {
-            _dependencies.StateMachine.SetState(_dependencies.StateMachine.LaunchState);
+            _isAlreadyLaunched = false;
 
+            await WaitForCatchingFish();
+        }
+
+        public async UniTask WaitForCatchingFish()
+        {
+            OnCatchTimeStarted?.Invoke();
+
+            var uiConfig = _dependencies.ProjectConfigLoader.ProjectConfig.UIConfig;
+            float waitingTime = UnityEngine.Random.Range(uiConfig.MinimumWaitingTime, uiConfig.MaximumWaitingTime);
+
+            await UniTask.WaitForSeconds(waitingTime);
+
+            OnCatchTiming?.Invoke();
+
+            _dependencies.CharacterInput.MiniGames.CatchFish.performed += CatchFish;
+            _isSubscribed = true;
+
+            await UniTask.WaitForSeconds(uiConfig.TimeToCatchFish);
+
+            if (_isAlreadyLaunched == false)
+            {
+                OnCatchTimeEnded?.Invoke();
+                _staminaHandler.AllowHandle();
+            }
+
+            DisposeSubscribe();
+        }
+
+        private void CatchFish(InputAction.CallbackContext context)
+        {
+            if (_isAlreadyLaunched)
+                return;
+
+            _isAlreadyLaunched = true;
+            OnCatchTimeEnded?.Invoke();
+            Debug.Log("Ты поймал рыбу");
+
+            DisposeSubscribe();
+
+            _dependencies.StateMachine.SetState(_dependencies.StateMachine.LaunchState);
             _dependencies.StateMachine.EndState.OnEnded += OnEnded;
+        }
+
+        private void DisposeSubscribe()
+        {
+            if (_isSubscribed == true)
+            {
+                _dependencies.CharacterInput.MiniGames.CatchFish.performed -= CatchFish;
+                _isSubscribed = false;
+            }
         }
 
         private void Update() =>

@@ -67,8 +67,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         private void InitializeView()
         {
-            _dependencies.View.Initialize(_dependencies.ProjectConfigLoader);
-
             _dependencies.ProgressView.SetValue(FishingMiniGameDependencies.INITIAL_PROGRESS_VALUE);
             _dependencies.PointerSlider.value = FishingMiniGameDependencies.INITIAL_SLIDER_VALUE;
         }

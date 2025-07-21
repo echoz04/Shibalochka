@@ -8,7 +8,7 @@ using DG.Tweening;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Gameplay.Inventory;
 
-namespace Sources.Runtime.Gameplay.MiniGames
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
     public class StaminaHandler : MonoBehaviour
     {
