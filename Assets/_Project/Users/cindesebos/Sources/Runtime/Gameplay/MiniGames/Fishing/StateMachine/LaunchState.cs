@@ -47,7 +47,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         {
             InitializeView();
 
-            int randomIndex = 1; //UnityEngine.Random.Range(0, 2);
+            int randomIndex = UnityEngine.Random.Range(0, 2);
 
             Debug.Log("Random Mini Game Index is " + randomIndex);
 
@@ -87,9 +87,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
                 Vector3 fishWorldPos = slot.CurrentFish.transform.position;
 
-                Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(_dependencies.Camera, fishWorldPos);
+                Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(null, fishWorldPos);
 
-                float pointerValue = Extensions.MapScreenPositionToSliderValue(screenPos.x, _dependencies.PointerSlider, _dependencies.Camera);
+                float pointerValue = Extensions.MapWorldPositionToSliderValue(slot.CurrentFish.transform.position, _dependencies.PointerSlider);
 
                 slot.CatchCenterValue = pointerValue;
             }

@@ -85,7 +85,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
                     {
                         Vector3 fishWorldPos = fishTransform.position;
                         Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(_camera, fishWorldPos);
-                        slot.CatchCenterValue = Extensions.MapScreenPositionToSliderValue(screenPos.x, _pointerSlider, _camera);
+                        slot.CatchCenterValue = Extensions.MapWorldPositionToSliderValue(fishTransform.position, _pointerSlider);
                     }
                 })
                 .OnComplete(() =>
