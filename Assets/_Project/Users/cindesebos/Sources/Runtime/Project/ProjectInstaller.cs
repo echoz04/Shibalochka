@@ -20,6 +20,7 @@ namespace Sources.Runtime.Project
             BindAssetLoader();
             BindInput();
             BindCursorView();
+            DiscordOverlayDisplayer();
         }
 
         private void BindSceneLoader()
@@ -53,6 +54,12 @@ namespace Sources.Runtime.Project
         {
             Container.Bind<CursorView>()
                 .FromInstance(_cursorView)
+                .AsSingle();
+        }
+
+        private void DiscordOverlayDisplayer()
+        {
+            Container.BindInterfacesAndSelfTo<DiscordOverlayDisplayer>()
                 .AsSingle();
         }
     }

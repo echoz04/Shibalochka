@@ -7,6 +7,20 @@
       "dependencies": {},
       "hash": "f213ff497e4ff462a77319cf677cf20cc0860ca9"
     },
+    "com.discord.game-sdk": {
+      "version": "https://github.com/HouraiTeahouse/Discord-Game-SDK.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "02bb804c67b98dfb26fda79eb2bc197bdbb59403"
+    },
+    "com.github-glitchenzo.nugetforunity": {
+      "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "a7c6b49a0141a5bff9b1983e38137522ef61977d"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

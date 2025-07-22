@@ -67,8 +67,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         private void InitializeView()
         {
-            _dependencies.View.Initialize(_dependencies.ProjectConfigLoader);
-
             _dependencies.ProgressView.SetValue(FishingMiniGameDependencies.INITIAL_PROGRESS_VALUE);
             _dependencies.PointerSlider.value = FishingMiniGameDependencies.INITIAL_SLIDER_VALUE;
         }
@@ -87,9 +85,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
                 Vector3 fishWorldPos = slot.CurrentFish.transform.position;
 
-                Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(_dependencies.Camera, fishWorldPos);
+                Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(null, fishWorldPos);
 
-                float pointerValue = Extensions.MapScreenPositionToSliderValue(screenPos.x, _dependencies.PointerSlider, _dependencies.Camera);
+                float pointerValue = Extensions.MapWorldPositionToSliderValue(slot.CurrentFish.transform.position, _dependencies.PointerSlider);
 
                 slot.CatchCenterValue = pointerValue;
             }

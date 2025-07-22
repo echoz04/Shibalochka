@@ -12,5 +12,7 @@ namespace Sources.Runtime.Gameplay.Configs
         [field: SerializeField] public UIConfig UIConfig { get; private set; } = new UIConfig();
         [field: Space(17.5f)]
         [field: SerializeField] public InventoryConfig InventoryConfig { get; private set; } = new InventoryConfig();
+        [field: Space(17.5f)]
+        [field: SerializeField] public DiscordConfig DiscordConfig { get; private set; } = new DiscordConfig();
     }
 }

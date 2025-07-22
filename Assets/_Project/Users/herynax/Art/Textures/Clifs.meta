@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_Project/Users/herynax/Art/Textures/Clifs.meta
 guid: dbf00bcfa6a94b24793d857025c96759
+========
+guid: 359180399269d1b5e8851399e26adf9f
+>>>>>>>> 9e426939c925127dad7eb4aab14afef25cecd5ec:Assets/Packages.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

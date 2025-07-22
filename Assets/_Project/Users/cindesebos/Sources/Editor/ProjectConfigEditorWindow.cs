@@ -35,6 +35,10 @@ namespace Sources.Editor
         [TabGroup("Configs", "Inventory"), LabelText("Inventory Config")]
         [SerializeField] private InventoryConfig _inventoryConfig;
 
+        [ShowIf(nameof(_projectConfig)), InlineProperty, PropertyOrder(1)]
+        [TabGroup("Configs", "Discord"), LabelText("Discord Config")]
+        [SerializeField] private DiscordConfig _discordConfig;
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -59,6 +63,7 @@ namespace Sources.Editor
             _cameraConfig = _projectConfig.CameraConfig;
             _uiConfig = _projectConfig.UIConfig;
             _inventoryConfig = _projectConfig.InventoryConfig;
+            _discordConfig = _projectConfig.DiscordConfig;
         }
     }
 }

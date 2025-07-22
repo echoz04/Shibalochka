@@ -29,6 +29,7 @@ namespace Sources.Runtime.Gameplay.Inventory
         [SerializeField] private InventoryCell _cellPrefab;
         [SerializeField] private RectTransform _gridContent;
         [SerializeField] private GameObject _controlButtons;
+        [SerializeField] private Transform _rewardsPanel;
 
         private CharacterInput _characterInput;
         private IProjectConfigLoader _projectConfigLoader;
@@ -56,7 +57,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 
             BuildGrid();
 
-            _canvas.enabled = true;
+            _canvas.enabled = false;
         }
 
         private void OnDestroy()
@@ -138,10 +139,18 @@ namespace Sources.Runtime.Gameplay.Inventory
             _selectedItem.Rotate();
         }
 
+        public void MoveItemToRewardsPanel()
+        {
+            if (_selectedItem == null)
+                return;
+
+            _selectedItem.Delete(_rewardsPanel);
+        }
+
         private bool ProcessItemPlacement(ItemRoot itemRoot, bool highlightOnly)
         {
             itemRoot.ClearOccupiedInventoryCells();
-            float radius = CellSize / 1.35f;
+            float radius = CellSize;
 
             List<InventoryCell> matchedCells = new List<InventoryCell>();
             bool allValid = true;
