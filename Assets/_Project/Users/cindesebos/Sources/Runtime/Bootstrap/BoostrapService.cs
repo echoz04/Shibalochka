@@ -14,13 +14,16 @@ namespace Sources.Runtime.Bootstrap
         private readonly ISceneLoader _sceneLoader;
         private readonly IProjectConfigLoader _projectConfigLoader;
         private readonly Scene _sceneToLoad;
+        private DiscordOverlayDisplayer _discordOverlayDisplayer;
 
-        public BootstrapService(IAssetLoader assetLoader, ISceneLoader sceneLoader, IProjectConfigLoader projectConfigLoader, Scene sceneToLoad)
+        public BootstrapService(IAssetLoader assetLoader, ISceneLoader sceneLoader, IProjectConfigLoader projectConfigLoader, Scene sceneToLoad,
+        DiscordOverlayDisplayer discordOverlayDisplayer)
         {
             _assetLoader = assetLoader;
             _sceneLoader = sceneLoader;
             _projectConfigLoader = projectConfigLoader;
             _sceneToLoad = sceneToLoad;
+            _discordOverlayDisplayer = discordOverlayDisplayer;
         }
 
         public async void Initialize()
@@ -28,6 +31,7 @@ namespace Sources.Runtime.Bootstrap
             using (await _assetLoader.LoadDisposable<GameObject>(AssetsConstants.LoadingCanvas))
             {
                 await _projectConfigLoader.LoadProjectConfigAsync();
+                _discordOverlayDisplayer.Initialize();
                 await _sceneLoader.LoadSceneAsync(_sceneToLoad);
             }
         }
