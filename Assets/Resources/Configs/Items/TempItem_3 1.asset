@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f659c9617e0c72417a4b3149649112b9, type: 3}
-  m_Name: TempItem_2
+  m_Name: TempItem_3 1
   m_EditorClassIdentifier: 
-  <TypeId>k__BackingField: Item_2
+  <TypeId>k__BackingField: Item_3
   <Rarity>k__BackingField: 0
   <IsMutant>k__BackingField: 0
-  <TitleLid>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 0}
+  <TitleLid>k__BackingField: "\u041E\u0441\u043C\u0438\u043D\u043E\u0433 \u0414\u0430\u043C\u0431\u043E"
+  <Icon>k__BackingField: {fileID: -1716304933, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
   <ItemCellPointPrefab>k__BackingField: {fileID: 0}
   _cellPointsPosition: []

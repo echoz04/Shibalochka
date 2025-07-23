@@ -45,17 +45,32 @@ MonoBehaviour:
     _configs:
     - {fileID: 11400000, guid: e559ecdb3503a7227a27d0021f130f0c, type: 2}
     - {fileID: 11400000, guid: ab9715bb7aec565a08c7d40afc2a791a, type: 2}
-    - {fileID: 11400000, guid: d747d292c4be9cb78ac0a8939e626e0e, type: 2}
+    - {fileID: 11400000, guid: 78c21dfe60dd1534fa2cde109782296f, type: 2}
+    - {fileID: 11400000, guid: 117f10065960a2449a1d861b0a2208e8, type: 2}
+    - {fileID: 11400000, guid: 745205f7b1c521442802b43d3fdabb32, type: 2}
+    - {fileID: 11400000, guid: 414aaa67e5efd59428de8744e7508ae2, type: 2}
+    - {fileID: 11400000, guid: 61beec8410d16ac43b59729e9b8ee5af, type: 2}
+    - {fileID: 11400000, guid: d77b85bdbce6a5f4996d6963e22d7d27, type: 2}
+    - {fileID: 11400000, guid: 54da669a469685c46b81ba180762de09, type: 2}
+    - {fileID: 11400000, guid: 79cf42afc436aab4491f0f782c55150e, type: 2}
+    - {fileID: 11400000, guid: fe296e097bf21434dab64ed66b00b16e, type: 2}
+    - {fileID: 11400000, guid: 0ef79002e7b8ca640bb98466e3a80267, type: 2}
+    - {fileID: 11400000, guid: bba34991eff537548a2b1e01245c42e3, type: 2}
+    - {fileID: 11400000, guid: deaadf2d01b29bc478be7170e271ea90, type: 2}
+    - {fileID: 11400000, guid: 5897b76be610436478fdee3dde0c7007, type: 2}
+    - {fileID: 11400000, guid: c9aa48cef2e2e194a9c7bb3857c4c495, type: 2}
+    - {fileID: 11400000, guid: de9ff12fcb95d9b4d9cd855fed2dfb0b, type: 2}
+    - {fileID: 11400000, guid: d0ddf6dd672ba04468328dbac5dadac5, type: 2}
     _raritiesConfig:
     - _rarity: 0
-      _change: 80
-      _mutantChange: 30
+      _chance: 80
+      _mutantChance: 30
     - _rarity: 1
-      _change: 15
-      _mutantChange: 30
+      _chance: 20
+      _mutantChance: 30
     - _rarity: 2
-      _change: 5
-      _mutantChange: 30
+      _chance: 5
+      _mutantChance: 30
   <DiscordConfig>k__BackingField:
     _isOverlayEnabled: 1
     _overlayTitle: Chilling

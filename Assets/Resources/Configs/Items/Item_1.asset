@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Item_1
   m_EditorClassIdentifier: 
   <TypeId>k__BackingField: Item_1
-  <Rarity>k__BackingField: 2
+  <Rarity>k__BackingField: 0
   <IsMutant>k__BackingField: 0
-  <TitleLid>k__BackingField: "\u0428\u044B\u0431\u0430\u0440\u043E\u0447\u043A\u0430"
-  <Icon>k__BackingField: {fileID: -208598361, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
+  <TitleLid>k__BackingField: "\u0416\u0435\u043C\u0447\u0443\u0436\u043D\u044B\u0439
+    \u043C\u043E\u043B\u043B\u044E\u0441\u043A"
+  <Icon>k__BackingField: {fileID: 146469982, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
   <ItemCellPointPrefab>k__BackingField: {fileID: 5684752095224147114, guid: dadf362f63410de9e8bf0e517f48e7b2, type: 3}
   _cellPointsPosition:
   - {x: -59, y: 56, z: 0}
