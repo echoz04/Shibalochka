@@ -8,7 +8,10 @@ namespace Sources.Runtime.Gameplay.Configs
     {
         [Title("Discord Overlay Settings")]
 
-        [SerializeField, LabelText("Overlay Title")] private string _overlayTitle = "Chilling";
+        [SerializeField, LabelText("Enable Overlay")] private bool _isOverlayEnabled;
+        public bool IsOverlayEnabled => _isOverlayEnabled;
+
+        [SerializeField, LabelText("Overlay Title"), ShowIf(nameof(_isOverlayEnabled))] private string _overlayTitle;
         public string OverlayTitle => _overlayTitle;
     }
 }

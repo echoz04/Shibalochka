@@ -50,7 +50,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             if (_canHandle == false || _inventoryRoot.IsVisible == true)
                 return;
 
-            _cameraRotator.OnPanelShow();
+            _cameraRotator.Disable();
 
             _stamina.SetActive(true);
             _sliderImage.fillAmount = 0f;
@@ -78,7 +78,12 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _fishingMiniGameBootstrapper.Launch(result);
         }
 
-        public void AllowHandle() => _canHandle = true;
+        public void AllowHandle()
+        {
+            _canHandle = true;
+
+            _cameraRotator.Enable();
+        }
 
         private void OnDestroy()
         {

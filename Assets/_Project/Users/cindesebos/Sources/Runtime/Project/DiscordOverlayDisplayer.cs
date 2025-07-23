@@ -20,6 +20,9 @@ namespace Sources
 
         public void Initialize()
         {
+            if (_projectConfigLoader.ProjectConfig.DiscordConfig.IsOverlayEnabled == false)
+                return;
+
             _discord = new Discord.Discord(ApplicationId, (ulong)Discord.CreateFlags.NoRequireDiscord);
 
             SetActivity();

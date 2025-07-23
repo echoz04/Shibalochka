@@ -5,6 +5,7 @@ using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Gameplay.Inventory;
+using Sources.Runtime.Gameplay.MiniGames.Fishing;
 
 namespace Sources.Runtime.Project
 {
@@ -20,7 +21,8 @@ namespace Sources.Runtime.Project
             BindAssetLoader();
             BindInput();
             BindCursorView();
-            DiscordOverlayDisplayer();
+            BindDiscordOverlayDisplayer();
+            BindMiniGameRewardService();
         }
 
         private void BindSceneLoader()
@@ -57,9 +59,16 @@ namespace Sources.Runtime.Project
                 .AsSingle();
         }
 
-        private void DiscordOverlayDisplayer()
+        private void BindDiscordOverlayDisplayer()
         {
             Container.BindInterfacesAndSelfTo<DiscordOverlayDisplayer>()
+                .AsSingle();
+        }
+
+        private void BindMiniGameRewardService()
+        {
+            Container.Bind<IMiniGameRewardService>()
+                .To<MiniGameRewardService>()
                 .AsSingle();
         }
     }

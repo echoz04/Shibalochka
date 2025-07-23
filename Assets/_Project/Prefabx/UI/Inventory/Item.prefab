@@ -376,12 +376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b187854133f0a12bdb7cac2ecc4eea6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _image: {fileID: 1436593807720321556}
-  _target: {fileID: 0}
+  _view: {fileID: 1436593807720321556}
   _parent: {fileID: 0}
   _arrowSprite: {fileID: 0}
   _arrrowSize: {x: 62, y: 62}
-  _offSet: 0
+  _offSet: 5
 --- !u!114 &1783771171914294077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,8 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bea434d1187a01335835ebdd93d5c895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cellsPoints: []
-  _config: {fileID: 11400000, guid: 5b12c09efba78910b8c985b6f5426ba8, type: 2}
+  _cellPointsParent: {fileID: 4059940928503968686}
+  _config: {fileID: 11400000, guid: e559ecdb3503a7227a27d0021f130f0c, type: 2}
   _dragger: {fileID: 8832739346758725014}
   _view: {fileID: 4096750815505744532}
 --- !u!1 &7426999703707365609

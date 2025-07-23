@@ -17,10 +17,10 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
                 _slider.value = _value;
 
-                // Отменяем прошлый твин, если есть
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 _delayedSlider.DOKill();
 
-                // Запускаем отставание
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 DOVirtual.DelayedCall(_delay, () =>
                 {
                     _delayedSlider.DOValue(_value, _delayDuration).SetEase(Ease.OutQuad);
@@ -34,7 +34,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [SerializeField] private Slider _delayedSlider;
         [SerializeField] private TextMeshProUGUI _text;
 
-        [SerializeField] private float _delay = 0.1f; 
+        [SerializeField] private float _delay = 0.1f;
         [SerializeField] private float _delayDuration = 0.5f;
 
         private float _value;
@@ -48,22 +48,22 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             {
                 var sliders = GetComponentsInChildren<Slider>();
                 if (sliders.Length > 1)
-                    _delayedSlider = sliders[1]; // автонастройка второго слайдера
+                    _delayedSlider = sliders[1]; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             }
         }
 
         public void AddValue(float newValue)
         {
             Value += newValue;
-            RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
-            RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Success");
+            //RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
+            //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Success");
         }
 
         public void RemoveValue(float newValue)
         {
             Value -= newValue;
-            RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
-            RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Failure");
+            //RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
+            //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Failure");
         }
 
         public void SetValue(float newValue)

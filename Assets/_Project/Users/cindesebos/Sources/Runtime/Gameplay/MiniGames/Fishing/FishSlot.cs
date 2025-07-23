@@ -15,13 +15,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [field: SerializeField] public Transform SpawnPoint { get; set; }
         [field: SerializeField] public float CatchRange { get; set; }
 
-        public bool IsCaught(float pointerValue)
-        {
-            var result = Mathf.Abs(pointerValue - CatchCenterValue) <= CatchRange;
-
-            Debug.Log($"pointerValue is {pointerValue}  and  CatchCenterValue is {CatchCenterValue}");
-
-            return result;
-        }
+        public bool IsCaught(float pointerValue) => Mathf.Abs(pointerValue - CatchCenterValue) <= CatchRange;
     }
 }

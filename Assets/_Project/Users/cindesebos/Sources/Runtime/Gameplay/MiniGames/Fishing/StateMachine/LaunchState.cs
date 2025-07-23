@@ -8,7 +8,7 @@ using Sources.Runtime.Gameplay.MiniGames.Fishing.Types;
 using Sources.Runtime.Utilities;
 using UnityEngine;
 
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
 {
     public class LaunchState : State
     {
@@ -51,7 +51,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
             Debug.Log("Random Mini Game Index is " + randomIndex);
 
-            RuntimeManager.PlayOneShot("event:/SFX/GameSFX/Fishing_Rod");
+            //RuntimeManager.PlayOneShot("event:/SFX/GameSFX/Fishing_Rod");
 
             if (randomIndex == 0)
                 _dependencies.StateMachine.CurrentMiniGame = _movablePointerFishingMiniGame;

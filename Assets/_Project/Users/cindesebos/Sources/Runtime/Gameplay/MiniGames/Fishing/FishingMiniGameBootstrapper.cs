@@ -7,6 +7,8 @@ using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Core.ObjectPool;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem;
+using Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine;
+using Sources.Runtime.Gameplay.Inventory;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
@@ -25,12 +27,14 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         [Inject]
         private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, CameraRotator cameraRotator,
-        StaminaHandler staminaHandler)
+        StaminaHandler staminaHandler, IMiniGameRewardService rewardService, InventoryRoot inventoryRoot)
         {
             _dependencies.CharacterInput = characterInput;
             _dependencies.ProjectConfigLoader = projectConfigLoader;
             _dependencies.CameraRotator = cameraRotator;
             _staminaHandler = staminaHandler;
+            _dependencies.RewardService = rewardService;
+            _dependencies.InventoryRoot = inventoryRoot;
         }
 
         public void Initialize()
@@ -141,6 +145,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         public CharacterInput CharacterInput;
         public IProjectConfigLoader ProjectConfigLoader;
         public FishingMiniGameStateMachine StateMachine;
+        public IMiniGameRewardService RewardService;
+        public InventoryRoot InventoryRoot;
 
         public ObjectPool<Fish> CommonFishPool;
         public ObjectPool<Fish> GoldFishPool;

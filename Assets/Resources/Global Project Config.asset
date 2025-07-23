@@ -19,9 +19,13 @@ MonoBehaviour:
   <UIConfig>k__BackingField:
     _fishingPointerMoveDuration: 2.45
     _fishesMoveSpeed: 0.25
+    _minimumWaitingTime: 3
+    _maximumWaitingTime: 3
+    _timeToCatchFish: 0.45
     _fishingShowDelayBetweenItems: 0.225
     _fishingFadeDuration: 0.55
     _fishingClickCooldown: 0.1
+    _delayDuration: 2.45
     _sliderTimeToMaxValue: 1
     _valueToAddOnCommonCatch: 10
     _valueToAddOnGoldCatch: 15
@@ -35,3 +39,23 @@ MonoBehaviour:
     _spacing: 4
     _cellsSpawnAnimationDuration: 0.15
     _delayBetweenCellsSpawnAnimation: 0.025
+    _itemAnimationsDuration: 0.25
+    _itemDraggingScale: 1.1
+  <ItemsConfig>k__BackingField:
+    _configs:
+    - {fileID: 11400000, guid: e559ecdb3503a7227a27d0021f130f0c, type: 2}
+    - {fileID: 11400000, guid: ab9715bb7aec565a08c7d40afc2a791a, type: 2}
+    - {fileID: 11400000, guid: d747d292c4be9cb78ac0a8939e626e0e, type: 2}
+    _raritiesConfig:
+    - _rarity: 0
+      _change: 80
+      _mutantChange: 30
+    - _rarity: 1
+      _change: 15
+      _mutantChange: 30
+    - _rarity: 2
+      _change: 5
+      _mutantChange: 30
+  <DiscordConfig>k__BackingField:
+    _isOverlayEnabled: 1
+    _overlayTitle: Chilling

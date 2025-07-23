@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f659c9617e0c72417a4b3149649112b9, type: 3}
-  m_Name: Fish Config
+  m_Name: TempItem_2
   m_EditorClassIdentifier: 
-  <Title>k__BackingField: 123
-  <CellOffsets>k__BackingField:
-  - {x: 0, y: 0}
-  - {x: 0, y: 1}
-  - {x: 1, y: 0}
-  <Icon>k__BackingField: {fileID: 1726689818, guid: 2b972d4df7a5af64d93f9be0099148f6, type: 3}
+  <TypeId>k__BackingField: Item_2
+  <Rarity>k__BackingField: 0
+  <IsMutant>k__BackingField: 0
+  <TitleLid>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 0}
+  <ItemCellPointPrefab>k__BackingField: {fileID: 0}
+  _cellPointsPosition: []

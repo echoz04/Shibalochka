@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FMODUnity;
-using Sources.Runtime.Gameplay.Configs;
+using Sources.Runtime.Gameplay.Configs.Items;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,10 +23,10 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         public bool IsSelected { get; set; }
 
         [SerializeField] private Transform _cellPointsParent;
-        [SerializeField] private ItemConfig _config;
         [SerializeField] private ItemDragger _dragger;
         [SerializeField] private ItemView _view;
 
+        private ItemConfig _config;
         private InventoryRoot _inventoryRoot;
         private IProjectConfigLoader _projectConfigLoader;
         private List<ItemCellPoint> _cellPoints = new();
@@ -48,8 +48,10 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             _projectConfigLoader = projectConfigLoader;
         }
 
-        private void Start()
+        public void Initialize(ItemConfig config)
         {
+            _config = config;
+
             _occupiedInventoryCells = new List<InventoryCell>();
 
             CreateCellsPoints();
@@ -131,7 +133,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         {
             OnBeginDragging?.Invoke();
 
-            RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Open");
+            //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Open");
             _isDragging = true;
             _inventoryRoot.TryToggleControlButtons(this);
         }
@@ -151,7 +153,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
                 if (isImmediatelyPlace == true)
                 {
-                    RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Close");
+                    //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Close");
                 }
             }
             else
@@ -180,7 +182,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void Rotate()
         {
-            RuntimeManager.PlayOneShot("event:/SFX/UI/UI_PointerEnter");
+            //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_PointerEnter");
             transform.Rotate(0f, 0f, -90f);
 
             PlaceItem(false);
@@ -188,10 +190,10 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void SetSelection(bool isSelected)
         {
-            if (isSelected)
-                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Select");
-            else
-                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Deselect");
+            /* if (isSelected)
+                 //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Select");
+             else
+                 //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Deselect");*/
 
             IsSelected = isSelected;
             OnSelected?.Invoke(IsSelected);

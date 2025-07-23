@@ -52,11 +52,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 
         public void Launch()
         {
-            OnLaunched?.Invoke();
-
-            _loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
-            _loopedSound.start();
-            _loopedSound.setParameterByName("FishingMiniGame", 1);
+            //_loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
+            //_loopedSound.start();
+            //_loopedSound.setParameterByName("FishingMiniGame", 1);
 
             MoveFishes();
         }
@@ -101,8 +99,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         {
             _loopedSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             _loopedSound.release();
-
-            OnEnded?.Invoke(isWin);
 
             foreach (var tweener in _fishTweeners)
                 tweener?.Kill();

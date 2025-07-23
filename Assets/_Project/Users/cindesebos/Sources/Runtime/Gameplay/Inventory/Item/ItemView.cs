@@ -1,5 +1,6 @@
-using DG.Tweening; // ← Не забудь подключить DOTween
+using DG.Tweening;
 using Sources.Runtime.Gameplay.Configs;
+using Sources.Runtime.Gameplay.Configs.Items;
 using UnityEngine;
 using UnityEngine.UI;
 
