@@ -35,9 +35,9 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             _view.alphaHitTestMinimumThreshold = 0.1f;
             _view.SetNativeSize();
 
-            CreateArrows();
-            UpdateArrowPositions();
-            ToggleArrows(false);
+            //CreateArrows();
+            //UpdateArrowPositions();
+            //ToggleArrows(false);
 
             _root = root;
             _root.OnBeginDragging += OnDragBegan;
@@ -74,7 +74,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnSelected(bool value)
         {
-            ToggleArrows(value);
+            //ToggleArrows(value);
         }
 
         private void ToggleArrows(bool value)

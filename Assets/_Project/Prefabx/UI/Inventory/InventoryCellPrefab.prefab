@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 186945519582666918}
   - component: {fileID: 8572484534902859831}
   m_Layer: 0
-  m_Name: InventoryCell
+  m_Name: InventoryCellPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,4 +89,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsOccupied>k__BackingField: 0
+  <RectTransform>k__BackingField: {fileID: 8692039187484987383}
   _image: {fileID: 186945519582666918}

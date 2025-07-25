@@ -1,7 +1,8 @@
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Gameplay.Inventory;
-using Sources.Runtime.Gameplay.MiniGames;
+using Sources.Runtime.Gameplay.Inventory.Item;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Services.Builders.Item;
 using UnityEngine;
 using Zenject;
 
@@ -13,6 +14,7 @@ namespace Sources.Runtime.Gameplay
         [SerializeField] private StaminaHandler _staminaHandler;
         [SerializeField] private InventoryRoot _inventoryRoot;
         [SerializeField] private CameraRotator _cameraRotator;
+        [SerializeField] private ItemRoot _itemRootPrefab;
 
         public override void InstallBindings()
         {
@@ -20,6 +22,7 @@ namespace Sources.Runtime.Gameplay
             BindCameraRotator();
             BindInventory();
             BindStaminaHandler();
+            BindItemBuilder();
         }
 
         private void BindFishingMiniGameBootstrapper()
@@ -48,6 +51,14 @@ namespace Sources.Runtime.Gameplay
             Container.Bind<StaminaHandler>()
                 .FromInstance(_staminaHandler)
                 .AsSingle();
+        }
+
+        private void BindItemBuilder()
+        {
+            Container.Bind<IItemBuilder>()
+                .To<ItemBuilder>()
+                .AsSingle()
+                .WithArguments(Container, _itemRootPrefab);
         }
     }
 }

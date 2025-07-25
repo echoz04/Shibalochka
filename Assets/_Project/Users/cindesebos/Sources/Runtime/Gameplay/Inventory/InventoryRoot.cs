@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Gameplay.MiniGames;
 using Sources.Runtime.Gameplay.Configs.Items;
+using Sources.Runtime.Gameplay.Camera;
+using Sources.Runtime.Services.Builders.Item;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
@@ -35,6 +37,8 @@ namespace Sources.Runtime.Gameplay.Inventory
         private CharacterInput _characterInput;
         private IProjectConfigLoader _projectConfigLoader;
         private StaminaHandler _staminaHandler;
+        private CameraRotator _cameraRotator;
+        private IItemBuilder _itemBuilder;
 
         private ItemRoot _previousSelectedItem;
         private ItemRoot _selectedItem;
@@ -43,11 +47,14 @@ namespace Sources.Runtime.Gameplay.Inventory
         private List<InventoryCell> _allCells = new List<InventoryCell>();
 
         [Inject]
-        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, StaminaHandler staminaHandler)
+        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, StaminaHandler staminaHandler,
+        CameraRotator cameraRotator, IItemBuilder itemBuilder)
         {
             _characterInput = characterInput;
             _projectConfigLoader = projectConfigLoader;
             _staminaHandler = staminaHandler;
+            _cameraRotator = cameraRotator;
+            _itemBuilder = itemBuilder;
         }
 
         public void Initialize()
@@ -86,6 +93,8 @@ namespace Sources.Runtime.Gameplay.Inventory
         public void TryAddItem(ItemConfig itemConfig)
         {
             Debug.Log("Try To Add " + itemConfig.TitleLid);
+
+            _itemBuilder.Build(itemConfig, _rewardsPanel);
         }
 
         public void ToggleVisibility(InputAction.CallbackContext context)
@@ -96,7 +105,14 @@ namespace Sources.Runtime.Gameplay.Inventory
             _canvas.enabled = !_canvas.enabled;
 
             if (_canvas.enabled == true)
+            {
                 OnBuildCells?.Invoke(_allCells);
+                _cameraRotator.Disable();
+            }
+            else
+            {
+                _cameraRotator.Enable();
+            }
         }
 
         public void HightligchCells(ItemRoot itemRoot)

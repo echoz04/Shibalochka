@@ -84,7 +84,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
             _isAlreadyLaunched = true;
             OnCatchTimeEnded?.Invoke();
-            Debug.Log("Ты поймал рыбу");
 
             DisposeSubscribe();
 
