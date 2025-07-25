@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f659c9617e0c72417a4b3149649112b9, type: 3}
-  m_Name: TempItem_5
+  m_Name: Item_4_Mutant
   m_EditorClassIdentifier: 
-  <TypeId>k__BackingField: Item_4
+  <TypeId>k__BackingField: Item_4_Mutant
   <Rarity>k__BackingField: 0
-  <IsMutant>k__BackingField: 0
+  <IsMutant>k__BackingField: 1
   <TitleLid>k__BackingField: "\u041D\u0435\u0440\u0430\u0437\u043B\u0443\u0447\u043D\u0438\u043A\u0438
-    \u043C\u0430\u043B\u044B\u0435"
-  <Icon>k__BackingField: {fileID: -855189435, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
-  <ItemCellPointPrefab>k__BackingField: {fileID: 0}
-  _cellPointsPosition: []
+    \u043C\u0430\u043B\u044B\u0435 (\u041C\u0443\u0442\u0430\u043D\u0442)"
+  <Icon>k__BackingField: {fileID: -1558382343, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
+  <ItemCellPointPrefab>k__BackingField: {fileID: 5684752095224147114, guid: dadf362f63410de9e8bf0e517f48e7b2, type: 3}
+  _cellPointsPosition:
+  - {x: -56, y: 0, z: 0}
+  - {x: 56, y: 0, z: 0}

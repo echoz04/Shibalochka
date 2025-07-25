@@ -18,7 +18,7 @@ MonoBehaviour:
     _maxVerticalAngle: 25
   <UIConfig>k__BackingField:
     _fishingPointerMoveDuration: 2.45
-    _fishesMoveSpeed: 0.25
+    _fishesMoveSpeed: 250
     _minimumWaitingTime: 3
     _maximumWaitingTime: 3
     _timeToCatchFish: 0.45
@@ -60,7 +60,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5897b76be610436478fdee3dde0c7007, type: 2}
     - {fileID: 11400000, guid: c9aa48cef2e2e194a9c7bb3857c4c495, type: 2}
     - {fileID: 11400000, guid: de9ff12fcb95d9b4d9cd855fed2dfb0b, type: 2}
-    - {fileID: 11400000, guid: d0ddf6dd672ba04468328dbac5dadac5, type: 2}
+    - {fileID: 0}
     _raritiesConfig:
     - _rarity: 0
       _chance: 80
