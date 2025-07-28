@@ -1,5 +1,6 @@
 using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Project;
 using UnityEngine;
 using Zenject;
 
@@ -21,6 +22,10 @@ namespace Sources.Runtime.Gameplay
 
         private void Awake()
         {
+#if UNITY_EDITOR
+            ContentManagementSystem.Instance.InventoryRoot = _inventoryRoot;
+#endif
+
             _characterInput.Enable();
             _inventoryRoot.Initialize();
             _fishingMiniGameBootstrapper.Initialize();

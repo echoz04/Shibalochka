@@ -6,6 +6,7 @@ using UnityEngine;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Project;
 
 namespace Sources.Runtime.Bootstrap
 {
@@ -36,7 +37,15 @@ namespace Sources.Runtime.Bootstrap
                 await _projectConfigLoader.LoadProjectConfigAsync();
                 _discordOverlayDisplayer.Initialize();
                 _miniGameRewardService.Initialize();
+#if UNITY_EDITOR
+                ContentManagementSystem.Instance.ProjectConfigLoader = _projectConfigLoader;
+
+                Debug.Log($"Loading scene: {ContentManagementSystem.Instance.SceneToLoad}");
+
+                await _sceneLoader.LoadSceneAsync(ContentManagementSystem.Instance.SceneToLoad);
+#else
                 await _sceneLoader.LoadSceneAsync(_sceneToLoad);
+#endif
             }
         }
     }

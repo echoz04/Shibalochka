@@ -90,11 +90,20 @@ namespace Sources.Runtime.Gameplay.Inventory
             }
         }
 
-        public void TryAddItem(ItemConfig itemConfig)
+        public bool TryAddItem(ItemConfig itemConfig)
         {
             Debug.Log("Try To Add " + itemConfig.TitleLid);
 
+            if (itemConfig == null)
+            {
+                Debug.LogWarning("ItemConfig is null, cannot add item.");
+
+                return false;
+            }
+
             _itemBuilder.Build(itemConfig, _rewardsPanel);
+
+            return true;
         }
 
         public void ToggleVisibility(InputAction.CallbackContext context)

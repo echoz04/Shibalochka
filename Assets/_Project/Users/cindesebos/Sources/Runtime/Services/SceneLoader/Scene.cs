@@ -4,6 +4,6 @@ namespace Sources.Runtime.Services.SceneLoader
     {
         Bootstrap = 0,
         Gameplay = 1,
-        TestGameplay = 2
+        Test = 2
     }
 }

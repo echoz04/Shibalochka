@@ -4,7 +4,7 @@ using Sources.Runtime.Core.StateMachine;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
 {
-    public class EndState : State
+    public class EndState : BaseState
     {
         public event Action OnEnded;
 

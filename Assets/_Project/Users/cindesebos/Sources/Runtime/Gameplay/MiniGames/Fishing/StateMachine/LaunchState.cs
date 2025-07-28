@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
 {
-    public class LaunchState : State
+    public class LaunchState : BaseState
     {
         private readonly FishingMiniGameDependencies _dependencies;
 

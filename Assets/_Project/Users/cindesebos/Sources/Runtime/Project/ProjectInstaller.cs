@@ -11,6 +11,7 @@ namespace Sources.Runtime.Project
 {
     public class ProjectInstaller : MonoInstaller
     {
+        [SerializeField] private ContentManagementSystem _contentManagementSystemPrefab;
         [SerializeField] private CursorView _cursorView;
         [SerializeField] private InventoryCell _cellPrefab;
 

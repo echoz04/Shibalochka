@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
 {
-    public class GameplayState : State
+    public class GameplayState : BaseState
     {
         private readonly FishingMiniGameDependencies _dependencies;
 
