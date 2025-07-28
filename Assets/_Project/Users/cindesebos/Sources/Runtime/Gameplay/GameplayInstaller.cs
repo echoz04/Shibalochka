@@ -2,6 +2,7 @@ using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.Inventory.Item;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Gameplay.Wallet;
 using Sources.Runtime.Services.Builders.Item;
 using UnityEngine;
 using Zenject;
@@ -15,6 +16,7 @@ namespace Sources.Runtime.Gameplay
         [SerializeField] private InventoryRoot _inventoryRoot;
         [SerializeField] private CameraRotator _cameraRotator;
         [SerializeField] private ItemRoot _itemRootPrefab;
+        [SerializeField] private WalletView _walletView;
 
         public override void InstallBindings()
         {
@@ -23,6 +25,7 @@ namespace Sources.Runtime.Gameplay
             BindInventory();
             BindStaminaHandler();
             BindItemBuilder();
+            BindWalllet();
         }
 
         private void BindFishingMiniGameBootstrapper()
@@ -59,6 +62,16 @@ namespace Sources.Runtime.Gameplay
                 .To<ItemBuilder>()
                 .AsSingle()
                 .WithArguments(Container, _itemRootPrefab);
+        }
+
+        private void BindWalllet()
+        {
+            Container.Bind<WalletRoot>()
+                .AsSingle();
+
+            Container.Bind<WalletView>()
+                .FromInstance(_walletView)
+                .AsSingle();
         }
     }
 }

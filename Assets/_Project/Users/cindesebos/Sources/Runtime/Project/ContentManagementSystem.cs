@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using Sirenix.OdinInspector;
 using Sources.Runtime.Gameplay.Inventory;
+using Sources.Runtime.Gameplay.Wallet;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
@@ -43,6 +44,10 @@ namespace Sources.Runtime.Project
 
         private static ContentManagementSystem _instance;
 
+        [field: SerializeField] public bool InstanceHasProjectConfigLoader => Instance != null && Instance.ProjectConfigLoader != null;
+
+        public IProjectConfigLoader ProjectConfigLoader { get; set; }
+
         public void InitializeInstance()
         {
             _instance.SceneToLoad = _owner.SceneToLoad;
@@ -57,6 +62,13 @@ namespace Sources.Runtime.Project
                 .Where(s => s != Scene.Bootstrap)
                 .ToArray();
         }
+
+
+        #region Add Item
+
+        public InventoryRoot InventoryRoot { get; set; }
+
+        [field: SerializeField] public bool InstanceHasInventoryRoot => Instance != null && Instance.InventoryRoot != null;
 
         [Space]
         [SerializeField, FoldoutGroup("Add Item"), LabelText("Item ID")] private string _targetItemId;
@@ -89,10 +101,27 @@ namespace Sources.Runtime.Project
         private bool CanShowInventoryControls =>
             !Application.isPlaying || InstanceHasInventoryRoot;
 
-        public InventoryRoot InventoryRoot { get; set; }
-        public IProjectConfigLoader ProjectConfigLoader { get; set; }
+        #endregion
 
-        [field: SerializeField] public bool InstanceHasInventoryRoot => Instance != null && Instance.InventoryRoot != null;
-        [field: SerializeField] public bool InstanceHasProjectConfigLoader => Instance != null && Instance.ProjectConfigLoader != null;
+        #region Wallet
+
+        public WalletRoot WalletRoot { get; set; }
+
+        [field: SerializeField] public bool InstanceHasWallet => Instance != null && Instance.WalletRoot != null;
+
+        [Space]
+        [SerializeField, FoldoutGroup("Add Money"), LabelText("Money Amount")] private int _targetMoneyAmount;
+
+        [FoldoutGroup("Add Money"), Button("Add", ButtonSizes.Medium)]
+        private void AddMoneyToWallet()
+        {
+            if (Application.isPlaying == false)
+                return;
+
+            Instance.WalletRoot.Money.TryAdd(_targetMoneyAmount);
+            _targetMoneyAmount = 0;
+        }
+
+        #endregion
     }
 }

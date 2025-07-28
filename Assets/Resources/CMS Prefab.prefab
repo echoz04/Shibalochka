@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SceneToLoad>k__BackingField: 1
   _targetItemId: 
+  _targetMoneyAmount: 0
