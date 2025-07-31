@@ -1,8 +1,6 @@
-using Sources.Runtime.Core.StateMachine;
-
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
 {
-    public class FishingMiniGameStateMachine : StateMachine
+    public class FishingMiniGameStateMachine : Sources.Runtime.Core.StateMachine.StateMachine
     {
         public readonly LaunchState LaunchState;
         public readonly GameplayState GameplayState;
@@ -20,7 +18,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         public void SetState(EndState endState, bool gameplayResult)
         {
             endState.SetGameplayResult(gameplayResult);
-            
+
             base.SetState(endState);
         }
     }

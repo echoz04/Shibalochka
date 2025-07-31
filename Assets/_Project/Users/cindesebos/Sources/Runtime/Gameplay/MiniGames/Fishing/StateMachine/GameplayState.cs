@@ -4,7 +4,7 @@ using Sources.Runtime.Core.StateMachine;
 using Sources.Runtime.Gameplay.MiniGames.Fishing.Types;
 using UnityEngine.InputSystem;
 
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
 {
     public class GameplayState : State
     {

@@ -1,5 +1,4 @@
 using System;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing

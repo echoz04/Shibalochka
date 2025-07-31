@@ -7,6 +7,9 @@ using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine.InputSystem;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Gameplay.MiniGames;
+using Sources.Runtime.Gameplay.Configs.Items;
+using Sources.Runtime.Gameplay.Camera;
+using Sources.Runtime.Services.Builders.Item;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
@@ -29,10 +32,13 @@ namespace Sources.Runtime.Gameplay.Inventory
         [SerializeField] private InventoryCell _cellPrefab;
         [SerializeField] private RectTransform _gridContent;
         [SerializeField] private GameObject _controlButtons;
+        [SerializeField] private Transform _rewardsPanel;
 
         private CharacterInput _characterInput;
         private IProjectConfigLoader _projectConfigLoader;
         private StaminaHandler _staminaHandler;
+        private CameraRotator _cameraRotator;
+        private IItemBuilder _itemBuilder;
 
         private ItemRoot _previousSelectedItem;
         private ItemRoot _selectedItem;
@@ -41,11 +47,14 @@ namespace Sources.Runtime.Gameplay.Inventory
         private List<InventoryCell> _allCells = new List<InventoryCell>();
 
         [Inject]
-        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, StaminaHandler staminaHandler)
+        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, StaminaHandler staminaHandler,
+        CameraRotator cameraRotator, IItemBuilder itemBuilder)
         {
             _characterInput = characterInput;
             _projectConfigLoader = projectConfigLoader;
             _staminaHandler = staminaHandler;
+            _cameraRotator = cameraRotator;
+            _itemBuilder = itemBuilder;
         }
 
         public void Initialize()
@@ -56,7 +65,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 
             BuildGrid();
 
-            _canvas.enabled = true;
+            _canvas.enabled = false;
         }
 
         private void OnDestroy()
@@ -81,6 +90,13 @@ namespace Sources.Runtime.Gameplay.Inventory
             }
         }
 
+        public void TryAddItem(ItemConfig itemConfig)
+        {
+            Debug.Log("Try To Add " + itemConfig.TitleLid);
+
+            _itemBuilder.Build(itemConfig, _rewardsPanel);
+        }
+
         public void ToggleVisibility(InputAction.CallbackContext context)
         {
             if (_staminaHandler.IsStarted == true)
@@ -89,7 +105,14 @@ namespace Sources.Runtime.Gameplay.Inventory
             _canvas.enabled = !_canvas.enabled;
 
             if (_canvas.enabled == true)
+            {
                 OnBuildCells?.Invoke(_allCells);
+                _cameraRotator.Disable();
+            }
+            else
+            {
+                _cameraRotator.Enable();
+            }
         }
 
         public void HightligchCells(ItemRoot itemRoot)
@@ -138,10 +161,18 @@ namespace Sources.Runtime.Gameplay.Inventory
             _selectedItem.Rotate();
         }
 
+        public void MoveItemToRewardsPanel()
+        {
+            if (_selectedItem == null)
+                return;
+
+            _selectedItem.Delete(_rewardsPanel);
+        }
+
         private bool ProcessItemPlacement(ItemRoot itemRoot, bool highlightOnly)
         {
             itemRoot.ClearOccupiedInventoryCells();
-            float radius = CellSize / 1.35f;
+            float radius = CellSize;
 
             List<InventoryCell> matchedCells = new List<InventoryCell>();
             bool allValid = true;
@@ -186,18 +217,21 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         private InventoryCell FindNearestCell(Vector3 worldPos, float radius)
         {
+            InventoryCell closest = null;
+            float closestDistance = float.MaxValue;
+
             foreach (var cell in GetAllCells())
             {
-                Vector3 cellPos = cell.transform.position;
+                float distance = Vector2.Distance(new Vector2(worldPos.x, worldPos.y), new Vector2(cell.transform.position.x, cell.transform.position.y));
 
-                float dx = Mathf.Abs(worldPos.x - cellPos.x);
-                float dy = Mathf.Abs(worldPos.y - cellPos.y);
-
-                if (dx <= radius && dy <= radius)
-                    return cell;
+                if (distance <= radius && distance < closestDistance)
+                {
+                    closest = cell;
+                    closestDistance = distance;
+                }
             }
 
-            return null;
+            return closest;
         }
 
         private IEnumerable<InventoryCell> GetAllCells()

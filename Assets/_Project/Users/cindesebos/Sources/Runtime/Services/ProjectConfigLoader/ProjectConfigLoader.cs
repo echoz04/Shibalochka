@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Sources.Runtime.Services.ProjectConfigLoader
 {
-    public class ProjectConfigLoader: IProjectConfigLoader
+    public class ProjectConfigLoader : IProjectConfigLoader
     {
         public ProjectConfig ProjectConfig { get; private set; }
 

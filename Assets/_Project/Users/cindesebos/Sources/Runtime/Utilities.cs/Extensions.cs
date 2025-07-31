@@ -5,20 +5,15 @@ namespace Sources.Runtime.Utilities
 {
     public static class Extensions
     {
-        public static float MapScreenPositionToSliderValue(float screenX, Slider slider, Camera camera)
+        public static float MapWorldPositionToSliderValue(Vector3 worldPosition, Slider slider)
         {
             RectTransform sliderRect = slider.GetComponent<RectTransform>();
 
-            Vector3[] worldCorners = new Vector3[4];
-            sliderRect.GetWorldCorners(worldCorners);
+            Vector2 localPoint = sliderRect.InverseTransformPoint(worldPosition);
 
-            float minX = RectTransformUtility.WorldToScreenPoint(camera, worldCorners[0]).x;
-            float maxX = RectTransformUtility.WorldToScreenPoint(camera, worldCorners[3]).x;
+            float normalized = Mathf.InverseLerp(sliderRect.rect.xMin, sliderRect.rect.xMax, localPoint.x);
 
-            float t = Mathf.InverseLerp(minX, maxX, screenX);
-            float value = Mathf.Lerp(slider.minValue, slider.maxValue, t);
-
-            return value;
+            return Mathf.Lerp(slider.minValue, slider.maxValue, normalized);
         }
     }
 }

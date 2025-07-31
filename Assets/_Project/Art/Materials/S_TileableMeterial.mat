@@ -37,8 +37,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: ca29d0ce3389a1f4eb9f57b7207a8134, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: e301cbb23d22eae4a99eb8dcc7f13f60, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SideTexture:
-        m_Texture: {fileID: 2800000, guid: d114df164bcddf64d81878e4e6ddeb61, type: 3}
+        m_Texture: {fileID: 2800000, guid: ca3eee105c8977d40a56877480db5234, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TopTexture:
@@ -59,22 +67,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BaseColorStrenght: 1
     - _BlendDistance: 0.47
     - _BlendNoiseScale: 3.03
     - _BlendNoiseStrength: 0
     - _BlendTiling: 1
     - _NoiseRotate: 0
-    - _NoiseScale: 0
+    - _NoiseScale: 41.31
     - _NoiseStrengh: 0
+    - _NoiseStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scale: 0.14
     - _SideTextureNoiseScale: 50
-    - _SideTextureScale: 0.1
+    - _SideTextureScale: 0.12
     - _Smoothness: 0
     - _TopTextureDistance: 0.5
     - _TopTextureDistance_1: 0.8
-    - _TopTextureScale: 0.16
-    m_Colors: []
+    - _TopTextureScale: 0.07
+    m_Colors:
+    - _123: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
