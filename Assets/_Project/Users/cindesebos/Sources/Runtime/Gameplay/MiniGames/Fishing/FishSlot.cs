@@ -1,4 +1,5 @@
 using System;
+using Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes;
 using UnityEngine;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing

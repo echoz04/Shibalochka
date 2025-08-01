@@ -28,7 +28,6 @@ namespace Sources.Runtime.Gameplay.Inventory
         public float Spacing => _projectConfigLoader.ProjectConfig.InventoryConfig.InventorySpacing;
 
         [SerializeField] private Canvas _canvas;
-        [SerializeField] private InventoryView _view;
         [SerializeField] private InventoryCell _cellPrefab;
         [SerializeField] private RectTransform _gridContent;
         [SerializeField] private GameObject _controlButtons;
@@ -61,8 +60,6 @@ namespace Sources.Runtime.Gameplay.Inventory
         {
             _characterInput.UI.ToggleInventoryVisibility.performed += ToggleVisibility;
 
-            _view.Initialize(this, _projectConfigLoader);
-
             BuildGrid();
 
             _canvas.enabled = false;
@@ -82,7 +79,7 @@ namespace Sources.Runtime.Gameplay.Inventory
                 for (int x = 0; x < Width; x++)
                 {
                     var cell = Instantiate(_cellPrefab, _gridContent);
-                    cell.Initialize(x, y, CellSize, this);
+                    cell.Initialize(x, y);
                     _currentGrid[x, y] = cell;
                     _allCells.Add(cell);
 

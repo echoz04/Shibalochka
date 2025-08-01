@@ -14,6 +14,7 @@ namespace Sources.Runtime.Gameplay
         [SerializeField] private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         [SerializeField] private StaminaHandler _staminaHandler;
         [SerializeField] private InventoryRoot _inventoryRoot;
+        [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private CameraRotator _cameraRotator;
         [SerializeField] private ItemRoot _itemRootPrefab;
         [SerializeField] private WalletView _walletView;
@@ -46,6 +47,10 @@ namespace Sources.Runtime.Gameplay
         {
             Container.Bind<InventoryRoot>()
                 .FromInstance(_inventoryRoot)
+                .AsSingle();
+
+            Container.Bind<InventoryView>()
+                .FromInstance(_inventoryView)
                 .AsSingle();
         }
 

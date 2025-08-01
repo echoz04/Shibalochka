@@ -1,4 +1,4 @@
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes
 {
     public enum FishType
     {

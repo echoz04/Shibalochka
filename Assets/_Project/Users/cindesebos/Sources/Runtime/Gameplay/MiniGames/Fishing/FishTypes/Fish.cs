@@ -1,7 +1,6 @@
-using Sources.Runtime.Gameplay.MiniGames.Fishing.Types;
 using UnityEngine;
 
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes
 {
     public class Fish : MonoBehaviour
     {

@@ -1,14 +1,12 @@
-using System;
-using System.Linq;
 using Cysharp.Threading.Tasks;
-using FMODUnity;
 using Sources.Runtime.Core.ObjectPool;
 using Sources.Runtime.Core.StateMachine;
+using Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes;
 using Sources.Runtime.Gameplay.MiniGames.Fishing.Types;
 using Sources.Runtime.Utilities;
 using UnityEngine;
 
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 {
     public class LaunchState : BaseState
     {
@@ -32,6 +30,28 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
         public override void Enter()
         {
             LaunchRandomMiniGame().Forget();
+        }
+
+        private void SpawnFishes()
+        {
+            int goldFishIndex = UnityEngine.Random.Range(0, _dependencies.FishSlots.Length);
+
+            for (int i = 0; i < _dependencies.FishSlots.Length; i++)
+            {
+                FishSlot slot = _dependencies.FishSlots[i];
+
+                if (slot.IsOccupied == true) continue;
+
+                CreateFishInstanceInPool(i, goldFishIndex, slot);
+
+                Vector3 fishWorldPos = slot.CurrentFish.transform.position;
+
+                Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(null, fishWorldPos);
+
+                float pointerValue = Extensions.MapWorldPositionToSliderValue(slot.CurrentFish.transform.position, _dependencies.PointerSlider);
+
+                slot.CatchCenterValue = pointerValue;
+            }
         }
 
         private void CreateMiniGames()
@@ -69,28 +89,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
         {
             _dependencies.ProgressView.SetValue(FishingMiniGameDependencies.INITIAL_PROGRESS_VALUE);
             _dependencies.PointerSlider.value = FishingMiniGameDependencies.INITIAL_SLIDER_VALUE;
-        }
-
-        private void SpawnFishes()
-        {
-            int goldFishIndex = UnityEngine.Random.Range(0, _dependencies.FishSlots.Length);
-
-            for (int i = 0; i < _dependencies.FishSlots.Length; i++)
-            {
-                FishSlot slot = _dependencies.FishSlots[i];
-
-                if (slot.IsOccupied == true) continue;
-
-                CreateFishInstanceInPool(i, goldFishIndex, slot);
-
-                Vector3 fishWorldPos = slot.CurrentFish.transform.position;
-
-                Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(null, fishWorldPos);
-
-                float pointerValue = Extensions.MapWorldPositionToSliderValue(slot.CurrentFish.transform.position, _dependencies.PointerSlider);
-
-                slot.CatchCenterValue = pointerValue;
-            }
         }
 
         private void CreateFishInstanceInPool(int currentIndex, int goldFishIndex, FishSlot targetSlot)

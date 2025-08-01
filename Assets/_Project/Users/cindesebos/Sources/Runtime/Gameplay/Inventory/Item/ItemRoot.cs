@@ -20,13 +20,13 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public IEnumerable<ItemCellPoint> CellsPoints => _cellPoints;
 
+        public ItemConfig Config { get; private set; }
+
         public bool IsSelected { get; set; }
 
         [SerializeField] private Transform _cellPointsParent;
         [SerializeField] private ItemDragger _dragger;
-        [SerializeField] private ItemView _view;
 
-        private ItemConfig _config;
         private InventoryRoot _inventoryRoot;
         private IProjectConfigLoader _projectConfigLoader;
         private List<ItemCellPoint> _cellPoints = new();
@@ -38,7 +38,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         private void OnValidate()
         {
             _dragger ??= GetComponent<ItemDragger>();
-            _view ??= GetComponent<ItemView>();
         }
 
         [Inject]
@@ -50,23 +49,22 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void Initialize(ItemConfig config)
         {
-            _config = config;
+            Config = config;
 
             _occupiedInventoryCells = new List<InventoryCell>();
 
             CreateCellsPoints();
 
-            _view.Initialize(this, _config, _projectConfigLoader.ProjectConfig.InventoryConfig);
             _dragger.Initialize(_inventoryRoot, this);
         }
 
         public void CreateCellsPoints()
         {
-            for (int i = 0; i < _config.CellPointsPosition.Count(); i++)
+            for (int i = 0; i < Config.CellPointsPosition.Count(); i++)
             {
-                var position = _config.CellPointsPosition.ElementAt(i);
+                var position = Config.CellPointsPosition.ElementAt(i);
 
-                var instance = Instantiate(_config.ItemCellPointPrefab);
+                var instance = Instantiate(Config.ItemCellPointPrefab);
 
                 instance.transform.SetParent(_cellPointsParent);
                 instance.transform.localPosition = position;

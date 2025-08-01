@@ -11,16 +11,18 @@ namespace Sources.Runtime.Gameplay
     {
         private CharacterInput _characterInput;
         private InventoryRoot _inventoryRoot;
+        private InventoryView _inventoryView;
         private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         private WalletRoot _walletRoot;
         private WalletView _walletView;
 
         [Inject]
-        private void Construct(CharacterInput characterInput, InventoryRoot inventoryRoot, FishingMiniGameBootstrapper fishingMiniGameBootstrapper,
-        WalletView walletView, WalletRoot walletRoot)
+        private void Construct(CharacterInput characterInput, InventoryRoot inventoryRoot, InventoryView inventoryView,
+        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, WalletView walletView, WalletRoot walletRoot)
         {
             _characterInput = characterInput;
             _inventoryRoot = inventoryRoot;
+            _inventoryView = inventoryView;
             _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
             _walletView = walletView;
             _walletRoot = walletRoot;
@@ -34,6 +36,9 @@ namespace Sources.Runtime.Gameplay
 #endif
 
             _characterInput.Enable();
+
+            _inventoryRoot.Initialize();
+            _inventoryView.Initialize();
             _inventoryRoot.Initialize();
             _fishingMiniGameBootstrapper.Initialize();
             _walletView.Initialize();

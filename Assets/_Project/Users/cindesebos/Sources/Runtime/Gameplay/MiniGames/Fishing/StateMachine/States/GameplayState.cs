@@ -1,10 +1,8 @@
-using System;
-using System.Diagnostics;
 using Sources.Runtime.Core.StateMachine;
-using Sources.Runtime.Gameplay.MiniGames.Fishing.Types;
+using Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes;
 using UnityEngine.InputSystem;
 
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 {
     public class GameplayState : BaseState
     {

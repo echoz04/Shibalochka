@@ -2,7 +2,7 @@ using System;
 using FMODUnity;
 using Sources.Runtime.Core.StateMachine;
 
-namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 {
     public class EndState : BaseState
     {

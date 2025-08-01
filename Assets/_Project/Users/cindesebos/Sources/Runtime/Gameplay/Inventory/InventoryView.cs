@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sources.Runtime.Services.ProjectConfigLoader;
+using Zenject;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
@@ -11,10 +12,17 @@ namespace Sources.Runtime.Gameplay.Inventory
         private InventoryRoot _root;
         private IProjectConfigLoader _projectConfigLoader;
 
-        public void Initialize(InventoryRoot root, IProjectConfigLoader projectConfigLoader)
+        [Inject]
+        private void Construct(IProjectConfigLoader projectConfigLoader, InventoryRoot root)
         {
-            _root = root;
             _projectConfigLoader = projectConfigLoader;
+            _root = root;
+        }
+
+        public void Initialize()
+        {
+            if (_root == null)
+                return;
 
             _root.OnBuildCells += BuildCells;
         }

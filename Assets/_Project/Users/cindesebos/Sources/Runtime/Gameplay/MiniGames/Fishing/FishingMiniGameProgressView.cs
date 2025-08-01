@@ -17,10 +17,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
                 _slider.value = _value;
 
-                // �������� ������� ����, ���� ����
                 _delayedSlider.DOKill();
 
-                // ��������� ����������
                 DOVirtual.DelayedCall(_delay, () =>
                 {
                     _delayedSlider.DOValue(_value, _delayDuration).SetEase(Ease.OutQuad);
@@ -47,8 +45,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             if (_delayedSlider == null)
             {
                 var sliders = GetComponentsInChildren<Slider>();
+
                 if (sliders.Length > 1)
-                    _delayedSlider = sliders[1]; // ������������� ������� ��������
+                    _delayedSlider = sliders[1];
             }
         }
 

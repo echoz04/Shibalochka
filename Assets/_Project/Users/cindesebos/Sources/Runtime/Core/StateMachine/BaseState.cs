@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Sources.Runtime.Core.StateMachine
 {
     public abstract class BaseState

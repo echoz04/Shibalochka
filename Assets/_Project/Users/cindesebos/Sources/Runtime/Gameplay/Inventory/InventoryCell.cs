@@ -14,7 +14,6 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         private int _x;
         private int _y;
-        private InventoryRoot _inventory;
 
         private Color _defaultColor;
         private Color _validColor = new Color(0f, 1f, 0f, 0.4f);
@@ -26,13 +25,12 @@ namespace Sources.Runtime.Gameplay.Inventory
             _image ??= GetComponent<Image>();
         }
 
-        public void Initialize(int indexByX, int indexByY, float cellSize, InventoryRoot inventory)
+        public void Initialize(int indexByX, int indexByY)
         {
             _defaultColor = _image.color;
 
             _x = indexByX;
             _y = indexByY;
-            _inventory = inventory;
 
             transform.localScale = Vector3.one;
         }
