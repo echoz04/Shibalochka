@@ -64,9 +64,8 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             {
                 var position = Config.CellPointsPosition.ElementAt(i);
 
-                var instance = Instantiate(Config.ItemCellPointPrefab);
+                var instance = Instantiate(Config.ItemCellPointPrefab, _cellPointsParent, true);
 
-                instance.transform.SetParent(_cellPointsParent);
                 instance.transform.localPosition = position;
 
                 _cellPoints.Add(instance);
@@ -75,20 +74,11 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (_occupiedInventoryCells.Count == 0)
+            if (_occupiedInventoryCells.Count == 0 || IsSelected)
             {
                 Drag();
 
                 return;
-            }
-            else
-            {
-                if (IsSelected == true)
-                {
-                    Drag();
-
-                    return;
-                }
             }
 
             _isDragging = false;
@@ -106,7 +96,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
             _previousPosition = transform.position;
 
-            _inventoryRoot.HightligchCells(this);
+            _inventoryRoot.HighlightCells(this);
         }
 
         public void OnEndDrag(PointerEventData eventData)

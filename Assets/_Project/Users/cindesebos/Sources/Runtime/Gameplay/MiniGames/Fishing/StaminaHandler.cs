@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Sources.Runtime.Gameplay.Camera;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,7 +6,6 @@ using UnityEngine.InputSystem;
 using Zenject;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using DG.Tweening;
-using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Gameplay.Inventory;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
@@ -50,7 +50,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             if (_canHandle == false || _inventoryRoot.IsVisible == true)
                 return;
 
-            _cameraRotator.Disable();
+            _cameraRotator.SetActive(false);
 
             _stamina.SetActive(true);
             _sliderImage.fillAmount = 0f;
@@ -75,14 +75,14 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
             _stamina.SetActive(false);
 
-            _fishingMiniGameBootstrapper.Launch(result);
+            _fishingMiniGameBootstrapper.Launch(result).Forget();
         }
 
         public void AllowHandle()
         {
             _canHandle = true;
 
-            _cameraRotator.Enable();
+            _cameraRotator.SetActive(true);
         }
 
         private void OnDestroy()

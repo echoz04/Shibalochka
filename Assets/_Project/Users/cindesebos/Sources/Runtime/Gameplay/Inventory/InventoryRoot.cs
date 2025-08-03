@@ -43,7 +43,7 @@ namespace Sources.Runtime.Gameplay.Inventory
         private ItemRoot _selectedItem;
 
         private InventoryCell[,] _currentGrid;
-        private List<InventoryCell> _allCells = new List<InventoryCell>();
+        private List<InventoryCell> _allCells = new();
 
         [Inject]
         private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, StaminaHandler staminaHandler,
@@ -91,7 +91,7 @@ namespace Sources.Runtime.Gameplay.Inventory
         {
             Debug.Log("Try To Add " + itemConfig.TitleLid);
 
-            if (itemConfig == null)
+            if (!itemConfig)
             {
                 Debug.LogWarning("ItemConfig is null, cannot add item.");
 
@@ -103,25 +103,28 @@ namespace Sources.Runtime.Gameplay.Inventory
             return true;
         }
 
-        public void ToggleVisibility(InputAction.CallbackContext context)
+        public void SetVisibility(bool isVisible)
         {
-            if (_staminaHandler.IsStarted == true)
+            if (_staminaHandler.IsStarted)
                 return;
-
-            _canvas.enabled = !_canvas.enabled;
-
-            if (_canvas.enabled == true)
+            
+            _cameraRotator.SetActive(!isVisible);
+            
+            if (isVisible)
             {
                 OnBuildCells?.Invoke(_allCells);
-                _cameraRotator.Disable();
             }
-            else
-            {
-                _cameraRotator.Enable();
-            }
+            
+            _canvas.enabled = isVisible;
         }
 
-        public void HightligchCells(ItemRoot itemRoot)
+        public void ToggleVisibility(InputAction.CallbackContext context)
+        {
+            var isVisible = !_canvas.enabled;
+            SetVisibility(isVisible);
+        }
+
+        public void HighlightCells(ItemRoot itemRoot)
         {
             ProcessItemPlacement(itemRoot, true);
         }

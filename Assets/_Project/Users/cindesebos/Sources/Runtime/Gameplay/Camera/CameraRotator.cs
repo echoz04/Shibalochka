@@ -20,21 +20,22 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Start()
         {
-            Enable();
+            SetActive(true);
         }
 
-        public void Enable()
+        public void SetActive(bool state)
         {
-            _cursorView.Hide();
-
-            _cinemachineInputAxisController.enabled = true;
-        }
-
-        public void Disable()
-        {
-            _cursorView.Show();
-
-            _cinemachineInputAxisController.enabled = false;
+            _cinemachineInputAxisController.enabled = state;
+            
+            switch (state)
+            {
+                case true:
+                    _cursorView.Hide();
+                    break;
+                case false:
+                    _cursorView.Show();
+                    break;
+            }
         }
     }
 }

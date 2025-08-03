@@ -39,7 +39,6 @@ namespace Sources.Runtime.Gameplay
 
             _inventoryRoot.Initialize();
             _inventoryView.Initialize();
-            _inventoryRoot.Initialize();
             _fishingMiniGameBootstrapper.Initialize();
             _walletView.Initialize();
         }

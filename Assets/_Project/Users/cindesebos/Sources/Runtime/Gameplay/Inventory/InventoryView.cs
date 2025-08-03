@@ -21,7 +21,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public void Initialize()
         {
-            if (_root == null)
+            if (!_root)
                 return;
 
             _root.OnBuildCells += BuildCells;
