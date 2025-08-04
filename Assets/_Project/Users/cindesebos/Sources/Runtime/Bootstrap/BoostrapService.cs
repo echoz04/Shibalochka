@@ -1,12 +1,12 @@
-using Zenject;
-using Cysharp.Threading.Tasks;
+
 using Sources.Runtime.Services.AssetLoader;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
 using Sources.Runtime.Services.ProjectConfigLoader;
-using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Project;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Bootstrap
 {
@@ -18,7 +18,8 @@ namespace Sources.Runtime.Bootstrap
         private readonly Scene _sceneToLoad;
         private readonly DiscordOverlayDisplayer _discordOverlayDisplayer;
         private readonly IMiniGameRewardService _miniGameRewardService;
-
+        
+        [Inject]
         public BootstrapService(IAssetLoader assetLoader, ISceneLoader sceneLoader, IProjectConfigLoader projectConfigLoader, Scene sceneToLoad,
         DiscordOverlayDisplayer discordOverlayDisplayer, IMiniGameRewardService miniGameRewardService)
         {

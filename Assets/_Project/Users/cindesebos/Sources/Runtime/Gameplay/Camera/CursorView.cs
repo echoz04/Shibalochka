@@ -1,10 +1,8 @@
 using UnityEngine;
-using Zenject;
-using UnityEngine.InputSystem;
 
 namespace Sources.Runtime.Gameplay.Camera
 {
-    public class CursorView : MonoBehaviour
+    public class CursorView
     {
         public void Show()
         {

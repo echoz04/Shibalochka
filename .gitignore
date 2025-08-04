@@ -31,6 +31,9 @@
 
 # Visual Studio cache directory
 .vs/
+
+# Rider/Resharper settings
+*.csproj.DotSettings
 .idea/
 
 # Gradle cache directory

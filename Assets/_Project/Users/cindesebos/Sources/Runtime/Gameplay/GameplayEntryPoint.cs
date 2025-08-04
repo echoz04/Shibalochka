@@ -2,12 +2,12 @@ using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Gameplay.Wallet;
 using Sources.Runtime.Project;
-using UnityEngine;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay
 {
-    public class GameplayEntryPoint : MonoBehaviour
+    public class GameplayEntryPoint : IStartable
     {
         private CharacterInput _characterInput;
         private InventoryRoot _inventoryRoot;
@@ -18,7 +18,7 @@ namespace Sources.Runtime.Gameplay
 
         [Inject]
         private void Construct(CharacterInput characterInput, InventoryRoot inventoryRoot, InventoryView inventoryView,
-        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, WalletView walletView, WalletRoot walletRoot)
+            FishingMiniGameBootstrapper fishingMiniGameBootstrapper, WalletView walletView, WalletRoot walletRoot)
         {
             _characterInput = characterInput;
             _inventoryRoot = inventoryRoot;
@@ -28,7 +28,7 @@ namespace Sources.Runtime.Gameplay
             _walletRoot = walletRoot;
         }
 
-        private void Awake()
+        void IStartable.Start()
         {
 #if UNITY_EDITOR
             ContentManagementSystem.Instance.InventoryRoot = _inventoryRoot;

@@ -3,14 +3,15 @@ using Sources.Runtime.Gameplay.Camera;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using Zenject;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using DG.Tweening;
 using Sources.Runtime.Gameplay.Inventory;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
-    public class StaminaHandler : MonoBehaviour
+    public class StaminaHandler : MonoBehaviour, IStartable
     {
         public bool IsStarted => _canHandle == false;
 
@@ -36,8 +37,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _cameraRotator = cameraRotator;
             _inventoryRoot = inventoryRoot;
         }
-
-        private void Start()
+        
+        void IStartable.Start()
         {
             _canHandle = true;
 

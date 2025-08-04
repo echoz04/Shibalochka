@@ -1,8 +1,6 @@
 using UnityEngine;
-using Zenject;
-using UnityEngine.InputSystem;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using Unity.Cinemachine;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Camera
 {
@@ -26,7 +24,7 @@ namespace Sources.Runtime.Gameplay.Camera
         public void SetActive(bool state)
         {
             _cinemachineInputAxisController.enabled = state;
-            
+
             switch (state)
             {
                 case true:
