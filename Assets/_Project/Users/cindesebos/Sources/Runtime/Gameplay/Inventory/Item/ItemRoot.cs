@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sources.Runtime.Gameplay.Configs.Items;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using VContainer;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {
-    [RequireComponent(typeof(ItemDragger), typeof(ItemView))]
+    [RequireComponent(typeof(ItemView))]
     public class ItemRoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         public event Action OnBeginDragging;
@@ -24,26 +23,18 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         public bool IsSelected { get; set; }
 
         [SerializeField] private Transform _cellPointsParent;
-        [SerializeField] private ItemDragger _dragger;
 
         private InventoryRoot _inventoryRoot;
-        private IProjectConfigLoader _projectConfigLoader;
         private List<ItemCellPoint> _cellPoints = new();
         private List<InventoryCell> _occupiedInventoryCells = new();
         private Vector3 _previousPosition;
-        private bool _canSelect = false;
-        private bool _isDragging = false;
-
-        private void OnValidate()
-        {
-            _dragger ??= GetComponent<ItemDragger>();
-        }
+        private bool _canSelect;
+        private bool _isDragging;
 
         [Inject]
-        private void Construct(InventoryRoot inventoryRoot, IProjectConfigLoader projectConfigLoader)
+        private void Construct(InventoryRoot inventoryRoot)
         {
             _inventoryRoot = inventoryRoot;
-            _projectConfigLoader = projectConfigLoader;
         }
 
         public void Initialize(ItemConfig config)
@@ -53,8 +44,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             _occupiedInventoryCells = new List<InventoryCell>();
 
             CreateCellsPoints();
-
-            _dragger.Initialize(_inventoryRoot, this);
         }
 
         public void CreateCellsPoints()

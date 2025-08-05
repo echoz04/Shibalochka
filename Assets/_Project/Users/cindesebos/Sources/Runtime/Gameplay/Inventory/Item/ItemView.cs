@@ -3,6 +3,7 @@ using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.Configs.Items;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using VContainer;
 
@@ -71,6 +72,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnDragged()
         {
+                transform.position = Mouse.current.position.ReadValue();
         }
 
         public void OnDragEnded()

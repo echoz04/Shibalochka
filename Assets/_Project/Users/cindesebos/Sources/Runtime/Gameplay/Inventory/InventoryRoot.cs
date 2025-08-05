@@ -47,11 +47,10 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         [Inject]
         private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
-        CameraRotator cameraRotator,StaminaHandler staminaHandler, IItemBuilder itemBuilder)
+        CameraRotator cameraRotator, IItemBuilder itemBuilder)
         {
             _characterInput = characterInput;
             _projectConfigLoader = projectConfigLoader;
-            // _staminaHandler = staminaHandler;
             _cameraRotator = cameraRotator;
             _itemBuilder = itemBuilder;
         }
@@ -82,7 +81,6 @@ namespace Sources.Runtime.Gameplay.Inventory
                     cell.Initialize(x, y);
                     _currentGrid[x, y] = cell;
                     _allCells.Add(cell);
-
                 }
             }
         }
