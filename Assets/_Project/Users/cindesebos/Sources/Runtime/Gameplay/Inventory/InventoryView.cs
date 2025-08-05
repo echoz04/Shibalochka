@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
-    public class InventoryView : MonoBehaviour
+    public class InventoryView : MonoBehaviour, IInitializable
     {
         private InventoryRoot _root;
         private IProjectConfigLoader _projectConfigLoader;
@@ -19,7 +19,7 @@ namespace Sources.Runtime.Gameplay.Inventory
             _root = root;
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
             if (!_root)
                 return;

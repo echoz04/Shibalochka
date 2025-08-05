@@ -1,18 +1,20 @@
-using System;
-using System.Collections.Generic;
+
 using System.Linq;
 using Sources.Runtime.Gameplay.Configs.Fish;
 using Sources.Runtime.Gameplay.Configs.Items;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
-    public class MiniGameRewardService : IMiniGameRewardService
+    public class MiniGameRewardService : IMiniGameRewardService, IInitializable
     {
         private readonly IProjectConfigLoader _projectConfigLoader;
         private ItemsConfig _itemsConfig;
-
+ 
+        [Inject]
         public MiniGameRewardService(IProjectConfigLoader projectConfigLoader)
         {
             _projectConfigLoader = projectConfigLoader;

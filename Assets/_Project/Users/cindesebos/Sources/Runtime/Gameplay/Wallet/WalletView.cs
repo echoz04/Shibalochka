@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Sources.Runtime.Gameplay.Wallet
 {
-    public class WalletView : MonoBehaviour
+    public class WalletView : MonoBehaviour, IInitializable
     {
         [SerializeField] private TextMeshProUGUI _moneyText;
 
@@ -19,7 +19,7 @@ namespace Sources.Runtime.Gameplay.Wallet
             _root = root;
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
             _moneyText.text = _root.Money.Value.ToString();
 

@@ -1,5 +1,4 @@
 using blindingred;
-using Sources._Project.Users.blindingred.Sources.Runtime.Interfaces;
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Services.AssetLoader;
@@ -20,13 +19,9 @@ namespace Sources
             BindInput(builder);
             BindCursorView(builder);
             BindDiscordOverlayDisplayer(builder);
-            BindMiniGameRewardService(builder);
+            // BindMiniGameRewardService(builder);
         }
-
-        private void BindMiniGameRewardService(IContainerBuilder builder)
-        {
-            builder.Register<MiniGameRewardService>(Lifetime.Singleton).As<IMiniGameRewardService>();
-        }
+       
 
         private void BindDiscordOverlayDisplayer(IContainerBuilder builder)
         {

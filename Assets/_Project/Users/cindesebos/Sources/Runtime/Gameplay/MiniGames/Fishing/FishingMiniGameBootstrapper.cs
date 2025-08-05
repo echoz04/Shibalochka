@@ -14,7 +14,7 @@ using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
-    public class FishingMiniGameBootstrapper : MonoBehaviour, ITickable
+    public class FishingMiniGameBootstrapper : MonoBehaviour, IInitializable, ITickable
     {
         public event Action OnCatchTimeStarted;
         public event Action OnCatchTiming;
@@ -24,8 +24,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         [SerializeField] private StaminaHandler _staminaHandler;
 
-        private bool _isAlreadyLaunched = false;
-        private bool _isSubscribed = false;
+        private bool _isAlreadyLaunched;
+        private bool _isSubscribed;
 
         [Inject]
         private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, CameraRotator cameraRotator, IMiniGameRewardService rewardService, InventoryRoot inventoryRoot)
@@ -37,7 +37,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _dependencies.InventoryRoot = inventoryRoot;
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
             _dependencies.Camera ??= UnityEngine.Camera.main;
 

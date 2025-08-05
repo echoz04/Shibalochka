@@ -19,9 +19,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 
         public override void Enter()
         {
-            UnityEngine.Debug.Log("GAmeplay result is " + _gameplayResult);
-
-            if (_gameplayResult == true)
+            if (_gameplayResult)
             {
                 _dependencies.InventoryRoot.TryAddItem(_dependencies.RewardService.GetRandomItem());
                 //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Win");

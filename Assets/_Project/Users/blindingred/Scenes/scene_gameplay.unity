@@ -5040,6 +5040,7 @@ MonoBehaviour:
   _gridContent: {fileID: 38570089}
   _controlButtons: {fileID: 337792036}
   _rewardsPanel: {fileID: 1480736311}
+  _staminaHandler: {fileID: 8947050289671081503}
 --- !u!114 &650771062
 MonoBehaviour:
   m_ObjectHideFlags: 0

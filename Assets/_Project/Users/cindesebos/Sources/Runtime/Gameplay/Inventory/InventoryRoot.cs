@@ -2,19 +2,19 @@ using System;
 using UnityEngine;
 using Sources.Runtime.Gameplay.Inventory.Item;
 using System.Collections.Generic;
-using Zenject;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine.InputSystem;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
-using Sources.Runtime.Gameplay.MiniGames;
 using Sources.Runtime.Gameplay.Configs.Items;
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Services.Builders.Item;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
     [RequireComponent(typeof(InventoryView))]
-    public class InventoryRoot : MonoBehaviour
+    public class InventoryRoot : MonoBehaviour, IInitializable
     {
         public event Action<List<InventoryCell>> OnBuildCells;
         public event Action OnItemAdded;
@@ -22,9 +22,9 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public bool IsVisible => _canvas.enabled;
 
-        public int Width => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryWidth;
-        public int Height => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryHeigth;
-        public float CellSize => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryCellSize;
+        private int Width => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryWidth;
+        private int Height => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryHeigth;
+        private float CellSize => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryCellSize;
         public float Spacing => _projectConfigLoader.ProjectConfig.InventoryConfig.InventorySpacing;
 
         [SerializeField] private Canvas _canvas;
@@ -35,9 +35,9 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         private CharacterInput _characterInput;
         private IProjectConfigLoader _projectConfigLoader;
-        private StaminaHandler _staminaHandler;
         private CameraRotator _cameraRotator;
         private IItemBuilder _itemBuilder;
+        private StaminaHandler _staminaHandler;
 
         private ItemRoot _previousSelectedItem;
         private ItemRoot _selectedItem;
@@ -46,17 +46,17 @@ namespace Sources.Runtime.Gameplay.Inventory
         private List<InventoryCell> _allCells = new();
 
         [Inject]
-        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, StaminaHandler staminaHandler,
-        CameraRotator cameraRotator, IItemBuilder itemBuilder)
+        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
+        CameraRotator cameraRotator,StaminaHandler staminaHandler, IItemBuilder itemBuilder)
         {
             _characterInput = characterInput;
             _projectConfigLoader = projectConfigLoader;
-            _staminaHandler = staminaHandler;
+            // _staminaHandler = staminaHandler;
             _cameraRotator = cameraRotator;
             _itemBuilder = itemBuilder;
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
             _characterInput.UI.ToggleInventoryVisibility.performed += ToggleVisibility;
 
@@ -105,8 +105,8 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public void SetVisibility(bool isVisible)
         {
-            if (_staminaHandler.IsStarted)
-                return;
+            // if (_staminaHandler.IsStarted)
+            //     return;
             
             _cameraRotator.SetActive(!isVisible);
             
