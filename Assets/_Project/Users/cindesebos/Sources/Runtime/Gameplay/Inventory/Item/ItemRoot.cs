@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FMODUnity;
 using Sources.Runtime.Gameplay.Configs.Items;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {

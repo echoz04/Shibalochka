@@ -3,7 +3,8 @@ using DG.Tweening;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sources.Runtime.Services.ProjectConfigLoader;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {

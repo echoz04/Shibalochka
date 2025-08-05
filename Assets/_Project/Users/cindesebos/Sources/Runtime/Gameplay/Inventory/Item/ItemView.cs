@@ -4,7 +4,7 @@ using Sources.Runtime.Gameplay.Configs.Items;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {

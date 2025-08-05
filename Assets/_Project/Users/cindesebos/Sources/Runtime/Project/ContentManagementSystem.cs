@@ -1,13 +1,11 @@
 using System;
 using System.Linq;
-using NUnit.Framework;
 using Sirenix.OdinInspector;
 using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.Wallet;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
-using Zenject;
 
 namespace Sources.Runtime.Project
 {

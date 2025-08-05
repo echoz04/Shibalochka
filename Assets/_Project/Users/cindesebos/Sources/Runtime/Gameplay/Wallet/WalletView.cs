@@ -1,7 +1,8 @@
 using R3;
 using TMPro;
 using UnityEngine;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.Wallet
 {

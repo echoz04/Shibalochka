@@ -1,7 +1,7 @@
 using System;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
-using Zenject;
+using VContainer.Unity;
 
 namespace Sources
 {

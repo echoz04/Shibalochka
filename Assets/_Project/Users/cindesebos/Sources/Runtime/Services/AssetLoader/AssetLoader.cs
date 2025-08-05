@@ -1,17 +1,15 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Services.AssetLoader
 {
     public class AssetLoader : IAssetLoader
     {
-        private readonly DiContainer _container;
+        private readonly IObjectResolver _container;
 
-        public AssetLoader(DiContainer container) => _container = container;
+        public AssetLoader(IObjectResolver container) => _container = container;
 
         public async UniTask<T> Load<T>(string assetId, Transform parent = null) where T : UnityEngine.Object
         {
@@ -19,7 +17,7 @@ namespace Sources.Runtime.Services.AssetLoader
 
             var instance = await handle.Task;
 
-            _container.InjectGameObject(instance);
+            _container.Inject(instance);
 
             return await handle.Task as T;
         }
@@ -30,7 +28,7 @@ namespace Sources.Runtime.Services.AssetLoader
 
             var instance = await handle.Task;
 
-            _container.InjectGameObject(instance);
+            _container.Inject(instance);
 
             return new Disposable<T>(instance as T, () =>
                 {
