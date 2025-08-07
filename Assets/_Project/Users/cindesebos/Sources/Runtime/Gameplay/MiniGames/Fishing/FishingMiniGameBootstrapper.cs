@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Core.ObjectPool;
 using Cysharp.Threading.Tasks;
+using Sources.Runtime.Gameplay.Configs;
 using UnityEngine.InputSystem;
 using Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine;
 using Sources.Runtime.Gameplay.Inventory;
@@ -28,12 +28,14 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         private bool _isSubscribed;
 
         [Inject]
-        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader, CameraRotator cameraRotator, IMiniGameRewardService rewardService, InventoryRoot inventoryRoot)
+        private void Construct(CharacterInput characterInput, ProjectConfig projectConfig, CameraRotator cameraRotator, IMiniGameRewardService rewardService, InventoryRoot inventoryRoot)
         {
+            Debug.Log("QWEQWE");
             _dependencies.CharacterInput = characterInput;
-            _dependencies.ProjectConfigLoader = projectConfigLoader;
+            _dependencies.ProjectConfig = projectConfig;
             _dependencies.CameraRotator = cameraRotator;
             _dependencies.RewardService = rewardService;
+            
             _dependencies.InventoryRoot = inventoryRoot;
         }
 
@@ -42,7 +44,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _dependencies.Camera ??= UnityEngine.Camera.main;
 
             _dependencies.StateMachine = new FishingMiniGameStateMachine(_dependencies);
-            _dependencies.View.Initialize(this, _dependencies.ProjectConfigLoader);
+            _dependencies.View.Initialize(this, _dependencies.ProjectConfig);
         }
 
         public async UniTask Launch(float force)
@@ -56,7 +58,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         {
             OnCatchTimeStarted?.Invoke();
 
-            var uiConfig = _dependencies.ProjectConfigLoader.ProjectConfig.UIConfig;
+            var uiConfig = _dependencies.ProjectConfig.UIConfig;
             float waitingTime = UnityEngine.Random.Range(uiConfig.MinimumWaitingTime, uiConfig.MaximumWaitingTime);
 
             await UniTask.WaitForSeconds(waitingTime);
@@ -144,7 +146,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [field: SerializeField] public UnityEngine.Camera Camera;
 
         public CharacterInput CharacterInput;
-        public IProjectConfigLoader ProjectConfigLoader;
+        public ProjectConfig ProjectConfig;
         public FishingMiniGameStateMachine StateMachine;
         public IMiniGameRewardService RewardService;
         public InventoryRoot InventoryRoot;

@@ -1,51 +1,46 @@
-
 using System.Linq;
+using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.Configs.Fish;
 using Sources.Runtime.Gameplay.Configs.Items;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
-    public class MiniGameRewardService : IMiniGameRewardService, IInitializable
+    public class MiniGameRewardService : IMiniGameRewardService
     {
-        private readonly IProjectConfigLoader _projectConfigLoader;
+        private readonly ProjectConfig _projectConfig;
         private ItemsConfig _itemsConfig;
  
         [Inject]
-        public MiniGameRewardService(IProjectConfigLoader projectConfigLoader)
+        public MiniGameRewardService(ProjectConfig projectConfig)
         {
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
         }
 
         public void Initialize()
         {
-            _itemsConfig = _projectConfigLoader.ProjectConfig.ItemsConfig;
+            _itemsConfig = _projectConfig.ItemsConfig;
         }
 
         public ItemConfig GetRandomItem()
         {
             if (_itemsConfig == null)
                 return null;
+            
+            var rarity = GetRandomRarity();
+            var item = GetRandomItem(rarity);
 
-            Rarity rarity = GetRandomRarity();
-            ItemConfig item = GetRandomItem(rarity);
-
-            if (item == null)
-                return null;
-
-            return item;
+            return !item ? null : item;
         }
 
         private Rarity GetRandomRarity()
         {
-            var rarities = _itemsConfig.RaritiesConfig;
-            int totalWeight = rarities.Sum(r => r.Chance);
+            var rarities = _itemsConfig.RaritiesConfig.ToArray();
+            var totalWeight = rarities.Sum(r => r.Chance);
 
-            int roll = UnityEngine.Random.Range(0, totalWeight);
-            int cumulative = 0;
+            var roll = Random.Range(0, totalWeight);
+            var cumulative = 0;
 
             foreach (var rarity in rarities)
             {
@@ -59,23 +54,23 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         private ItemConfig GetRandomItem(Rarity rarity)
         {
-            RaritiesConfig rarityConfig = _itemsConfig.RaritiesConfig.FirstOrDefault(r => r.Rarity == rarity);
+            var rarityConfig = _itemsConfig.RaritiesConfig.FirstOrDefault(r => r.Rarity == rarity);
 
             if (rarityConfig == null)
                 return null;
 
-            int mutantChange = UnityEngine.Random.Range(0, 100);
+            var mutantChange = Random.Range(0, 100);
 
-            bool isMutant = mutantChange < rarityConfig.MutantChance;
+            var isMutant = mutantChange < rarityConfig.MutantChance;
 
             var filteredItems = _itemsConfig.Configs
-                .Where(i => i != null && i.Rarity == rarity && i.IsMutant == isMutant)
+                .Where(i => i && i.Rarity == rarity && i.IsMutant == isMutant)
                 .ToList();
 
             if (filteredItems.Count == 0)
                 return null;
 
-            var randomItem = filteredItems[UnityEngine.Random.Range(0, filteredItems.Count)];
+            var randomItem = filteredItems[Random.Range(0, filteredItems.Count)];
 
             Debug.Log($"Random Type is {rarity}, Mutant Chance Is {mutantChange} And Target Change Is {rarityConfig.MutantChance}, Is Mutant {isMutant}, Random Item Is {randomItem}");
 

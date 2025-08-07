@@ -1,8 +1,9 @@
 using blindingred;
 using Sources.Runtime.Gameplay.Camera;
+using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Services.AssetLoader;
-using Sources.Runtime.Services.ProjectConfigLoader;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -10,27 +11,37 @@ namespace Sources
 {
     public class RootLifetimeScope : LifetimeScope
     {
+        [SerializeField] private ProjectConfig projectConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
             BindSceneLoader(builder);
-            BindProjectConfigLoader(builder);
             BindAssetLoader(builder);
             BindInput(builder);
             BindCursorView(builder);
             BindDiscordOverlayDisplayer(builder);
-            // BindMiniGameRewardService(builder);
+            BindMiniGameRewardService(builder);
+            RegisterProjectConfig(builder);
         }
-       
+
+        private void RegisterProjectConfig(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(projectConfig);
+        }
+
+        private void BindMiniGameRewardService(IContainerBuilder builder)
+        {
+            builder.Register<MiniGameRewardService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+        }
 
         private void BindDiscordOverlayDisplayer(IContainerBuilder builder)
         {
-            builder.Register<DiscordOverlayDisplayer>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<DiscordOverlayDisplayer>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
 
         private void BindSceneLoader(IContainerBuilder builder)
         {
-            builder.Register<SceneLoader>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<SceneLoader>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
 
         private void BindInput(IContainerBuilder builder)
@@ -40,12 +51,7 @@ namespace Sources
 
         private void BindAssetLoader(IContainerBuilder builder)
         {
-            builder.Register<AssetLoader>(Lifetime.Singleton).As<IAssetLoader>();
-        }
-
-        private void BindProjectConfigLoader(IContainerBuilder builder)
-        {
-            builder.Register<ProjectConfigLoader>(Lifetime.Singleton).As<IProjectConfigLoader>();
+            builder.Register<AssetLoader>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
 
         private void BindCursorView(IContainerBuilder builder)

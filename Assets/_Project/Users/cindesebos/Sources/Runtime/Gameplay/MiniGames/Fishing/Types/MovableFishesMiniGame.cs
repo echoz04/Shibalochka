@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
-using Cysharp.Threading.Tasks;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Utilities;
-using FMODUnity;
 using FMOD.Studio;
+using Sources.Runtime.Gameplay.Configs;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 {
@@ -22,7 +19,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         private readonly IEnumerable<FishSlot> _fishSlots;
         private readonly Vector3 _startPosition;
         private readonly Vector3 _endPosition;
-        private readonly IProjectConfigLoader _projectConfigLoader;
+        private readonly ProjectConfig _projectConfig;
         private readonly Slider _pointerSlider;
         private readonly UnityEngine.Camera _camera;
         private readonly Dictionary<Transform, FishSlot> _fishMap = new();
@@ -31,13 +28,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 
         private EventInstance _loopedSound;
 
-        public MovableFishesMiniGame(IEnumerable<FishSlot> fishSlots, Transform[] edgePoints, IProjectConfigLoader projectConfigLoader,
+        public MovableFishesMiniGame(IEnumerable<FishSlot> fishSlots, Transform[] edgePoints, ProjectConfig projectConfig,
         Slider pointerSlider, UnityEngine.Camera camera)
         {
             _fishSlots = fishSlots;
             _startPosition = edgePoints[0].transform.position;
             _endPosition = edgePoints[1].transform.position;
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
 
             _pointerSlider = pointerSlider;
             _camera = camera;
@@ -73,7 +70,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         private void StartFishLoop(Transform fishTransform)
         {
             float distance = Vector3.Distance(fishTransform.position, _endPosition);
-            float duration = distance / _projectConfigLoader.ProjectConfig.UIConfig.FishesMoveSpeed;
+            float duration = distance / _projectConfig.UIConfig.FishesMoveSpeed;
 
             var tweener = fishTransform.DOMove(_endPosition, duration)
                 .SetEase(Ease.Linear)

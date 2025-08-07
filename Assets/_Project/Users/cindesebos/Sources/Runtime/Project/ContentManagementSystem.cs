@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
 using Sirenix.OdinInspector;
+using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.Wallet;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
 
@@ -42,9 +42,12 @@ namespace Sources.Runtime.Project
 
         private static ContentManagementSystem _instance;
 
-        [field: SerializeField] public bool InstanceHasProjectConfigLoader => Instance != null && Instance.ProjectConfigLoader != null;
+        // [field: SerializeField] public bool InstanceHasProjectConfigLoader => Instance != null && Instance.ProjectConfigLoader != null;
+        [field: SerializeField] public bool InstanceHasProjectConfig => Instance != null && Instance.ProjectConfig != null;
 
-        public IProjectConfigLoader ProjectConfigLoader { get; set; }
+        // public IProjectConfigLoader ProjectConfigLoader { get; set; }
+        
+        public ProjectConfig ProjectConfig { get; set; }
 
         public void InitializeInstance()
         {
@@ -77,7 +80,7 @@ namespace Sources.Runtime.Project
             if (Application.isPlaying == false)
                 return;
 
-            var configs = Instance.ProjectConfigLoader?.ProjectConfig?.ItemsConfig?.Configs;
+            var configs = Instance.ProjectConfig?.ItemsConfig?.Configs;
 
             var item = configs
                 .Where(i => i != null)

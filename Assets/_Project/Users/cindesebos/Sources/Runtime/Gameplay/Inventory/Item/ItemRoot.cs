@@ -62,6 +62,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            Debug.Log($"OnBeginDrag {Config.TypeId}");
             if (_occupiedInventoryCells.Count == 0 || IsSelected)
             {
                 Drag();
@@ -74,6 +75,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnDrag(PointerEventData eventData)
         {
+            Debug.Log($"OnDrag {Config.TypeId}");
             if (_isDragging == false)
                 return;
 
@@ -99,6 +101,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            Debug.Log($"OnPointerClick {Config.TypeId}");
             if (_occupiedInventoryCells.Count == 0 || _canSelect == false)
                 return;
 
@@ -170,7 +173,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
                  //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Select");
              else
                  //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Deselect");*/
-
+            Debug.Log($"SetSelection {Config.TypeId}");
             IsSelected = isSelected;
             OnSelected?.Invoke(IsSelected);
         }

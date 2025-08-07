@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.Configs.Items;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -30,9 +29,9 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         }
 
         [Inject]
-        private void Construct(IProjectConfigLoader projectConfigLoader)
+        private void Construct(ProjectConfig projectConfig)
         {
-            _inventoryConfig = projectConfigLoader.ProjectConfig.InventoryConfig;
+            _inventoryConfig = projectConfig.InventoryConfig;
         }
 
         private void Start()
@@ -72,6 +71,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnDragged()
         {
+            Debug.Log($"04KO dragged");
                 transform.position = Mouse.current.position.ReadValue();
         }
 

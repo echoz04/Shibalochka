@@ -1,5 +1,6 @@
 using Sources.Runtime.Core.StateMachine;
 using Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
@@ -44,7 +45,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 
             _canMovePointer = false;
 
-            _timeToAllowMovePointer = _dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.FishingClickCooldown;
+            _timeToAllowMovePointer = _dependencies.ProjectConfig.UIConfig.FishingClickCooldown;
 
             FishSlot caughtFish = TryCatchFish();
 
@@ -77,13 +78,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
             if (caughtFish != null)
             {
                 if (caughtFish.CurrentFish.Type == FishType.Common)
-                    _dependencies.ProgressView.AddValue(_dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.ValueToAddOnCommonCatch);
+                    _dependencies.ProgressView.AddValue(_dependencies.ProjectConfig.UIConfig.ValueToAddOnCommonCatch);
                 else
-                    _dependencies.ProgressView.AddValue(_dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.ValueToAddOnGoldCatch);
+                    _dependencies.ProgressView.AddValue(_dependencies.ProjectConfig.UIConfig.ValueToAddOnGoldCatch);
             }
             else
             {
-                _dependencies.ProgressView.RemoveValue(_dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.ValueToRemoveOnMiss);
+                _dependencies.ProgressView.RemoveValue(_dependencies.ProjectConfig.UIConfig.ValueToRemoveOnMiss);
             }
         }
 
@@ -91,13 +92,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
         {
             if (_dependencies.ProgressView.Value <= 0)
             {
-                UnityEngine.Debug.Log("You lose");
+                Debug.Log("You lose");
 
                 _dependencies.StateMachine.SetState(_dependencies.StateMachine.EndState, false);
             }
             else if (_dependencies.ProgressView.Value >= 100)
             {
-                UnityEngine.Debug.Log("You win");
+                Debug.Log("You win");
 
                 _dependencies.StateMachine.SetState(_dependencies.StateMachine.EndState, true);
             }

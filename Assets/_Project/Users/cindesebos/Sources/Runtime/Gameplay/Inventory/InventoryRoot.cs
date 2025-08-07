@@ -2,11 +2,11 @@ using System;
 using UnityEngine;
 using Sources.Runtime.Gameplay.Inventory.Item;
 using System.Collections.Generic;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine.InputSystem;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Gameplay.Configs.Items;
 using Sources.Runtime.Gameplay.Camera;
+using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Services.Builders.Item;
 using VContainer;
 using VContainer.Unity;
@@ -22,10 +22,10 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public bool IsVisible => _canvas.enabled;
 
-        private int Width => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryWidth;
-        private int Height => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryHeigth;
-        private float CellSize => _projectConfigLoader.ProjectConfig.InventoryConfig.InventoryCellSize;
-        public float Spacing => _projectConfigLoader.ProjectConfig.InventoryConfig.InventorySpacing;
+        private int Width => _projectConfig.InventoryConfig.InventoryWidth;
+        private int Height => _projectConfig.InventoryConfig.InventoryHeigth;
+        private float CellSize => _projectConfig.InventoryConfig.InventoryCellSize;
+        public float Spacing => _projectConfig.InventoryConfig.InventorySpacing;
 
         [SerializeField] private Canvas _canvas;
         [SerializeField] private InventoryCell _cellPrefab;
@@ -34,7 +34,7 @@ namespace Sources.Runtime.Gameplay.Inventory
         [SerializeField] private Transform _rewardsPanel;
 
         private CharacterInput _characterInput;
-        private IProjectConfigLoader _projectConfigLoader;
+        private ProjectConfig _projectConfig;
         private CameraRotator _cameraRotator;
         private IItemBuilder _itemBuilder;
         private StaminaHandler _staminaHandler;
@@ -46,11 +46,11 @@ namespace Sources.Runtime.Gameplay.Inventory
         private List<InventoryCell> _allCells = new();
 
         [Inject]
-        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
+        private void Construct(CharacterInput characterInput, ProjectConfig projectConfig,
         CameraRotator cameraRotator, IItemBuilder itemBuilder)
         {
             _characterInput = characterInput;
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
             _cameraRotator = cameraRotator;
             _itemBuilder = itemBuilder;
         }
@@ -87,15 +87,15 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public bool TryAddItem(ItemConfig itemConfig)
         {
-            Debug.Log("Try To Add " + itemConfig.TitleLid);
-
             if (!itemConfig)
             {
                 Debug.LogWarning("ItemConfig is null, cannot add item.");
 
                 return false;
             }
-
+            
+            Debug.Log("Try To Add " + itemConfig.TitleLid);
+            
             _itemBuilder.Build(itemConfig, _rewardsPanel);
 
             return true;

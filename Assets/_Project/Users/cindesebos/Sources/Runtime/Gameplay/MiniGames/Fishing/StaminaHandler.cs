@@ -3,8 +3,8 @@ using Sources.Runtime.Gameplay.Camera;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using DG.Tweening;
+using Sources.Runtime.Gameplay.Configs;
 using VContainer;
 using VContainer.Unity;
 
@@ -18,7 +18,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [SerializeField] private Image _sliderImage;
 
         private CharacterInput _characterInput;
-        private IProjectConfigLoader _projectConfigLoader;
+        private ProjectConfig _projectConfig;
         private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         private CameraRotator _cameraRotator;
         // private InventoryRoot _inventoryRoot;
@@ -27,11 +27,11 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [SerializeField] private bool _canHandle = true;
 
         [Inject]
-        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
+        private void Construct(CharacterInput characterInput, ProjectConfig projectConfig,
         FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator)
         {
             _characterInput = characterInput;
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
             _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
             _cameraRotator = cameraRotator;
             // _inventoryRoot = inventoryRoot;
@@ -57,8 +57,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _sliderImage.fillAmount = 0f;
 
             _staminaTween = DOTween.Sequence()
-                .Append(_sliderImage.DOFillAmount(1f, _projectConfigLoader.ProjectConfig.UIConfig.StaminaFillDuration).SetEase(Ease.Linear))
-                .Append(_sliderImage.DOFillAmount(0f, _projectConfigLoader.ProjectConfig.UIConfig.StaminaDrainDuration).SetEase(Ease.Linear))
+                .Append(_sliderImage.DOFillAmount(1f, _projectConfig.UIConfig.StaminaFillDuration).SetEase(Ease.Linear))
+                .Append(_sliderImage.DOFillAmount(0f, _projectConfig.UIConfig.StaminaDrainDuration).SetEase(Ease.Linear))
                 .SetLoops(-1);
         }
 

@@ -1,11 +1,7 @@
-using System;
 using DG.Tweening;
-using Sources.Runtime.Services.ProjectConfigLoader;
-using TMPro;
 using UnityEngine.UI;
-using Sources.Runtime.Gameplay.MiniGames;
-using FMODUnity;
 using FMOD.Studio;
+using Sources.Runtime.Gameplay.Configs;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 {
@@ -15,18 +11,16 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         private const int MaxPointerValue = 100;
 
         private readonly Slider _pointerSlider;
-        private readonly CharacterInput _characterInput;
-        private readonly IProjectConfigLoader _projectConfigLoader;
+        private readonly ProjectConfig _projectConfig;
 
         private Tween _pointerTween;
 
         private EventInstance _loopedSound;
 
-        public MovablePointerFishingMiniGame(Slider pointerSlider, CharacterInput characterInput, IProjectConfigLoader projectConfigLoader)
+        public MovablePointerFishingMiniGame(Slider pointerSlider, ProjectConfig projectConfig)
         {
             _pointerSlider = pointerSlider;
-            _characterInput = characterInput;
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
         }
 
         public void Launch()
@@ -47,7 +41,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
                     _pointerSlider.value = value;
                 },
                 MaxPointerValue,
-                _projectConfigLoader.ProjectConfig.UIConfig.FishingPointerMoveDuration / 2f
+                _projectConfig.UIConfig.FishingPointerMoveDuration / 2f
             ).SetEase(Ease.InOutSine);
 
             Tween loopTween = DOTween.To(
@@ -57,7 +51,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
                     _pointerSlider.value = value;
                 },
                 MinPointerValue,
-                _projectConfigLoader.ProjectConfig.UIConfig.FishingPointerMoveDuration
+                _projectConfig.UIConfig.FishingPointerMoveDuration
             ).SetEase(Ease.InOutSine)
              .SetLoops(-1, LoopType.Yoyo);
 

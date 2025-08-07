@@ -8,13 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FirePurticles
-<<<<<<< HEAD
-  m_Shader: {fileID: -6465566751694194690, guid: 0f24383338ee50d40bf8ca7338358546, type: 3}
-  m_Parent: {fileID: 0}
-=======
   m_Shader: {fileID: -6465566751694194690, guid: 8f4df958adb28ae4abf1ad2ce9d0b696, type: 3}
   m_Parent: {fileID: 2100000, guid: 59d48ce9036733047a9a5e2f3a45949b, type: 2}
->>>>>>> herynax
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -33,30 +28,8 @@ Material:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-<<<<<<< HEAD
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _DistortionStrenght: 0.05
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _ScrollSpeed: 0.3
-    - _TwirlStrenght: 8
-=======
     m_Ints: []
     m_Floats: []
->>>>>>> herynax
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

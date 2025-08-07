@@ -24,12 +24,6 @@ namespace Sources
             BindStaminaHandler(builder);
             BindItemBuilder(builder);
             BindWallet(builder);
-            BindMiniGameRewardService(builder);
-        }
-        
-        private void BindMiniGameRewardService(IContainerBuilder builder)
-        {
-            builder.Register<MiniGameRewardService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         }
 
         private void BindGameplayEntryPoint(IContainerBuilder builder)

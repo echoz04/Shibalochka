@@ -1,6 +1,4 @@
-using Sources._Project.Users.blindingred.Sources.Runtime.Interfaces;
 using Sources.Runtime.Bootstrap;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
@@ -14,16 +12,16 @@ namespace Sources
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<BootstrapService>(Lifetime.Singleton).AsSelf();
-            builder.RegisterBuildCallback(BootstrapScenes);
+            builder.Register<BootstrapService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            RegisterScenes(builder);
         }
 
-        private async void BootstrapScenes(IObjectResolver resolver)
+        private void RegisterScenes(IContainerBuilder builder)
         {
-            var projectConfigLoader = resolver.Resolve<IProjectConfigLoader>();
-            await projectConfigLoader.LoadProjectConfigAsync();
-            var sceneLoader = resolver.Resolve<IAddressableSceneLoader>();
-            await sceneLoader.LoadScenes(_scenesToLoad, sceneLoader.ActivateAllScenes);
+            foreach (var scene in _scenesToLoad)
+            {
+                builder.RegisterInstance(scene).As<AssetReference>().Keyed(scene.editorAsset.name);
+            }
         }
     }
 }

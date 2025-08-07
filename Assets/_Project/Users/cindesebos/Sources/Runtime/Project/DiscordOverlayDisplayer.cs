@@ -1,5 +1,5 @@
 using System;
-using Sources.Runtime.Services.ProjectConfigLoader;
+using Sources.Runtime.Gameplay.Configs;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -11,16 +11,16 @@ namespace Sources
         private const string LogoAdress = "logo_baobit";
 
         private Discord.Discord _discord;
-        private IProjectConfigLoader _projectConfigLoader;
+        private ProjectConfig _projectConfig;
 
-        public DiscordOverlayDisplayer(IProjectConfigLoader projectConfigLoader)
+        public DiscordOverlayDisplayer(ProjectConfig projectConfig)
         {
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
         }
 
         public void Initialize()
         {
-            if (_projectConfigLoader.ProjectConfig.DiscordConfig.IsOverlayEnabled == false)
+            if (_projectConfig.DiscordConfig.IsOverlayEnabled == false)
                 return;
 
             _discord = new Discord.Discord(ApplicationId, (ulong)Discord.CreateFlags.NoRequireDiscord);
@@ -43,7 +43,7 @@ namespace Sources
             var activityManager = _discord.GetActivityManager();
             var activity = new Discord.Activity
             {
-                State = _projectConfigLoader.ProjectConfig.DiscordConfig.OverlayTitle,
+                State = _projectConfig.DiscordConfig.OverlayTitle,
                 Assets =
                 {
                     LargeImage = LogoAdress,
