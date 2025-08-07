@@ -78,7 +78,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.8678415, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.91223574, a: 1}
     - _Color_1: {r: 0, g: 0.70165753, b: 1, a: 1}
     - _Color_Depth: {r: 0.57254905, g: 0.9333334, b: 1, a: 1}
     - _Color_Wave: {r: 0.57254905, g: 0.9333334, b: 1, a: 1}
