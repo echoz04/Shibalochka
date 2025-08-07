@@ -3,7 +3,12 @@ guid: 1453a1a1fbb472844a8e5d3e99db8090
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Seashell
+    second: {fileID: 2100000, guid: 1d566ed61d348d546a3c811ecde684e8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

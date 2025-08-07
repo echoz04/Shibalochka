@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Coconuts
-    second: {fileID: 2100000, guid: 250cdb38aee44bc458339d98400229f6, type: 2}
+      name: SM_Coconuts
+    second: {fileID: 2100000, guid: 1ead7752c0533d84f849795a9e666581, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

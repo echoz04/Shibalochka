@@ -53,7 +53,7 @@ Material:
     m_Floats:
     - _BottomBrightness: 0
     - _BottomStrenght: 1
-    - _Erosion: 0.523
+    - _Erosion: 0.699
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RippleAmount: 5
@@ -61,7 +61,7 @@ Material:
     - _VoronoiScale: 12
     - _VoronoiSpeed: 2
     m_Colors:
-    - _RippleColor: {r: 7.4619308, g: 45.9155, b: 47.937252, a: 1}
+    - _RippleColor: {r: 0.11764707, g: 0.43951565, b: 0.7490196, a: 1}
     - _RippleSpeed: {r: 0, g: 0.68, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
