@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Shader Graph 2
+  m_Name: M_Waterfall
   m_Shader: {fileID: -6465566751694194690, guid: 17caa02aa70f61c4ebec2ba8d2669768, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
