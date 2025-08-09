@@ -32,6 +32,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         private List<ItemCellPoint> _cellPoints = new();
         private List<InventoryCell> _occupiedInventoryCells = new();
         private Vector3 _previousPosition;
+        private Vector3 _occupiedPosition = Vector3.zero;
         private bool _canSelect = false;
         private bool _isDragging = false;
 
@@ -116,6 +117,8 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
             OnEndDragging?.Invoke();
 
+            _occupiedPosition = Vector3.zero;
+
             PlaceItem();
         }
 
@@ -142,9 +145,20 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             {
                 if (_occupiedInventoryCells.Count > 0)
                 {
+                    Debug.Log("YEs");
+
                     Vector3 offset = transform.position - _cellPoints[0].Transform.position;
                     Vector3 snapTo = _occupiedInventoryCells[0].transform.position;
                     transform.position = snapTo + offset;
+
+                    if (_occupiedPosition == Vector3.zero)
+                    {
+                        _occupiedPosition = transform.position;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Occupied pois");
                 }
 
                 _canSelect = true;
@@ -157,6 +171,8 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             else
             {
                 _canSelect = false;
+                _occupiedPosition = Vector3.zero;
+                Debug.Log("occupied position is zero");
 
                 ClearOccupiedInventoryCells();
             }
@@ -182,6 +198,8 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         {
             //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_PointerEnter");
             transform.Rotate(0f, 0f, -90f);
+
+            transform.position = _occupiedPosition;
 
             PlaceItem(false);
         }

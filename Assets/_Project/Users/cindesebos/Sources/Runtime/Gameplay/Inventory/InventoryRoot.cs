@@ -74,6 +74,9 @@ namespace Sources.Runtime.Gameplay.Inventory
         {
             _currentGrid = new InventoryCell[Width, Height];
 
+            Debug.Log("Heigh is " + Height);
+            Debug.Log("Width is " + Width);
+
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
