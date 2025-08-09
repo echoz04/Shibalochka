@@ -23,6 +23,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 
             if (_gameplayResult == true)
             {
+                _dependencies.InventoryRoot.ShowInventoryAfterMiniGame();
                 _dependencies.InventoryRoot.TryAddItem(_dependencies.RewardService.GetRandomItem());
                 //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Win");
             }

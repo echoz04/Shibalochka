@@ -146,6 +146,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
                 if (_occupiedInventoryCells.Count > 0)
                 {
                     Debug.Log("YEs");
+                    ToggleCellsVisibility(false);
 
                     Vector3 offset = transform.position - _cellPoints[0].Transform.position;
                     Vector3 snapTo = _occupiedInventoryCells[0].transform.position;
@@ -170,6 +171,8 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             }
             else
             {
+                ToggleCellsVisibility(true);
+
                 _canSelect = false;
                 _occupiedPosition = Vector3.zero;
                 Debug.Log("occupied position is zero");
@@ -215,6 +218,18 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             OnSelected?.Invoke(IsSelected);
         }
 
+        private void ToggleCellsVisibility(bool value)
+        {
+            foreach (var cell in _cellPoints)
+                cell.gameObject.SetActive(value);
+        }
+
+        public void Confirm()
+        {
+            SetSelection(false);
+            _inventoryRoot.TryToggleControlButtons(this);
+        }
+
         public void Delete(Transform newParent)
         {
             _inventoryRoot.TryToggleControlButtons(this);
@@ -223,6 +238,14 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             transform.SetParent(newParent);
             transform.localPosition = Vector3.zero;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+        }
+
+        public void Remove()
+        {
+            _inventoryRoot.TryToggleControlButtons(this);
+            SetSelection(false);
+            ClearOccupiedInventoryCells();
+            Destroy(gameObject);
         }
     }
 }

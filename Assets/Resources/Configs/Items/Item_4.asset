@@ -20,5 +20,5 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: -855189435, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
   <ItemCellPointPrefab>k__BackingField: {fileID: 5684752095224147114, guid: dadf362f63410de9e8bf0e517f48e7b2, type: 3}
   _cellPointsPosition:
-  - {x: -56, y: 0, z: 0}
-  - {x: 56, y: 0, z: 0}
+  - {x: -54, y: 0, z: 0}
+  - {x: 58, y: 0, z: 0}

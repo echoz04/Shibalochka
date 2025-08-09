@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/_Project/Users/cindesebos/Scenes/Bootstrap.unity
     guid: d9916013d112c5f34b98ae1b87fba0c8
   - enabled: 1
+    path: Assets/_Project/Users/cindesebos/Scenes/Menu.unity
+    guid: 254366628cb4baf82a2e38c758966353
+  - enabled: 1
     path: Assets/_Project/Users/cindesebos/Scenes/Gameplay.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/_Project/Users/cindesebos/Scenes/TradingIsland.unity
+    guid: eed6ff51a4b2a45359a8ad93d4fcfdc2
   - enabled: 1
     path: Assets/_Project/Users/cindesebos/Scenes/Test.unity
     guid: 22750d22ccbd0a4c0bcb63dbbf244fce

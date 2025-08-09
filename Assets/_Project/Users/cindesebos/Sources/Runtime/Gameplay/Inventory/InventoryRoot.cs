@@ -43,6 +43,7 @@ namespace Sources.Runtime.Gameplay.Inventory
         private ItemRoot _selectedItem;
 
         private InventoryCell[,] _currentGrid;
+        [SerializeField] private List<ItemRoot> _unUsedItems = new();
         private List<InventoryCell> _allCells = new List<InventoryCell>();
 
         [Inject]
@@ -58,7 +59,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public void Initialize()
         {
-            _characterInput.UI.ToggleInventoryVisibility.performed += ToggleVisibility;
+            _characterInput.UI.ToggleInventoryVisibility.performed += ctx => ToggleVisibility();
 
             BuildGrid();
 
@@ -67,7 +68,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         private void OnDestroy()
         {
-            _characterInput.UI.ToggleInventoryVisibility.performed -= ToggleVisibility;
+            _characterInput.UI.ToggleInventoryVisibility.performed -= ctx => ToggleVisibility();
         }
 
         private void BuildGrid()
@@ -101,12 +102,13 @@ namespace Sources.Runtime.Gameplay.Inventory
                 return false;
             }
 
-            _itemBuilder.Build(itemConfig, _rewardsPanel);
+            var item = _itemBuilder.Build(itemConfig, _rewardsPanel);
+            _unUsedItems.Add(item);
 
             return true;
         }
 
-        public void ToggleVisibility(InputAction.CallbackContext context)
+        public void ToggleVisibility()
         {
             if (_staminaHandler.IsStarted == true)
                 return;
@@ -131,7 +133,19 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         public bool TryPlaceItem(ItemRoot itemRoot)
         {
-            return ProcessItemPlacement(itemRoot, false);
+            bool isPlaced = ProcessItemPlacement(itemRoot, false);
+
+            if (isPlaced == true)
+            {
+                _unUsedItems.Remove(itemRoot);
+            }
+            else
+            {
+                if (_unUsedItems.Contains(itemRoot) == false)
+                    _unUsedItems.Add(itemRoot);
+            }
+
+            return isPlaced;
         }
 
         public bool TryToggleControlButtons(ItemRoot itemRoot)
@@ -168,6 +182,30 @@ namespace Sources.Runtime.Gameplay.Inventory
                 return;
 
             _selectedItem.Rotate();
+        }
+
+        public void DeleteItem()
+        {
+            if (_selectedItem == null)
+                return;
+
+            _selectedItem.Delete(_rewardsPanel);
+        }
+
+        public void ConfirmItem()
+        {
+            if (_selectedItem == null)
+                return;
+
+            _selectedItem.Confirm();
+        }
+
+        public void RemoveItem()
+        {
+            if (_selectedItem == null)
+                return;
+
+            _selectedItem.Remove();
         }
 
         public void MoveItemToRewardsPanel()
@@ -222,6 +260,18 @@ namespace Sources.Runtime.Gameplay.Inventory
             }
 
             return allValid;
+        }
+
+        public void ShowInventoryAfterMiniGame()
+        {
+            Debug.Log("Try To Remove Unused items");
+
+            foreach (var item in _unUsedItems)
+                item.Remove();
+
+            _unUsedItems.Clear();
+
+            ToggleVisibility();
         }
 
         private InventoryCell FindNearestCell(Vector3 worldPos, float radius)
