@@ -8,16 +8,13 @@ namespace Sources.Runtime.Gameplay.Configs
     {
         [Title("Camera")]
 
-        [SerializeField, MinValue(1f), MaxValue(100f), LabelText("Sensitivity")]
-        private float _sensitivity = 2f;
+        [SerializeField, MinValue(1f), MaxValue(100f), LabelText("Sensitivity")] private float _sensitivity;
         public float Sensitivity => _sensitivity;
 
-        [SerializeField, LabelText("Min Vertical Angle")]
-        private float _minVerticalAngle = -25f;
+        [SerializeField, LabelText("Min Vertical Angle")] private float _minVerticalAngle;
         public float MinVerticalAngle => _minVerticalAngle;
 
-        [SerializeField, LabelText("Max Vertical Angle")]
-        private float _maxVerticalAngle = 25f;
+        [SerializeField, LabelText("Max Vertical Angle")] private float _maxVerticalAngle;
         public float MaxVerticalAngle => _maxVerticalAngle;
     }
 }

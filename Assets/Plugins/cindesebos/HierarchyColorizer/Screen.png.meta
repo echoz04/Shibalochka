@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/_Project/Users/herynax/Textures/1 (1).png.meta
+guid: ff984c58e4c9867daa48bb3777328268
+========
 guid: cd78b8b8b4038e27e89973cda8cfa9b9
+>>>>>>>> 5a34f88489768061e38271ccc1cbc629d92c4742:Assets/Plugins/cindesebos/HierarchyColorizer/Screen.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,6 +73,22 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
+<<<<<<<< HEAD:Assets/_Project/Users/herynax/Textures/1 (1).png.meta
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+========
+>>>>>>>> 5a34f88489768061e38271ccc1cbc629d92c4742:Assets/Plugins/cindesebos/HierarchyColorizer/Screen.png.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

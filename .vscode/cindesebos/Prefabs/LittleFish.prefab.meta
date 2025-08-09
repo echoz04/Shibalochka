@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:.vscode/cindesebos/Prefabs/LargeFish.prefab.meta
+guid: 41d113f545fe73852a7fa20cfa5efc78
+========
 guid: ff49e3593062f4e62902def6f1efcf85
+>>>>>>>> 5a34f88489768061e38271ccc1cbc629d92c4742:.vscode/cindesebos/Prefabs/LittleFish.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

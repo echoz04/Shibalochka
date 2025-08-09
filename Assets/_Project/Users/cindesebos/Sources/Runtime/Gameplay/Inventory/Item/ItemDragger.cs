@@ -12,25 +12,18 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         {
             _inventoryRoot = inventoryRoot;
             _root = root;
+
+            _root.OnDragging += Drag;
         }
 
-        public void BeginDrag()
+        private void OnDestroy()
         {
-            // Optional: Add drag start logic
+            _root.OnDragging -= Drag;
         }
 
         public void Drag()
         {
             transform.position = Mouse.current.position.ReadValue();
-        }
-
-        public void EndDrag()
-        {
-        }
-
-        public void PointClick()
-        {
-            // Optional: Add click logic
         }
     }
 }

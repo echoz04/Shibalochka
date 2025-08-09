@@ -5,6 +5,8 @@ using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
 using Sources.Runtime.Services.ProjectConfigLoader;
 using Sources.Runtime.Gameplay.Inventory;
+using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Project;
 
 namespace Sources.Runtime.Bootstrap
 {
@@ -14,13 +16,18 @@ namespace Sources.Runtime.Bootstrap
         private readonly ISceneLoader _sceneLoader;
         private readonly IProjectConfigLoader _projectConfigLoader;
         private readonly Scene _sceneToLoad;
+        private readonly DiscordOverlayDisplayer _discordOverlayDisplayer;
+        private readonly IMiniGameRewardService _miniGameRewardService;
 
-        public BootstrapService(IAssetLoader assetLoader, ISceneLoader sceneLoader, IProjectConfigLoader projectConfigLoader, Scene sceneToLoad)
+        public BootstrapService(IAssetLoader assetLoader, ISceneLoader sceneLoader, IProjectConfigLoader projectConfigLoader, Scene sceneToLoad,
+        DiscordOverlayDisplayer discordOverlayDisplayer, IMiniGameRewardService miniGameRewardService)
         {
             _assetLoader = assetLoader;
             _sceneLoader = sceneLoader;
             _projectConfigLoader = projectConfigLoader;
             _sceneToLoad = sceneToLoad;
+            _discordOverlayDisplayer = discordOverlayDisplayer;
+            _miniGameRewardService = miniGameRewardService;
         }
 
         public async void Initialize()
@@ -28,7 +35,17 @@ namespace Sources.Runtime.Bootstrap
             using (await _assetLoader.LoadDisposable<GameObject>(AssetsConstants.LoadingCanvas))
             {
                 await _projectConfigLoader.LoadProjectConfigAsync();
+                _discordOverlayDisplayer.Initialize();
+                _miniGameRewardService.Initialize();
+#if UNITY_EDITOR
+                ContentManagementSystem.Instance.ProjectConfigLoader = _projectConfigLoader;
+
+                Debug.Log($"Loading scene: {ContentManagementSystem.Instance.SceneToLoad}");
+
+                await _sceneLoader.LoadSceneAsync(ContentManagementSystem.Instance.SceneToLoad);
+#else
                 await _sceneLoader.LoadSceneAsync(_sceneToLoad);
+#endif
             }
         }
     }
