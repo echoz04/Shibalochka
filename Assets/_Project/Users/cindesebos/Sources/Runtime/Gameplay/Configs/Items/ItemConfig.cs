@@ -15,6 +15,9 @@ namespace Sources.Runtime.Gameplay.Configs.Items
         [field: SerializeField] public string TypeId { get; private set; }
         [field: Space]
 
+        [field: SerializeField] public int Price { get; private set; }
+        [field: Space]
+
         [field: SerializeField] public Rarity Rarity { get; private set; }
         [field: Space]
 

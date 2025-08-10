@@ -1,3 +1,4 @@
+using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,7 +12,7 @@ namespace Sources.Runtime.Gameplay.Map
         [SerializeField] private GameObject _button;
 
         private ISceneLoader _sceneLoader;
-        private Scene _scene;
+        private Sources.Runtime.Services.SceneLoader.Scene _scene;
 
         [Inject]
         private void Construct(ISceneLoader sceneLoader)
@@ -31,7 +32,7 @@ namespace Sources.Runtime.Gameplay.Map
             BaseMapSelectorButton.IslandUnselected -= HideButton;
         }
 
-        private void ShowButton(Scene scene)
+        private void ShowButton(Sources.Runtime.Services.SceneLoader.Scene scene)
         {
             _button.SetActive(true);
 
@@ -45,10 +46,18 @@ namespace Sources.Runtime.Gameplay.Map
 
         public void Load()
         {
-            if (!IsCurrentScene(_scene))
+            if (IsCurrentScene(_scene.ToString()) == false)
                 _sceneLoader.LoadScene(_scene);
         }
 
-        private bool IsCurrentScene(string sceneName) => SceneManager.GetActiveScene().name == sceneName;
+        private bool IsCurrentScene(string sceneName)
+        {
+            var currentSceneName = SceneManager.GetActiveScene().name;
+            var sceneToLoadName = sceneName;
+
+            Debug.Log($"currentSceneName: {currentSceneName}  sceneToLoadName: {sceneToLoadName}");
+
+            return currentSceneName == sceneToLoadName;
+        }
     }
 }

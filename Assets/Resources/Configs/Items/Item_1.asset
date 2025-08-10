@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Item_1
   m_EditorClassIdentifier: 
   <TypeId>k__BackingField: Item_1
+  <Price>k__BackingField: 100
   <Rarity>k__BackingField: 0
   <IsMutant>k__BackingField: 0
   <TitleLid>k__BackingField: "\u0416\u0435\u043C\u0447\u0443\u0436\u043D\u044B\u0439
