@@ -1,7 +1,10 @@
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Gameplay.Inventory;
-using Sources.Runtime.Gameplay.MiniGames;
+using Sources.Runtime.Gameplay.Inventory.Item;
+using Sources.Runtime.Gameplay.Map;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
+using Sources.Runtime.Gameplay.Wallet;
+using Sources.Runtime.Services.Builders.Item;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +15,11 @@ namespace Sources.Runtime.Gameplay
         [SerializeField] private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         [SerializeField] private StaminaHandler _staminaHandler;
         [SerializeField] private InventoryRoot _inventoryRoot;
+        [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private CameraRotator _cameraRotator;
+        [SerializeField] private ItemRoot _itemRootPrefab;
+        [SerializeField] private WalletView _walletView;
+        [SerializeField] private MapView _mapView;
 
         public override void InstallBindings()
         {
@@ -20,6 +27,9 @@ namespace Sources.Runtime.Gameplay
             BindCameraRotator();
             BindInventory();
             BindStaminaHandler();
+            BindItemBuilder();
+            BindWalllet();
+            BindMapView();
         }
 
         private void BindFishingMiniGameBootstrapper()
@@ -41,12 +51,41 @@ namespace Sources.Runtime.Gameplay
             Container.Bind<InventoryRoot>()
                 .FromInstance(_inventoryRoot)
                 .AsSingle();
+
+            Container.Bind<InventoryView>()
+                .FromInstance(_inventoryView)
+                .AsSingle();
         }
 
         private void BindStaminaHandler()
         {
             Container.Bind<StaminaHandler>()
                 .FromInstance(_staminaHandler)
+                .AsSingle();
+        }
+
+        private void BindItemBuilder()
+        {
+            Container.Bind<IItemBuilder>()
+                .To<ItemBuilder>()
+                .AsSingle()
+                .WithArguments(Container, _itemRootPrefab);
+        }
+
+        private void BindWalllet()
+        {
+            Container.Bind<WalletRoot>()
+                .AsSingle();
+
+            Container.Bind<WalletView>()
+                .FromInstance(_walletView)
+                .AsSingle();
+        }
+
+        private void BindMapView()
+        {
+            Container.Bind<MapView>()
+                .FromInstance(_mapView)
                 .AsSingle();
         }
     }

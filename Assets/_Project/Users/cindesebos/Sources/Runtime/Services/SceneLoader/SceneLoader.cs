@@ -27,7 +27,7 @@ namespace Sources.Runtime.Services.SceneLoader
 
                 SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
             }
-            finally 
+            finally
             {
                 OnLoadingEnded?.Invoke();
             }

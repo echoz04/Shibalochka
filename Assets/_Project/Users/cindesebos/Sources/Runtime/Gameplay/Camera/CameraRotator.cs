@@ -2,88 +2,39 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.InputSystem;
 using Sources.Runtime.Services.ProjectConfigLoader;
-using Sources.Runtime.Gameplay.Configs;
+using Unity.Cinemachine;
 
 namespace Sources.Runtime.Gameplay.Camera
 {
     public class CameraRotator : MonoBehaviour
     {
-        [SerializeField] private Transform _holder;
-        [SerializeField] private Transform _cameraPivot;
+        [SerializeField] private CinemachineInputAxisController _cinemachineInputAxisController;
 
-        private CharacterInput _characterInput;
         private CursorView _cursorView;
-        private CameraConfig _cameraConfig;
-
-        private float _xRotation;
-        private bool _isRotating = false;
-        private bool _canRotate = true;
 
         [Inject]
-        private void Construct(CharacterInput characterInput, CursorView cursorView, IProjectConfigLoader projectConfigLoader)
+        private void Construct(CursorView cursorView)
         {
-            _characterInput = characterInput;
             _cursorView = cursorView;
-            _cameraConfig = projectConfigLoader.ProjectConfig.CameraConfig;
         }
 
-        private void Awake()
+        private void Start()
         {
-            _characterInput.Camera.Rotate.started += StartWorking;
-            _characterInput.Camera.Rotate.canceled += StopWorking;
+            Enable();
         }
 
-        private void Update()
-        {
-            if (_isRotating == false || _canRotate == false)
-                return;
-
-            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-            Rotate(mouseDelta);
-        }
-
-        private void Rotate(Vector2 delta)
-        {
-            float mouseX = delta.x * _cameraConfig.Sensitivity * Time.deltaTime;
-            float mouseY = delta.y * _cameraConfig.Sensitivity * Time.deltaTime;
-
-            _holder.Rotate(Vector3.up * mouseX);
-
-            _xRotation -= mouseY;
-            _xRotation = Mathf.Clamp(_xRotation, _cameraConfig.MinVerticalAngle, _cameraConfig.MaxVerticalAngle);
-            _cameraPivot.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        }
-
-        public void OnPanelShow()
-        {
-            _canRotate = false;
-        }
-
-        public void OnPanelHide()
-        {
-            _canRotate = true;
-        }
-
-        private void StartWorking(InputAction.CallbackContext context)
+        public void Enable()
         {
             _cursorView.Hide();
 
-            _isRotating = true;
+            _cinemachineInputAxisController.enabled = true;
         }
 
-        private void StopWorking(InputAction.CallbackContext context)
+        public void Disable()
         {
             _cursorView.Show();
 
-            _isRotating = false;
+            _cinemachineInputAxisController.enabled = false;
         }
-
-        private void OnDestroy()
-        {
-            _characterInput.Camera.Rotate.started -= StartWorking;
-            _characterInput.Camera.Rotate.canceled -= StopWorking;
-        }
-
-        private float GetCameraLook() => _characterInput.Camera.Look.ReadValue<float>();
     }
 }

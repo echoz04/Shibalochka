@@ -10,12 +10,26 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
     {
         [SerializeField] private List<FishingCanvasItem> _items;
         [SerializeField] private GameObject _miniGame;
+        [SerializeField] private GameObject _catchWindow;
 
         private IProjectConfigLoader _projectConfigLoader;
+        private FishingMiniGameBootstrapper _bootstrapper;
 
-        public void Initialize(IProjectConfigLoader projectConfigLoader)
+        public void Initialize(FishingMiniGameBootstrapper bootstrapper, IProjectConfigLoader projectConfigLoader)
         {
+            _bootstrapper = bootstrapper;
             _projectConfigLoader = projectConfigLoader;
+
+            _bootstrapper.OnCatchTimeStarted += OnCatchTimeStarted;
+            _bootstrapper.OnCatchTiming += OnCatchTiming;
+            _bootstrapper.OnCatchTimeEnded += OnCatchTimeEnded;
+        }
+
+        private void OnDestroy()
+        {
+            _bootstrapper.OnCatchTimeStarted -= OnCatchTimeStarted;
+            _bootstrapper.OnCatchTiming -= OnCatchTiming;
+            _bootstrapper.OnCatchTimeEnded -= OnCatchTimeEnded;
         }
 
         public async UniTask Show()
@@ -32,6 +46,21 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             }
 
             await UniTask.WhenAll(tasks);
+        }
+
+        public void OnCatchTimeStarted()
+        {
+
+        }
+
+        public void OnCatchTiming()
+        {
+            _catchWindow.SetActive(true);
+        }
+
+        public void OnCatchTimeEnded()
+        {
+            _catchWindow.SetActive(false);
         }
 
         private void ResetItems()

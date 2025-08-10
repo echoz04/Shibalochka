@@ -1,58 +1,93 @@
+using DG.Tweening;
 using Sources.Runtime.Gameplay.Configs;
+using Sources.Runtime.Gameplay.Configs.Items;
+using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {
     public class ItemView : MonoBehaviour
     {
+        [SerializeField] private ItemRoot _root;
         [SerializeField] private Image _view;
-
         [SerializeField] private RectTransform _parent;
-
         [SerializeField] private Sprite _arrowSprite;
-
         [SerializeField] private Vector2 _arrrowSize = new Vector2(62f, 62f);
-
         [SerializeField] private float _offSet;
 
         private GameObject[] _currentArrows = new GameObject[4];
-
         private RectTransform _target;
         private ItemConfig _config;
-        private ItemRoot _root;
+        private InventoryConfig _inventoryConfig;
 
         private void OnValidate()
         {
+            _root ??= GetComponent<ItemRoot>();
             _view ??= GetComponentInChildren<Image>();
         }
 
-        public void Initialize(ItemRoot root, ItemConfig config)
+        [Inject]
+        private void Construct(IProjectConfigLoader projectConfigLoader)
         {
-            _config = config;
+            _inventoryConfig = projectConfigLoader.ProjectConfig.InventoryConfig;
+        }
+
+        private void Start()
+        {
+            _config = _root.Config;
             _target = GetComponent<RectTransform>();
 
             _view.sprite = _config.Icon;
             _view.alphaHitTestMinimumThreshold = 0.1f;
             _view.SetNativeSize();
 
-            CreateArrows();
-            UpdateArrowPositions();
-            ToggleArrows(false);
+            //CreateArrows();
+            //UpdateArrowPositions();
+            //ToggleArrows(false);
 
-            _root = root;
-            _root.OnSelected += ToggleArrows;
+            _root.OnBeginDragging += OnDragBegan;
+            _root.OnDragging += OnDragged;
+            _root.OnEndDragging += OnDragEnded;
+            _root.OnSelected += OnSelected;
         }
 
         private void OnDestroy()
         {
-            _root.OnSelected -= ToggleArrows;
+            if (_root == null) return;
+
+            _root.OnBeginDragging -= OnDragBegan;
+            _root.OnDragging -= OnDragged;
+            _root.OnEndDragging -= OnDragEnded;
+            _root.OnSelected -= OnSelected;
+        }
+
+        public void OnDragBegan()
+        {
+            _target.DOKill();
+            _target.DOScale(_inventoryConfig.ItemDraggingScale, _inventoryConfig.ItemAnimationsDuration);
+        }
+
+        public void OnDragged()
+        {
+        }
+
+        public void OnDragEnded()
+        {
+            _target.DOKill();
+            _target.DOScale(1f, _inventoryConfig.ItemAnimationsDuration);
+        }
+
+        public void OnSelected(bool value)
+        {
+            //ToggleArrows(value);
         }
 
         private void ToggleArrows(bool value)
         {
-            for (int i = 0; i < _currentArrows.Length; i++)
-                _currentArrows[i].SetActive(value);
+            foreach (var arrow in _currentArrows)
+                arrow.SetActive(value);
         }
 
         private void CreateArrows()
@@ -80,7 +115,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
                 _currentArrows[i] = arrow;
             }
         }
-
 
         private void UpdateArrowPositions()
         {

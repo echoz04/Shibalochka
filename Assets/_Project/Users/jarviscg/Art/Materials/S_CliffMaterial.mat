@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5061333695584923178
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: S_CliffMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 2eb55b253d7414740af2faee863092c2, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: 8485db257788d084ba30c274302e2296, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Main_Textures:
+        m_Texture: {fileID: 2800000, guid: 54eeab4188f9aae4b87dd34235d94701, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Moss_Noise_Tex:
+        m_Texture: {fileID: 2800000, guid: 2d7a5c06dca4896489b5f6a9d48c7d01, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Moss_Texture:
+        m_Texture: {fileID: 2800000, guid: c62044909d2a3fd4b9a3c3fbbea0439d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Moss_Two_Texture:
+        m_Texture: {fileID: 2800000, guid: 8c1ae7ace14d2654baaf19f3c9aaade0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Main_Texture:
+        m_Texture: {fileID: 2800000, guid: 4fcc0ff26acc307468f59ec9df6586cd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map:
+        m_Texture: {fileID: 2800000, guid: 801d6e94f34b47b428c1f621826431df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SideTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TopTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BlendDistance: 0
+    - _Light_Main_Textures: 0.057
+    - _Main_Blend_Textures: 2
+    - _Main_Texture_Tile: 0.384
+    - _Moss_Blend: 5
+    - _Moss_End_Y: 0.459
+    - _Moss_Int: 1
+    - _Moss_Noise_Blend: 5
+    - _Moss_Noise_Int: 2.06
+    - _Moss_Noise_Scale: 0.04
+    - _Moss_Scale: 0.26
+    - _Moss_Start_Y: 0
+    - _NoiseScale: 0.75
+    - _NoiseScale_Dark: 1.79
+    - _NoiseScale_White: 1.03
+    - _Noise_Blend: 0.497
+    - _Noise_Blend_Dark: 0.42
+    - _Noise_Blend_White: 0.308
+    - _Normal_Int: 1.12
+    - _Normal_Mix: 1.07
+    - _Normal_Mix_Tex: 0
+    - _Normal_Test: 1.07
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _SideTextureScale: 1
+    - _Smoothness: 0
+    - _Smoothness_1: 0
+    - _Specular_Color: 0
+    - _Specular_Color_1: 0
+    - _Test: 0.05
+    - _TopTextureScale: 1
+    m_Colors:
+    - _Blend_Color: {r: 0.7021334, g: 0.5647918, b: 0.7169812, a: 1}
+    - _Color_BaseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Moss_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Moss_Noise_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

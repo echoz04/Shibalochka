@@ -14,9 +14,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         private const int MinPointerValue = 0;
         private const int MaxPointerValue = 100;
 
-        public event Action OnLaunched;
-        public event Action<bool> OnEnded;
-
         private readonly Slider _pointerSlider;
         private readonly CharacterInput _characterInput;
         private readonly IProjectConfigLoader _projectConfigLoader;
@@ -34,11 +31,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 
         public void Launch()
         {
-            OnLaunched?.Invoke();
-
-            _loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
-            _loopedSound.start();
-            _loopedSound.setParameterByName("FishingMiniGame", 1);
+            //_loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
+            //_loopedSound.start();
+            //_loopedSound.setParameterByName("FishingMiniGame", 1);
 
             MovePointer();
         }
@@ -75,8 +70,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         {
             _loopedSound.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             _loopedSound.release();
-
-            OnEnded?.Invoke(isWin);
 
             if (_pointerTween == null)
                 return;

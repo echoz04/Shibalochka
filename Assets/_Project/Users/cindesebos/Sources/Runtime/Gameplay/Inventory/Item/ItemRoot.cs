@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FMODUnity;
-using Sources.Runtime.Gameplay.Configs;
+using Sources.Runtime.Gameplay.Configs.Items;
+using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -12,53 +13,59 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
     [RequireComponent(typeof(ItemDragger), typeof(ItemView))]
     public class ItemRoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
+        public event Action OnBeginDragging;
+        public event Action OnDragging;
+        public event Action OnEndDragging;
         public event Action<bool> OnSelected;
 
         public IEnumerable<ItemCellPoint> CellsPoints => _cellPoints;
 
+        public ItemConfig Config { get; private set; }
+
         public bool IsSelected { get; set; }
 
         [SerializeField] private Transform _cellPointsParent;
-        [SerializeField] private ItemConfig _config;
         [SerializeField] private ItemDragger _dragger;
-        [SerializeField] private ItemView _view;
 
         private InventoryRoot _inventoryRoot;
+        private IProjectConfigLoader _projectConfigLoader;
         private List<ItemCellPoint> _cellPoints = new();
         private List<InventoryCell> _occupiedInventoryCells = new();
         private Vector3 _previousPosition;
+        private Vector3 _occupiedPosition = Vector3.zero;
         private bool _canSelect = false;
+        private bool _isDragging = false;
 
         private void OnValidate()
         {
             _dragger ??= GetComponent<ItemDragger>();
-            _view ??= GetComponent<ItemView>();
         }
 
         [Inject]
-        private void Construct(InventoryRoot inventoryRoot)
+        private void Construct(InventoryRoot inventoryRoot, IProjectConfigLoader projectConfigLoader)
         {
             _inventoryRoot = inventoryRoot;
+            _projectConfigLoader = projectConfigLoader;
         }
 
-        private void Start()
+        public void Initialize(ItemConfig config)
         {
+            Config = config;
+
             _occupiedInventoryCells = new List<InventoryCell>();
 
             CreateCellsPoints();
 
-            _view.Initialize(this, _config);
             _dragger.Initialize(_inventoryRoot, this);
         }
 
         public void CreateCellsPoints()
         {
-            for (int i = 0; i < _config.CellPointsPosition.Count(); i++)
+            for (int i = 0; i < Config.CellPointsPosition.Count(); i++)
             {
-                var position = _config.CellPointsPosition.ElementAt(i);
-                Debug.Log("position by " + i + " is " + position);
+                var position = Config.CellPointsPosition.ElementAt(i);
 
-                var instance = Instantiate(_config.ItemCellPointPrefab);
+                var instance = Instantiate(Config.ItemCellPointPrefab);
 
                 instance.transform.SetParent(_cellPointsParent);
                 instance.transform.localPosition = position;
@@ -69,13 +76,31 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            _dragger.BeginDrag();
-            RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Open");
+            if (_occupiedInventoryCells.Count == 0)
+            {
+                Drag();
+
+                return;
+            }
+            else
+            {
+                if (IsSelected == true)
+                {
+                    Drag();
+
+                    return;
+                }
+            }
+
+            _isDragging = false;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            _dragger.Drag();
+            if (_isDragging == false)
+                return;
+
+            OnDragging?.Invoke();
 
             if (_previousPosition == transform.position)
                 return;
@@ -87,26 +112,14 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _dragger.EndDrag();
+            if (_isDragging == false)
+                return;
 
-            if (_inventoryRoot.TryPlaceItem(this))
-            {
-                if (_occupiedInventoryCells.Count > 0)
-                {
-                    Vector3 offset = transform.position - _cellPoints[0].Transform.position;
-                    Vector3 snapTo = _occupiedInventoryCells[0].transform.position;
-                    transform.position = snapTo + offset;
-                }
+            OnEndDragging?.Invoke();
 
-                _canSelect = true;
-                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Close");
-            }
-            else
-            {
-                _canSelect = false;
+            _occupiedPosition = Vector3.zero;
 
-                ClearOccupiedInventoryCells();
-            }
+            PlaceItem();
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -114,18 +127,58 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             if (_occupiedInventoryCells.Count == 0 || _canSelect == false)
                 return;
 
-            bool isSelected = _inventoryRoot.TryToggleControlButtons(this);
+            _inventoryRoot.TryToggleControlButtons(this);
+        }
 
-            if (isSelected)
+        private void Drag()
+        {
+            OnBeginDragging?.Invoke();
+
+            //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Open");
+            _isDragging = true;
+            _inventoryRoot.TryToggleControlButtons(this);
+        }
+
+        private void PlaceItem(bool isImmediatelyPlace = true)
+        {
+            if (_inventoryRoot.TryPlaceItem(this))
             {
-                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Select");
+                if (_occupiedInventoryCells.Count > 0)
+                {
+                    Debug.Log("YEs");
+                    ToggleCellsVisibility(false);
+
+                    Vector3 offset = transform.position - _cellPoints[0].Transform.position;
+                    Vector3 snapTo = _occupiedInventoryCells[0].transform.position;
+                    transform.position = snapTo + offset;
+
+                    if (_occupiedPosition == Vector3.zero)
+                    {
+                        _occupiedPosition = transform.position;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Occupied pois");
+                }
+
+                _canSelect = true;
+
+                if (isImmediatelyPlace == true)
+                {
+                    //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Close");
+                }
             }
             else
             {
-                RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Deselect");
-            }
+                ToggleCellsVisibility(true);
 
-            _dragger.PointClick();
+                _canSelect = false;
+                _occupiedPosition = Vector3.zero;
+                Debug.Log("occupied position is zero");
+
+                ClearOccupiedInventoryCells();
+            }
         }
 
         public void AddOccupiedInventoryCells(InventoryCell inventoryCell)
@@ -146,14 +199,53 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void Rotate()
         {
-            RuntimeManager.PlayOneShot("event:/SFX/UI/UI_PointerEnter");
+            //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_PointerEnter");
             transform.Rotate(0f, 0f, -90f);
+
+            transform.position = _occupiedPosition;
+
+            PlaceItem(false);
         }
 
-        public void SetSelection(bool isSelect)
+        public void SetSelection(bool isSelected)
         {
-            IsSelected = isSelect;
+            /* if (isSelected)
+                 //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Select");
+             else
+                 //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Deselect");*/
+
+            IsSelected = isSelected;
             OnSelected?.Invoke(IsSelected);
+        }
+
+        private void ToggleCellsVisibility(bool value)
+        {
+            foreach (var cell in _cellPoints)
+                cell.gameObject.SetActive(value);
+        }
+
+        public void Confirm()
+        {
+            SetSelection(false);
+            _inventoryRoot.TryToggleControlButtons(this);
+        }
+
+        public void Delete(Transform newParent)
+        {
+            _inventoryRoot.TryToggleControlButtons(this);
+            SetSelection(false);
+            ClearOccupiedInventoryCells();
+            transform.SetParent(newParent);
+            transform.localPosition = Vector3.zero;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
+        }
+
+        public void Remove()
+        {
+            _inventoryRoot.TryToggleControlButtons(this);
+            SetSelection(false);
+            ClearOccupiedInventoryCells();
+            Destroy(gameObject);
         }
     }
 }
