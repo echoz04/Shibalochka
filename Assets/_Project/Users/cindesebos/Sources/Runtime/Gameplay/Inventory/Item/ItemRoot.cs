@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FMODUnity;
 using Sources.Runtime.Gameplay.Configs.Items;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {
-    [RequireComponent(typeof(ItemDragger), typeof(ItemView))]
+    [RequireComponent(typeof(ItemView))]
     public class ItemRoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         public event Action OnBeginDragging;
@@ -25,27 +23,18 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         public bool IsSelected { get; set; }
 
         [SerializeField] private Transform _cellPointsParent;
-        [SerializeField] private ItemDragger _dragger;
 
         private InventoryRoot _inventoryRoot;
-        private IProjectConfigLoader _projectConfigLoader;
         private List<ItemCellPoint> _cellPoints = new();
         private List<InventoryCell> _occupiedInventoryCells = new();
         private Vector3 _previousPosition;
-        private Vector3 _occupiedPosition = Vector3.zero;
-        private bool _canSelect = false;
-        private bool _isDragging = false;
-
-        private void OnValidate()
-        {
-            _dragger ??= GetComponent<ItemDragger>();
-        }
+        private bool _canSelect;
+        private bool _isDragging;
 
         [Inject]
-        private void Construct(InventoryRoot inventoryRoot, IProjectConfigLoader projectConfigLoader)
+        private void Construct(InventoryRoot inventoryRoot)
         {
             _inventoryRoot = inventoryRoot;
-            _projectConfigLoader = projectConfigLoader;
         }
 
         public void Initialize(ItemConfig config)
@@ -55,8 +44,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             _occupiedInventoryCells = new List<InventoryCell>();
 
             CreateCellsPoints();
-
-            _dragger.Initialize(_inventoryRoot, this);
         }
 
         public void CreateCellsPoints()
@@ -65,9 +52,8 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             {
                 var position = Config.CellPointsPosition.ElementAt(i);
 
-                var instance = Instantiate(Config.ItemCellPointPrefab);
+                var instance = Instantiate(Config.ItemCellPointPrefab, _cellPointsParent, true);
 
-                instance.transform.SetParent(_cellPointsParent);
                 instance.transform.localPosition = position;
 
                 _cellPoints.Add(instance);
@@ -76,20 +62,12 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (_occupiedInventoryCells.Count == 0)
+            Debug.Log($"OnBeginDrag {Config.TypeId}");
+            if (_occupiedInventoryCells.Count == 0 || IsSelected)
             {
                 Drag();
 
                 return;
-            }
-            else
-            {
-                if (IsSelected == true)
-                {
-                    Drag();
-
-                    return;
-                }
             }
 
             _isDragging = false;
@@ -97,6 +75,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnDrag(PointerEventData eventData)
         {
+            Debug.Log($"OnDrag {Config.TypeId}");
             if (_isDragging == false)
                 return;
 
@@ -107,7 +86,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
             _previousPosition = transform.position;
 
-            _inventoryRoot.HightligchCells(this);
+            _inventoryRoot.HighlightCells(this);
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -117,13 +96,12 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
             OnEndDragging?.Invoke();
 
-            _occupiedPosition = Vector3.zero;
-
             PlaceItem();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            Debug.Log($"OnPointerClick {Config.TypeId}");
             if (_occupiedInventoryCells.Count == 0 || _canSelect == false)
                 return;
 
@@ -145,21 +123,9 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             {
                 if (_occupiedInventoryCells.Count > 0)
                 {
-                    Debug.Log("YEs");
-                    ToggleCellsVisibility(false);
-
                     Vector3 offset = transform.position - _cellPoints[0].Transform.position;
                     Vector3 snapTo = _occupiedInventoryCells[0].transform.position;
                     transform.position = snapTo + offset;
-
-                    if (_occupiedPosition == Vector3.zero)
-                    {
-                        _occupiedPosition = transform.position;
-                    }
-                }
-                else
-                {
-                    Debug.Log("Occupied pois");
                 }
 
                 _canSelect = true;
@@ -171,11 +137,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             }
             else
             {
-                ToggleCellsVisibility(true);
-
                 _canSelect = false;
-                _occupiedPosition = Vector3.zero;
-                Debug.Log("occupied position is zero");
 
                 ClearOccupiedInventoryCells();
             }
@@ -202,8 +164,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_PointerEnter");
             transform.Rotate(0f, 0f, -90f);
 
-            transform.position = _occupiedPosition;
-
             PlaceItem(false);
         }
 
@@ -213,21 +173,9 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
                  //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Select");
              else
                  //RuntimeManager.PlayOneShot("event:/SFX/UI/UI_Slot_Deselect");*/
-
+            Debug.Log($"SetSelection {Config.TypeId}");
             IsSelected = isSelected;
             OnSelected?.Invoke(IsSelected);
-        }
-
-        private void ToggleCellsVisibility(bool value)
-        {
-            foreach (var cell in _cellPoints)
-                cell.gameObject.SetActive(value);
-        }
-
-        public void Confirm()
-        {
-            SetSelection(false);
-            _inventoryRoot.TryToggleControlButtons(this);
         }
 
         public void Delete(Transform newParent)
@@ -238,14 +186,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             transform.SetParent(newParent);
             transform.localPosition = Vector3.zero;
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0f);
-        }
-
-        public void Remove()
-        {
-            _inventoryRoot.TryToggleControlButtons(this);
-            SetSelection(false);
-            ClearOccupiedInventoryCells();
-            Destroy(gameObject);
         }
     }
 }

@@ -1,12 +1,10 @@
-using System.Collections.Generic;
-using Sources.Runtime.Gameplay.Configs.Fish;
 using Sources.Runtime.Gameplay.Configs.Items;
 using UnityEngine;
 
 namespace Sources.Runtime.Gameplay.Configs
 {
     [CreateAssetMenu(fileName = "Global Project Config", menuName = "Configs/New Global Project Config")]
-    public class ProjectConfig : ScriptableObject
+    public class ProjectConfig : ScriptableObject // TODO Сделать IProjectConfig
     {
         [field: SerializeField] public CameraConfig CameraConfig { get; private set; } = new CameraConfig();
         [field: Space(17.5f)]

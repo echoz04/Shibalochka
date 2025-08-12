@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Sources.Runtime.Services.ProjectConfigLoader;
+using Sources.Runtime.Gameplay.Configs;
 using UnityEngine;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
@@ -12,13 +12,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [SerializeField] private GameObject _miniGame;
         [SerializeField] private GameObject _catchWindow;
 
-        private IProjectConfigLoader _projectConfigLoader;
+        private ProjectConfig _projectConfig;
         private FishingMiniGameBootstrapper _bootstrapper;
 
-        public void Initialize(FishingMiniGameBootstrapper bootstrapper, IProjectConfigLoader projectConfigLoader)
+        public void Initialize(FishingMiniGameBootstrapper bootstrapper, ProjectConfig projectConfig)
         {
             _bootstrapper = bootstrapper;
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
 
             _bootstrapper.OnCatchTimeStarted += OnCatchTimeStarted;
             _bootstrapper.OnCatchTiming += OnCatchTiming;
@@ -42,7 +42,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
             for (int i = 0; i < _items.Count; i++)
             {
-                tasks.Add(ShowItemAsync(_items[i], _projectConfigLoader.ProjectConfig.UIConfig.FishingShowDelayBetweenItems * i));
+                tasks.Add(ShowItemAsync(_items[i], _projectConfig.UIConfig.FishingShowDelayBetweenItems * i));
             }
 
             await UniTask.WhenAll(tasks);
@@ -79,14 +79,14 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             item.Transform.localScale = Vector3.zero;
 
             var fadeTask = item.CanvasGroup
-                .DOFade(1f, _projectConfigLoader.ProjectConfig.UIConfig.FishingFadeDuration)
+                .DOFade(1f, _projectConfig.UIConfig.FishingFadeDuration)
                 .SetDelay(delay)
                 .SetEase(Ease.OutQuad)
                 .AsyncWaitForCompletion()
                 .AsUniTask();
 
             var scaleTask = item.Transform
-                .DOScale(targetScale, _projectConfigLoader.ProjectConfig.UIConfig.FishingFadeDuration)
+                .DOScale(targetScale, _projectConfig.UIConfig.FishingFadeDuration)
                 .SetDelay(delay)
                 .SetEase(Ease.OutBack)
                 .AsyncWaitForCompletion()

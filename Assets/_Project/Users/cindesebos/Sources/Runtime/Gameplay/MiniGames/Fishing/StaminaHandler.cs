@@ -1,17 +1,16 @@
+using Cysharp.Threading.Tasks;
 using Sources.Runtime.Gameplay.Camera;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using Zenject;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using DG.Tweening;
-using Sources.Runtime.Gameplay.MiniGames.Fishing;
-using Sources.Runtime.Gameplay.Inventory;
-using Sources.Runtime.Gameplay.Map;
+using Sources.Runtime.Gameplay.Configs;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
-    public class StaminaHandler : MonoBehaviour
+    public class StaminaHandler : MonoBehaviour, IStartable
     {
         public bool IsStarted => _canHandle == false;
 
@@ -19,28 +18,26 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [SerializeField] private Image _sliderImage;
 
         private CharacterInput _characterInput;
-        private IProjectConfigLoader _projectConfigLoader;
+        private ProjectConfig _projectConfig;
         private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         private CameraRotator _cameraRotator;
-        private InventoryRoot _inventoryRoot;
-        private MapView _mapView;
+        // private InventoryRoot _inventoryRoot;
 
         private Tween _staminaTween;
         [SerializeField] private bool _canHandle = true;
 
         [Inject]
-        private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
-        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator, InventoryRoot inventoryRoot, MapView mapView)
+        private void Construct(CharacterInput characterInput, ProjectConfig projectConfig,
+        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator)
         {
             _characterInput = characterInput;
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
             _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
             _cameraRotator = cameraRotator;
-            _inventoryRoot = inventoryRoot;
-            _mapView = mapView;
+            // _inventoryRoot = inventoryRoot;
         }
-
-        private void Start()
+        
+        void IStartable.Start()
         {
             _canHandle = true;
 
@@ -50,23 +47,25 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         private void Handle(InputAction.CallbackContext context)
         {
-            if (_canHandle == false || _inventoryRoot.IsVisible == true || _mapView.IsVisible == true)
+            // if (_canHandle == false || _inventoryRoot.IsVisible)
+            if (_canHandle == false)
                 return;
 
-            _cameraRotator.Disable();
+            _cameraRotator.SetActive(false);
 
             _stamina.SetActive(true);
             _sliderImage.fillAmount = 0f;
 
             _staminaTween = DOTween.Sequence()
-                .Append(_sliderImage.DOFillAmount(1f, _projectConfigLoader.ProjectConfig.UIConfig.StaminaFillDuration).SetEase(Ease.Linear))
-                .Append(_sliderImage.DOFillAmount(0f, _projectConfigLoader.ProjectConfig.UIConfig.StaminaDrainDuration).SetEase(Ease.Linear))
+                .Append(_sliderImage.DOFillAmount(1f, _projectConfig.UIConfig.StaminaFillDuration).SetEase(Ease.Linear))
+                .Append(_sliderImage.DOFillAmount(0f, _projectConfig.UIConfig.StaminaDrainDuration).SetEase(Ease.Linear))
                 .SetLoops(-1);
         }
 
         private void BoostrapFishingMiniGame(InputAction.CallbackContext context)
         {
-            if (_canHandle == false || _inventoryRoot.IsVisible == true || _mapView.IsVisible == true)
+            // if (_canHandle == false || _inventoryRoot.IsVisible == true)
+            if (_canHandle == false)
                 return;
 
             if (_staminaTween != null && _staminaTween.IsActive())
@@ -77,15 +76,15 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _canHandle = false;
 
             _stamina.SetActive(false);
-
-            _fishingMiniGameBootstrapper.Launch(result);
+            
+            _fishingMiniGameBootstrapper.Launch(result).Forget();
         }
 
         public void AllowHandle()
         {
             _canHandle = true;
 
-            _cameraRotator.Enable();
+            _cameraRotator.SetActive(true);
         }
 
         private void OnDestroy()

@@ -1,11 +1,12 @@
 using R3;
 using TMPro;
 using UnityEngine;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.Wallet
 {
-    public class WalletView : MonoBehaviour
+    public class WalletView : MonoBehaviour, IInitializable
     {
         [SerializeField] private TextMeshProUGUI _moneyText;
         [SerializeField] private GameObject _winPanel;
@@ -20,7 +21,7 @@ namespace Sources.Runtime.Gameplay.Wallet
             _root = root;
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
             _moneyText.text = _root.Money.Value.ToString();
 

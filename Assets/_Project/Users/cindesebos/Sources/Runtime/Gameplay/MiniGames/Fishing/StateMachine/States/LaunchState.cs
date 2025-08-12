@@ -56,10 +56,10 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 
         private void CreateMiniGames()
         {
-            _movablePointerFishingMiniGame = new MovablePointerFishingMiniGame(_dependencies.PointerSlider, _dependencies.CharacterInput,
-            _dependencies.ProjectConfigLoader);
+            _movablePointerFishingMiniGame = new MovablePointerFishingMiniGame(_dependencies.PointerSlider,
+            _dependencies.ProjectConfig);
 
-            _movableFishesMiniGame = new MovableFishesMiniGame(_dependencies.FishSlots, _dependencies.EdgePoints, _dependencies.ProjectConfigLoader,
+            _movableFishesMiniGame = new MovableFishesMiniGame(_dependencies.FishSlots, _dependencies.EdgePoints, _dependencies.ProjectConfig,
             _dependencies.PointerSlider, _dependencies.Camera);
         }
 

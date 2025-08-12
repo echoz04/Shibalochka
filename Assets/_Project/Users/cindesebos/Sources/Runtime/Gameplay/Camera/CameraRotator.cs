@@ -1,8 +1,6 @@
 using UnityEngine;
-using Zenject;
-using UnityEngine.InputSystem;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using Unity.Cinemachine;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Camera
 {
@@ -20,21 +18,22 @@ namespace Sources.Runtime.Gameplay.Camera
 
         private void Start()
         {
-            Enable();
+            SetActive(true);
         }
 
-        public void Enable()
+        public void SetActive(bool state)
         {
-            _cursorView.Hide();
+            _cinemachineInputAxisController.enabled = state;
 
-            _cinemachineInputAxisController.enabled = true;
-        }
-
-        public void Disable()
-        {
-            _cursorView.Show();
-
-            _cinemachineInputAxisController.enabled = false;
+            switch (state)
+            {
+                case true:
+                    _cursorView.Hide();
+                    break;
+                case false:
+                    _cursorView.Show();
+                    break;
+            }
         }
     }
 }
