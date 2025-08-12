@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showHubOnStartup: 0
   debugGgTrackedTasks: 1
-  showGaskellgamesLogs: 1
+  showGaskellgamesLogs: 0
   infoLogs: 0
   warningLogs: 1
   errorLogs: 1

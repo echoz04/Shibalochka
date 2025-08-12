@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8692039187484987383}
   - component: {fileID: 8059134719232502171}
   - component: {fileID: 186945519582666918}
-  - component: {fileID: 8572484534902859831}
+  - component: {fileID: 8413794149848848160}
   m_Layer: 0
   m_Name: InventoryCellPrefab
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8572484534902859831
+--- !u!114 &8413794149848848160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,9 +85,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6143649375096571412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d249f289b5c34d259cab6522a41d5d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f16c5c4fdbf4721bfdf65cd4791a350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsOccupied>k__BackingField: 0
-  <RectTransform>k__BackingField: {fileID: 8692039187484987383}
   _image: {fileID: 186945519582666918}
+  _lockSprite: {fileID: 95664230, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}
+  _unlockSprite: {fileID: 289783595, guid: 91c35da272f52214fa7396f7ed77e811, type: 3}

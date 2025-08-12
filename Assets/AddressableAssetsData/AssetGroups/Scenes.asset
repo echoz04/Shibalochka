@@ -14,27 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Scenes
   m_GUID: c73062913bf2b284db7fd8eed36392b6
-  m_SerializeEntries:
-  - m_GUID: 2ee847dbb1e9dd643aa8d1cc160560d5
-    m_Address: scene_ui
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 99c9720ab356a0642a771bea13969a05
-    m_Address: scene_gameplay
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d3e89b27ffabc4b419fc1fc762d397b7
-    m_Address: scene_island
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ed945bcb2dad3d647bd89b122ba058c2
-    m_Address: scene_menu
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 99381e9d58c39b5489e7fcbdaf4449db, type: 2}
   m_SchemaSet:
