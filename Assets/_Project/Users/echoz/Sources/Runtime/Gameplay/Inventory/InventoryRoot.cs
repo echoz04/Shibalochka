@@ -7,7 +7,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 {
     public class InventoryRoot
     {
-        public event Action<ItemViewRoot> OnItemAdded;
+        public event Action<ItemViewRoot, InventoryCell> OnItemAdded;
         public event Action<ItemViewRoot> OnItemRemoved;
 
         private const int _width = 8;
@@ -38,22 +38,56 @@ namespace Sources.Runtime.Gameplay.Inventory
             }
         }
         
-        public void AddItem(ItemViewRoot itemViewRoot)
+        public void AddItem(ItemViewRoot itemPrefab)
         {
-            if(itemViewRoot == null)
+            if(itemPrefab == null)
                 return;
+
+            var firstFreeCell = FindFirstFreeCell();
+            var itemInstance = GameObject.Instantiate(itemPrefab);
             
-            OnItemAdded?.Invoke(itemViewRoot);
-            _storedItems.Add(itemViewRoot);
+            firstFreeCell.SetLockState(itemInstance);
+            OnItemAdded?.Invoke(itemInstance, firstFreeCell);
+            _storedItems.Add(itemInstance);
         }
 
-        public void RemoveItem(ItemViewRoot itemViewRoot)
+        public void RemoveItem(InventoryCell targetCell, ItemViewRoot itemViewRoot)
         {
-            if(itemViewRoot == null || _storedItems.Contains(itemViewRoot) == false)
+            var item = FindStoredItem(itemViewRoot);
+            
+            if(itemViewRoot == null || item == null)
                 return;
             
-            OnItemRemoved?.Invoke(itemViewRoot);
-            _storedItems.Remove(itemViewRoot);
+            targetCell.SetUnlockState();
+            OnItemRemoved?.Invoke(item);
+            _storedItems.Remove(item);
+        }
+
+        private InventoryCell FindFirstFreeCell()
+        {
+            for (int y = 0; y < _height; y++)
+            {
+                for (int x = 0; x < _width; x++)
+                {
+                    var targetCell = _cells[x, y];
+                    
+                    if (targetCell.IsFree == true)
+                        return targetCell;
+                }
+            }
+
+            return null;
+        }
+
+        private ItemViewRoot FindStoredItem(ItemViewRoot itemViewRoot)
+        {
+            for (int i = 0; i < _storedItems.Count; i++)
+            {
+                if(_storedItems[i] == itemViewRoot)
+                    return _storedItems[i];
+            }
+            
+            return null;
         }
     }
 }

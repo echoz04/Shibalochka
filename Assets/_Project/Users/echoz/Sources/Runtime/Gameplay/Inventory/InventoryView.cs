@@ -23,9 +23,10 @@ namespace Sources.Runtime.Gameplay.Inventory
             _root.OnItemRemoved -= RemoveItemFromContainer;
         }
 
-        private void AddItemToContainer(ItemViewRoot itemViewRoot)
+        private void AddItemToContainer(ItemViewRoot itemViewRoot, InventoryCell cell)
         {
-            itemViewRoot.transform.SetParent(_itemsContainer);
+            itemViewRoot.transform.SetParent(cell.transform, false);
+            itemViewRoot.transform.localPosition = Vector3.zero;
         }
 
         private void RemoveItemFromContainer(ItemViewRoot itemViewRoot)
