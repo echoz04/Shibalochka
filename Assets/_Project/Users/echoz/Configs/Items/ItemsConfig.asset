@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b381273afbd4604a56bad71b5cd3ba3, type: 3}
-  m_Name: FishConfig
+  m_Script: {fileID: 11500000, guid: 35842deac59a438a80491d76c6de45ab, type: 3}
+  m_Name: ItemsConfig
   m_EditorClassIdentifier: 
-  <Title>k__BackingField: Fas
+  <AllFishesConfig>k__BackingField: {fileID: 11400000, guid: 60e69ac03137e81b3b218e07ce60e535, type: 2}

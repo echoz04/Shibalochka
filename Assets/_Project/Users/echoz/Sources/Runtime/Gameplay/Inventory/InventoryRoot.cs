@@ -44,11 +44,10 @@ namespace Sources.Runtime.Gameplay.Inventory
                 return;
 
             var firstFreeCell = FindFirstFreeCell();
-            var itemInstance = GameObject.Instantiate(itemPrefab);
             
-            firstFreeCell.SetLockState(itemInstance);
-            OnItemAdded?.Invoke(itemInstance, firstFreeCell);
-            _storedItems.Add(itemInstance);
+            firstFreeCell.SetLockState(itemPrefab);
+            OnItemAdded?.Invoke(itemPrefab, firstFreeCell);
+            _storedItems.Add(itemPrefab);
         }
 
         public void RemoveItem(InventoryCell targetCell, ItemViewRoot itemViewRoot)
