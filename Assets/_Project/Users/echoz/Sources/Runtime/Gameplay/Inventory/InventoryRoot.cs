@@ -7,6 +7,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 {
     public class InventoryRoot
     {
+        public event Action<InventoryCell[,]> OnCellsCreated;
         public event Action<ItemViewRoot, InventoryCell> OnItemAdded;
         public event Action<ItemViewRoot> OnItemRemoved;
 
@@ -27,6 +28,7 @@ namespace Sources.Runtime.Gameplay.Inventory
                 for (int x = 0; x < _width; x++)
                 {
                     var instance = GameObject.Instantiate(cellPrefab, cellsContainer);
+                    instance.ToggleImage(false);
                     
                     if(y < _freeCellsHeight)
                         instance.SetUnlockState();
@@ -36,6 +38,8 @@ namespace Sources.Runtime.Gameplay.Inventory
                     _cells[x, y] = instance;
                 }
             }
+            
+            OnCellsCreated?.Invoke(_cells);
         }
         
         public void AddItem(ItemViewRoot itemPrefab)

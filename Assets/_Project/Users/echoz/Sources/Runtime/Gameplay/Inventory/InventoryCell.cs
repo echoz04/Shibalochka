@@ -30,5 +30,8 @@ namespace Sources.Runtime.Gameplay.Inventory
             IsFree = true;
             _image.sprite = _unlockSprite;
         }
+
+        public void ToggleImage(bool state) =>
+            _image.enabled = state;
     }
 }
