@@ -1,4 +1,5 @@
 using Sources.Runtime.Bootstrap;
+using Sources.Runtime.Gameplay.Camera;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
@@ -13,15 +14,6 @@ namespace Sources
         protected override void Configure(IContainerBuilder builder)
         {
             builder.Register<BootstrapService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
-            RegisterScenes(builder);
-        }
-
-        private void RegisterScenes(IContainerBuilder builder)
-        {
-            foreach (var scene in _scenesToLoad)
-            {
-                builder.RegisterInstance(scene).As<AssetReference>().Keyed(scene.editorAsset.name);
-            }
         }
     }
 }

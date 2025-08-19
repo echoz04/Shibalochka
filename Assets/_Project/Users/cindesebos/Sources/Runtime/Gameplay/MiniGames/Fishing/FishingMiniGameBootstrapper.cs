@@ -14,7 +14,7 @@ using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
-    public class FishingMiniGameBootstrapper : MonoBehaviour, IInitializable, ITickable
+    public class FishingMiniGameBootstrapper : MonoBehaviour, IInitializable
     {
         public event Action OnCatchTimeStarted;
         public event Action OnCatchTiming;
@@ -22,20 +22,16 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         [SerializeField] private FishingMiniGameDependencies _dependencies;
 
-        [SerializeField] private StaminaHandler _staminaHandler;
-
         private bool _isAlreadyLaunched;
         private bool _isSubscribed;
 
         [Inject]
         private void Construct(CharacterInput characterInput, ProjectConfig projectConfig, CameraRotator cameraRotator, IMiniGameRewardService rewardService, InventoryRoot inventoryRoot)
         {
-            Debug.Log("QWEQWE");
             _dependencies.CharacterInput = characterInput;
             _dependencies.ProjectConfig = projectConfig;
             _dependencies.CameraRotator = cameraRotator;
             _dependencies.RewardService = rewardService;
-            
             _dependencies.InventoryRoot = inventoryRoot;
         }
 
@@ -65,7 +61,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
             OnCatchTiming?.Invoke();
 
-            _dependencies.CharacterInput.MiniGames.CatchFish.performed += CatchFish;
+            _dependencies.CharacterInput.Game.CatchFish.performed += CatchFish;
             _isSubscribed = true;
 
             await UniTask.WaitForSeconds(uiConfig.TimeToCatchFish);
@@ -73,7 +69,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             if (_isAlreadyLaunched == false)
             {
                 OnCatchTimeEnded?.Invoke();
-                _staminaHandler.AllowHandle();
+                // _staminaHandler.AllowHandle();
             }
 
             DisposeSubscribe();
@@ -95,16 +91,16 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         private void DisposeSubscribe()
         {
-            if (_isSubscribed == true)
+            if (_isSubscribed)
             {
-                _dependencies.CharacterInput.MiniGames.CatchFish.performed -= CatchFish;
+                _dependencies.CharacterInput.Game.CatchFish.performed -= CatchFish;
                 _isSubscribed = false;
             }
         }
 
         public void OnEnded()
         {
-            _staminaHandler.AllowHandle();
+            // _staminaHandler.AllowHandle();
             _dependencies.View.Hide();
 
             _dependencies.StateMachine.EndState.OnEnded -= OnEnded;
@@ -114,11 +110,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         {
             _dependencies.StateMachine.EndState.OnEnded -= OnEnded;
         }
-
-        public void Tick()
-        {
-            _dependencies.StateMachine.Tick();
-        }
+       
     }
 
     [Serializable]

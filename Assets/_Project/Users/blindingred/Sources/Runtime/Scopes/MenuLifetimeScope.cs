@@ -7,7 +7,7 @@ namespace Sources
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<MenuUI>().AsSelf().AsImplementedInterfaces();
+           
         }
     }
 }

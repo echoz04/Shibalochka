@@ -18,12 +18,12 @@ namespace Sources
         protected override void Configure(IContainerBuilder builder)
         {
             BindGameplayEntryPoint(builder);
-            BindFishingMiniGameBootstrapper(builder);
+            // BindFishingMiniGameBootstrapper(builder);
             BindCameraRotator(builder);
-            BindInventory(builder);
-            BindStaminaHandler(builder);
-            BindItemBuilder(builder);
-            BindWallet(builder);
+            // BindInventory(builder);
+            // BindStaminaHandler(builder);
+            // BindItemBuilder(builder);
+            // BindWallet(builder);
         }
 
         private void BindGameplayEntryPoint(IContainerBuilder builder)
@@ -33,13 +33,13 @@ namespace Sources
 
         private void BindItemBuilder(IContainerBuilder builder)
         {
-           builder.Register<ItemBuilder>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter("prefab", _itemRootPrefab);
+           // builder.Register<ItemBuilder>(Lifetime.Singleton).AsImplementedInterfaces().WithParameter("prefab", _itemRootPrefab);
         }
 
         private void BindWallet(IContainerBuilder builder)
         {
-            builder.Register<WalletRoot>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.RegisterComponentInHierarchy<WalletView>().AsImplementedInterfaces().AsSelf();
+            // builder.Register<WalletRoot>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            // builder.RegisterComponentInHierarchy<WalletView>().AsImplementedInterfaces().AsSelf();
         }
 
         private void BindStaminaHandler(IContainerBuilder builder)

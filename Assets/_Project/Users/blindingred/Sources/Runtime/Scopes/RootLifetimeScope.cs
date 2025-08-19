@@ -1,9 +1,11 @@
-using blindingred;
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Services.AssetLoader;
+using Sources.SceneManagement;
+using Sources.Signals;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 
@@ -11,22 +13,39 @@ namespace Sources
 {
     public class RootLifetimeScope : LifetimeScope
     {
-        [SerializeField] private ProjectConfig projectConfig;
+        [SerializeField] private ProjectConfig _projectConfig;
+        [SerializeField] private ScenesData _scenesData;
         
         protected override void Configure(IContainerBuilder builder)
         {
             BindSceneLoader(builder);
-            BindAssetLoader(builder);
             BindInput(builder);
-            BindCursorView(builder);
+            
             BindDiscordOverlayDisplayer(builder);
             BindMiniGameRewardService(builder);
+            
             RegisterProjectConfig(builder);
+            RegisterScenes(builder);
+            RegisterSignalBus(builder);
+            RegisterCursorHandler(builder);
+        }
+
+        private void RegisterSignalBus(IContainerBuilder builder)
+        {
+            builder.Register<ISignalBus, SignalBus>(Lifetime.Singleton);
+        }
+
+        private void RegisterScenes(IContainerBuilder builder)
+        {
+            foreach (var scene in _scenesData.Scenes)
+            {
+                builder.RegisterInstance(scene).As<AssetReference>().Keyed(scene.editorAsset.name);
+            }
         }
 
         private void RegisterProjectConfig(IContainerBuilder builder)
         {
-            builder.RegisterInstance(projectConfig);
+            builder.RegisterInstance(_projectConfig);
         }
 
         private void BindMiniGameRewardService(IContainerBuilder builder)
@@ -53,10 +72,11 @@ namespace Sources
         {
             builder.Register<AssetLoader>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
-
-        private void BindCursorView(IContainerBuilder builder)
+        
+        private void RegisterCursorHandler(IContainerBuilder builder)
         {
-            builder.Register<CursorView>(Lifetime.Singleton).AsSelf();
+            Debug.Log($"Registering cursor view");
+            builder.Register<CursorHandler>(Lifetime.Singleton).AsImplementedInterfaces();
         }
     }
 }

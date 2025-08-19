@@ -57,7 +57,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         void IInitializable.Initialize()
         {
-            _characterInput.UI.ToggleInventoryVisibility.performed += ToggleVisibility;
+            _characterInput.Game.OpenInventory.performed += ToggleVisibility;
 
             BuildGrid();
 
@@ -66,7 +66,7 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         private void OnDestroy()
         {
-            _characterInput.UI.ToggleInventoryVisibility.performed -= ToggleVisibility;
+            _characterInput.Game.OpenInventory.performed -= ToggleVisibility;
         }
 
         private void BuildGrid()
@@ -106,7 +106,7 @@ namespace Sources.Runtime.Gameplay.Inventory
             // if (_staminaHandler.IsStarted)
             //     return;
             
-            _cameraRotator.SetActive(!isVisible);
+            _cameraRotator.SetState(!isVisible);
             
             if (isVisible)
             {

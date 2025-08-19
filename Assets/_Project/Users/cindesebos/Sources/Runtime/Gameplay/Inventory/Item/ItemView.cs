@@ -14,7 +14,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         [SerializeField] private Image _view;
         [SerializeField] private RectTransform _parent;
         [SerializeField] private Sprite _arrowSprite;
-        [SerializeField] private Vector2 _arrrowSize = new Vector2(62f, 62f);
+        [SerializeField] private Vector2 _arrowSize = new(62f, 62f);
         [SerializeField] private float _offSet;
 
         private GameObject[] _currentArrows = new GameObject[4];
@@ -71,8 +71,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnDragged()
         {
-            Debug.Log($"04KO dragged");
-                transform.position = Mouse.current.position.ReadValue();
+            transform.position = Mouse.current.position.ReadValue();
         }
 
         public void OnDragEnded()
@@ -101,7 +100,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
                 Image instance = arrow.GetComponent<Image>();
                 instance.sprite = _arrowSprite;
-                instance.rectTransform.sizeDelta = _arrrowSize;
+                instance.rectTransform.sizeDelta = _arrowSize;
 
                 float angle = i switch
                 {

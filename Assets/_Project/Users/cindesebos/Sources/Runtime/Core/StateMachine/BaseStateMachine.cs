@@ -1,8 +1,8 @@
-using UnityEngine;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Core.StateMachine
 {
-    public abstract class BaseStateMachine
+    public abstract class BaseStateMachine: ITickable
     {
         private BaseState _currentState;
 

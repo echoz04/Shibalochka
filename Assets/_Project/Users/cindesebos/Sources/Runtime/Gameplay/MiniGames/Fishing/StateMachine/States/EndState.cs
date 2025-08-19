@@ -36,6 +36,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 
         public override void Exit()
         {
+            
         }
 
         public void SetGameplayResult(bool result)

@@ -88,20 +88,11 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     ""name"": ""CharacterInput"",
     ""maps"": [
         {
-            ""name"": ""MiniGames"",
+            ""name"": ""Game"",
             ""id"": ""505a0d2e-1f22-4b49-9db0-008383aa560f"",
             ""actions"": [
                 {
-                    ""name"": ""UseMovingPointer"",
-                    ""type"": ""Button"",
-                    ""id"": ""96e7e602-a261-49e8-9aa1-6cbcfccce711"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ShowStamina"",
+                    ""name"": ""StartPowerBar"",
                     ""type"": ""Button"",
                     ""id"": ""9bb38e9f-b57a-4b5a-a537-81e5ace522f9"",
                     ""expectedControlType"": """",
@@ -110,9 +101,36 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""OpenInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d38c495-aac8-4819-b35e-ea138c8f69fc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""CatchFish"",
                     ""type"": ""Button"",
-                    ""id"": ""1370c978-c915-4ca4-9196-fad2897adf9c"",
+                    ""id"": ""dd375e22-734f-4d90-8cbb-d72ef8c8cd9f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0bebc22-1752-409f-9683-9f5b3ae60e51"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""987b6f48-ecb1-4fbe-a998-e9ac0faf0eb7"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -122,34 +140,56 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""5c1b383f-0887-4093-b814-7d5520adeff6"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseMovingPointer"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""d76a91a9-1695-4dc1-9794-5f8288f75ff0"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ShowStamina"",
+                    ""action"": ""StartPowerBar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ca415b5a-b922-456b-8cdd-818138121805"",
+                    ""id"": ""41c50fd0-d94f-4511-b1fc-c87beb3b7959"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3856a3f3-a4ca-4a04-9910-679617e2b403"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""CatchFish"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0fbc6ff-3b08-461c-a52b-a0f08153fbe0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d05389b-3423-4d3a-b4e1-17d988a69291"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchCursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -224,13 +264,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""UI"",
-            ""id"": ""469c89d5-7cb0-4ac0-82fa-a2bc9f131fb9"",
+            ""name"": ""Inventory"",
+            ""id"": ""3a375571-580f-4c6d-b57c-62dadaa8e41f"",
             ""actions"": [
                 {
-                    ""name"": ""ToggleInventoryVisibility"",
+                    ""name"": ""CloseInventory"",
                     ""type"": ""Button"",
-                    ""id"": ""8d8a1fad-0384-4095-898e-127174f7a273"",
+                    ""id"": ""ba209d5c-8650-4b53-ae04-47ccc3886fcb"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -240,12 +280,40 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""e48c66ab-d1ea-40b3-9996-d365a250460f"",
+                    ""id"": ""335e7f8d-d8fa-4758-8c24-062aecdd7e10"",
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ToggleInventoryVisibility"",
+                    ""action"": ""CloseInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Fishing"",
+            ""id"": ""514bc25c-0221-4daf-ace7-a85a8d59cd45"",
+            ""actions"": [
+                {
+                    ""name"": ""UseMovingPointer"",
+                    ""type"": ""Button"",
+                    ""id"": ""63dea696-e7e9-4bdc-9f0a-a9d1fbe9008f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""57cf5cfb-4c75-4e53-8dfc-47dffe84d392"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseMovingPointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -254,26 +322,32 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // MiniGames
-        m_MiniGames = asset.FindActionMap("MiniGames", throwIfNotFound: true);
-        m_MiniGames_UseMovingPointer = m_MiniGames.FindAction("UseMovingPointer", throwIfNotFound: true);
-        m_MiniGames_ShowStamina = m_MiniGames.FindAction("ShowStamina", throwIfNotFound: true);
-        m_MiniGames_CatchFish = m_MiniGames.FindAction("CatchFish", throwIfNotFound: true);
+        // Game
+        m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
+        m_Game_StartPowerBar = m_Game.FindAction("StartPowerBar", throwIfNotFound: true);
+        m_Game_OpenInventory = m_Game.FindAction("OpenInventory", throwIfNotFound: true);
+        m_Game_CatchFish = m_Game.FindAction("CatchFish", throwIfNotFound: true);
+        m_Game_OpenMenu = m_Game.FindAction("OpenMenu", throwIfNotFound: true);
+        m_Game_SwitchCursor = m_Game.FindAction("SwitchCursor", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_ToggleCursor = m_Camera.FindAction("ToggleCursor", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
         m_Camera_Rotate = m_Camera.FindAction("Rotate", throwIfNotFound: true);
-        // UI
-        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_ToggleInventoryVisibility = m_UI.FindAction("ToggleInventoryVisibility", throwIfNotFound: true);
+        // Inventory
+        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
+        m_Inventory_CloseInventory = m_Inventory.FindAction("CloseInventory", throwIfNotFound: true);
+        // Fishing
+        m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
+        m_Fishing_UseMovingPointer = m_Fishing.FindAction("UseMovingPointer", throwIfNotFound: true);
     }
 
     ~@CharacterInput()
     {
-        UnityEngine.Debug.Assert(!m_MiniGames.enabled, "This will cause a leak and performance issues, CharacterInput.MiniGames.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Game.enabled, "This will cause a leak and performance issues, CharacterInput.Game.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, CharacterInput.Camera.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, CharacterInput.UI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, CharacterInput.Inventory.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Fishing.enabled, "This will cause a leak and performance issues, CharacterInput.Fishing.Disable() has not been called.");
     }
 
     /// <summary>
@@ -346,39 +420,49 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // MiniGames
-    private readonly InputActionMap m_MiniGames;
-    private List<IMiniGamesActions> m_MiniGamesActionsCallbackInterfaces = new List<IMiniGamesActions>();
-    private readonly InputAction m_MiniGames_UseMovingPointer;
-    private readonly InputAction m_MiniGames_ShowStamina;
-    private readonly InputAction m_MiniGames_CatchFish;
+    // Game
+    private readonly InputActionMap m_Game;
+    private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
+    private readonly InputAction m_Game_StartPowerBar;
+    private readonly InputAction m_Game_OpenInventory;
+    private readonly InputAction m_Game_CatchFish;
+    private readonly InputAction m_Game_OpenMenu;
+    private readonly InputAction m_Game_SwitchCursor;
     /// <summary>
-    /// Provides access to input actions defined in input action map "MiniGames".
+    /// Provides access to input actions defined in input action map "Game".
     /// </summary>
-    public struct MiniGamesActions
+    public struct GameActions
     {
         private @CharacterInput m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public MiniGamesActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
+        public GameActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "MiniGames/UseMovingPointer".
+        /// Provides access to the underlying input action "Game/StartPowerBar".
         /// </summary>
-        public InputAction @UseMovingPointer => m_Wrapper.m_MiniGames_UseMovingPointer;
+        public InputAction @StartPowerBar => m_Wrapper.m_Game_StartPowerBar;
         /// <summary>
-        /// Provides access to the underlying input action "MiniGames/ShowStamina".
+        /// Provides access to the underlying input action "Game/OpenInventory".
         /// </summary>
-        public InputAction @ShowStamina => m_Wrapper.m_MiniGames_ShowStamina;
+        public InputAction @OpenInventory => m_Wrapper.m_Game_OpenInventory;
         /// <summary>
-        /// Provides access to the underlying input action "MiniGames/CatchFish".
+        /// Provides access to the underlying input action "Game/CatchFish".
         /// </summary>
-        public InputAction @CatchFish => m_Wrapper.m_MiniGames_CatchFish;
+        public InputAction @CatchFish => m_Wrapper.m_Game_CatchFish;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/OpenMenu".
+        /// </summary>
+        public InputAction @OpenMenu => m_Wrapper.m_Game_OpenMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/SwitchCursor".
+        /// </summary>
+        public InputAction @SwitchCursor => m_Wrapper.m_Game_SwitchCursor;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_MiniGames; }
+        public InputActionMap Get() { return m_Wrapper.m_Game; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -386,9 +470,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="MiniGamesActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="GameActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(MiniGamesActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -396,20 +480,26 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="MiniGamesActions" />
-        public void AddCallbacks(IMiniGamesActions instance)
+        /// <seealso cref="GameActions" />
+        public void AddCallbacks(IGameActions instance)
         {
-            if (instance == null || m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Add(instance);
-            @UseMovingPointer.started += instance.OnUseMovingPointer;
-            @UseMovingPointer.performed += instance.OnUseMovingPointer;
-            @UseMovingPointer.canceled += instance.OnUseMovingPointer;
-            @ShowStamina.started += instance.OnShowStamina;
-            @ShowStamina.performed += instance.OnShowStamina;
-            @ShowStamina.canceled += instance.OnShowStamina;
+            if (instance == null || m_Wrapper.m_GameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameActionsCallbackInterfaces.Add(instance);
+            @StartPowerBar.started += instance.OnStartPowerBar;
+            @StartPowerBar.performed += instance.OnStartPowerBar;
+            @StartPowerBar.canceled += instance.OnStartPowerBar;
+            @OpenInventory.started += instance.OnOpenInventory;
+            @OpenInventory.performed += instance.OnOpenInventory;
+            @OpenInventory.canceled += instance.OnOpenInventory;
             @CatchFish.started += instance.OnCatchFish;
             @CatchFish.performed += instance.OnCatchFish;
             @CatchFish.canceled += instance.OnCatchFish;
+            @OpenMenu.started += instance.OnOpenMenu;
+            @OpenMenu.performed += instance.OnOpenMenu;
+            @OpenMenu.canceled += instance.OnOpenMenu;
+            @SwitchCursor.started += instance.OnSwitchCursor;
+            @SwitchCursor.performed += instance.OnSwitchCursor;
+            @SwitchCursor.canceled += instance.OnSwitchCursor;
         }
 
         /// <summary>
@@ -418,27 +508,33 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="MiniGamesActions" />
-        private void UnregisterCallbacks(IMiniGamesActions instance)
+        /// <seealso cref="GameActions" />
+        private void UnregisterCallbacks(IGameActions instance)
         {
-            @UseMovingPointer.started -= instance.OnUseMovingPointer;
-            @UseMovingPointer.performed -= instance.OnUseMovingPointer;
-            @UseMovingPointer.canceled -= instance.OnUseMovingPointer;
-            @ShowStamina.started -= instance.OnShowStamina;
-            @ShowStamina.performed -= instance.OnShowStamina;
-            @ShowStamina.canceled -= instance.OnShowStamina;
+            @StartPowerBar.started -= instance.OnStartPowerBar;
+            @StartPowerBar.performed -= instance.OnStartPowerBar;
+            @StartPowerBar.canceled -= instance.OnStartPowerBar;
+            @OpenInventory.started -= instance.OnOpenInventory;
+            @OpenInventory.performed -= instance.OnOpenInventory;
+            @OpenInventory.canceled -= instance.OnOpenInventory;
             @CatchFish.started -= instance.OnCatchFish;
             @CatchFish.performed -= instance.OnCatchFish;
             @CatchFish.canceled -= instance.OnCatchFish;
+            @OpenMenu.started -= instance.OnOpenMenu;
+            @OpenMenu.performed -= instance.OnOpenMenu;
+            @OpenMenu.canceled -= instance.OnOpenMenu;
+            @SwitchCursor.started -= instance.OnSwitchCursor;
+            @SwitchCursor.performed -= instance.OnSwitchCursor;
+            @SwitchCursor.canceled -= instance.OnSwitchCursor;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MiniGamesActions.UnregisterCallbacks(IMiniGamesActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="GameActions.UnregisterCallbacks(IGameActions)" />.
         /// </summary>
-        /// <seealso cref="MiniGamesActions.UnregisterCallbacks(IMiniGamesActions)" />
-        public void RemoveCallbacks(IMiniGamesActions instance)
+        /// <seealso cref="GameActions.UnregisterCallbacks(IGameActions)" />
+        public void RemoveCallbacks(IGameActions instance)
         {
-            if (m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GameActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -448,21 +544,21 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="MiniGamesActions.AddCallbacks(IMiniGamesActions)" />
-        /// <seealso cref="MiniGamesActions.RemoveCallbacks(IMiniGamesActions)" />
-        /// <seealso cref="MiniGamesActions.UnregisterCallbacks(IMiniGamesActions)" />
-        public void SetCallbacks(IMiniGamesActions instance)
+        /// <seealso cref="GameActions.AddCallbacks(IGameActions)" />
+        /// <seealso cref="GameActions.RemoveCallbacks(IGameActions)" />
+        /// <seealso cref="GameActions.UnregisterCallbacks(IGameActions)" />
+        public void SetCallbacks(IGameActions instance)
         {
-            foreach (var item in m_Wrapper.m_MiniGamesActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GameActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_MiniGamesActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GameActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="MiniGamesActions" /> instance referencing this action map.
+    /// Provides a new <see cref="GameActions" /> instance referencing this action map.
     /// </summary>
-    public MiniGamesActions @MiniGames => new MiniGamesActions(this);
+    public GameActions @Game => new GameActions(this);
 
     // Camera
     private readonly InputActionMap m_Camera;
@@ -582,29 +678,29 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     /// </summary>
     public CameraActions @Camera => new CameraActions(this);
 
-    // UI
-    private readonly InputActionMap m_UI;
-    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_ToggleInventoryVisibility;
+    // Inventory
+    private readonly InputActionMap m_Inventory;
+    private List<IInventoryActions> m_InventoryActionsCallbackInterfaces = new List<IInventoryActions>();
+    private readonly InputAction m_Inventory_CloseInventory;
     /// <summary>
-    /// Provides access to input actions defined in input action map "UI".
+    /// Provides access to input actions defined in input action map "Inventory".
     /// </summary>
-    public struct UIActions
+    public struct InventoryActions
     {
         private @CharacterInput m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public UIActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
+        public InventoryActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "UI/ToggleInventoryVisibility".
+        /// Provides access to the underlying input action "Inventory/CloseInventory".
         /// </summary>
-        public InputAction @ToggleInventoryVisibility => m_Wrapper.m_UI_ToggleInventoryVisibility;
+        public InputAction @CloseInventory => m_Wrapper.m_Inventory_CloseInventory;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -612,9 +708,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="UIActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="InventoryActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -622,14 +718,14 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="UIActions" />
-        public void AddCallbacks(IUIActions instance)
+        /// <seealso cref="InventoryActions" />
+        public void AddCallbacks(IInventoryActions instance)
         {
-            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @ToggleInventoryVisibility.started += instance.OnToggleInventoryVisibility;
-            @ToggleInventoryVisibility.performed += instance.OnToggleInventoryVisibility;
-            @ToggleInventoryVisibility.canceled += instance.OnToggleInventoryVisibility;
+            if (instance == null || m_Wrapper.m_InventoryActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InventoryActionsCallbackInterfaces.Add(instance);
+            @CloseInventory.started += instance.OnCloseInventory;
+            @CloseInventory.performed += instance.OnCloseInventory;
+            @CloseInventory.canceled += instance.OnCloseInventory;
         }
 
         /// <summary>
@@ -638,21 +734,21 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="UIActions" />
-        private void UnregisterCallbacks(IUIActions instance)
+        /// <seealso cref="InventoryActions" />
+        private void UnregisterCallbacks(IInventoryActions instance)
         {
-            @ToggleInventoryVisibility.started -= instance.OnToggleInventoryVisibility;
-            @ToggleInventoryVisibility.performed -= instance.OnToggleInventoryVisibility;
-            @ToggleInventoryVisibility.canceled -= instance.OnToggleInventoryVisibility;
+            @CloseInventory.started -= instance.OnCloseInventory;
+            @CloseInventory.performed -= instance.OnCloseInventory;
+            @CloseInventory.canceled -= instance.OnCloseInventory;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIActions.UnregisterCallbacks(IUIActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="InventoryActions.UnregisterCallbacks(IInventoryActions)" />.
         /// </summary>
-        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
-        public void RemoveCallbacks(IUIActions instance)
+        /// <seealso cref="InventoryActions.UnregisterCallbacks(IInventoryActions)" />
+        public void RemoveCallbacks(IInventoryActions instance)
         {
-            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_InventoryActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -662,42 +758,138 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
-        /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
-        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
-        public void SetCallbacks(IUIActions instance)
+        /// <seealso cref="InventoryActions.AddCallbacks(IInventoryActions)" />
+        /// <seealso cref="InventoryActions.RemoveCallbacks(IInventoryActions)" />
+        /// <seealso cref="InventoryActions.UnregisterCallbacks(IInventoryActions)" />
+        public void SetCallbacks(IInventoryActions instance)
         {
-            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_InventoryActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_InventoryActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="UIActions" /> instance referencing this action map.
+    /// Provides a new <see cref="InventoryActions" /> instance referencing this action map.
     /// </summary>
-    public UIActions @UI => new UIActions(this);
+    public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Fishing
+    private readonly InputActionMap m_Fishing;
+    private List<IFishingActions> m_FishingActionsCallbackInterfaces = new List<IFishingActions>();
+    private readonly InputAction m_Fishing_UseMovingPointer;
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MiniGames" which allows adding and removing callbacks.
+    /// Provides access to input actions defined in input action map "Fishing".
     /// </summary>
-    /// <seealso cref="MiniGamesActions.AddCallbacks(IMiniGamesActions)" />
-    /// <seealso cref="MiniGamesActions.RemoveCallbacks(IMiniGamesActions)" />
-    public interface IMiniGamesActions
+    public struct FishingActions
+    {
+        private @CharacterInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public FishingActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Fishing/UseMovingPointer".
+        /// </summary>
+        public InputAction @UseMovingPointer => m_Wrapper.m_Fishing_UseMovingPointer;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Fishing; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="FishingActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(FishingActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="FishingActions" />
+        public void AddCallbacks(IFishingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_FishingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_FishingActionsCallbackInterfaces.Add(instance);
+            @UseMovingPointer.started += instance.OnUseMovingPointer;
+            @UseMovingPointer.performed += instance.OnUseMovingPointer;
+            @UseMovingPointer.canceled += instance.OnUseMovingPointer;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="FishingActions" />
+        private void UnregisterCallbacks(IFishingActions instance)
+        {
+            @UseMovingPointer.started -= instance.OnUseMovingPointer;
+            @UseMovingPointer.performed -= instance.OnUseMovingPointer;
+            @UseMovingPointer.canceled -= instance.OnUseMovingPointer;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="FishingActions.UnregisterCallbacks(IFishingActions)" />.
+        /// </summary>
+        /// <seealso cref="FishingActions.UnregisterCallbacks(IFishingActions)" />
+        public void RemoveCallbacks(IFishingActions instance)
+        {
+            if (m_Wrapper.m_FishingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="FishingActions.AddCallbacks(IFishingActions)" />
+        /// <seealso cref="FishingActions.RemoveCallbacks(IFishingActions)" />
+        /// <seealso cref="FishingActions.UnregisterCallbacks(IFishingActions)" />
+        public void SetCallbacks(IFishingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_FishingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_FishingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="FishingActions" /> instance referencing this action map.
+    /// </summary>
+    public FishingActions @Fishing => new FishingActions(this);
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Game" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="GameActions.AddCallbacks(IGameActions)" />
+    /// <seealso cref="GameActions.RemoveCallbacks(IGameActions)" />
+    public interface IGameActions
     {
         /// <summary>
-        /// Method invoked when associated input action "UseMovingPointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "StartPowerBar" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnUseMovingPointer(InputAction.CallbackContext context);
+        void OnStartPowerBar(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "ShowStamina" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "OpenInventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnShowStamina(InputAction.CallbackContext context);
+        void OnOpenInventory(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "CatchFish" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -705,6 +897,20 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCatchFish(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchCursor" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchCursor(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.
@@ -736,18 +942,33 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Inventory" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
-    /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
-    public interface IUIActions
+    /// <seealso cref="InventoryActions.AddCallbacks(IInventoryActions)" />
+    /// <seealso cref="InventoryActions.RemoveCallbacks(IInventoryActions)" />
+    public interface IInventoryActions
     {
         /// <summary>
-        /// Method invoked when associated input action "ToggleInventoryVisibility" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "CloseInventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnToggleInventoryVisibility(InputAction.CallbackContext context);
+        void OnCloseInventory(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Fishing" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="FishingActions.AddCallbacks(IFishingActions)" />
+    /// <seealso cref="FishingActions.RemoveCallbacks(IFishingActions)" />
+    public interface IFishingActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "UseMovingPointer" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUseMovingPointer(InputAction.CallbackContext context);
     }
 }

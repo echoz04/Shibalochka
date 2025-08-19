@@ -21,7 +21,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         private readonly Vector3 _endPosition;
         private readonly ProjectConfig _projectConfig;
         private readonly Slider _pointerSlider;
-        private readonly UnityEngine.Camera _camera;
         private readonly Dictionary<Transform, FishSlot> _fishMap = new();
 
         private List<Tweener> _fishTweeners = new();
@@ -29,7 +28,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
         private EventInstance _loopedSound;
 
         public MovableFishesMiniGame(IEnumerable<FishSlot> fishSlots, Transform[] edgePoints, ProjectConfig projectConfig,
-        Slider pointerSlider, UnityEngine.Camera camera)
+        Slider pointerSlider)
         {
             _fishSlots = fishSlots;
             _startPosition = edgePoints[0].transform.position;
@@ -37,8 +36,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
             _projectConfig = projectConfig;
 
             _pointerSlider = pointerSlider;
-            _camera = camera;
-
             foreach (var slot in _fishSlots)
             {
                 if (slot?.CurrentFish != null)
@@ -78,8 +75,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
                 {
                     if (_fishMap.TryGetValue(fishTransform, out var slot))
                     {
-                        Vector3 fishWorldPos = fishTransform.position;
-                        Vector2 screenPos = RectTransformUtility.WorldToScreenPoint(_camera, fishWorldPos);
                         slot.CatchCenterValue = Extensions.MapWorldPositionToSliderValue(fishTransform.position, _pointerSlider);
                     }
                 })

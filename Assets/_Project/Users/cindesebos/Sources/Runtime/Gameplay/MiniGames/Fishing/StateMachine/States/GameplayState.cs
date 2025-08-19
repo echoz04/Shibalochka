@@ -19,12 +19,12 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 
         public override void Enter()
         {
-            _dependencies.CharacterInput.MiniGames.UseMovingPointer.performed += OnUseMovingPointer;
+            _dependencies.CharacterInput.Fishing.UseMovingPointer.performed += OnUseMovingPointer;
         }
 
         public override void Exit()
         {
-            _dependencies.CharacterInput.MiniGames.UseMovingPointer.performed -= OnUseMovingPointer;
+            _dependencies.CharacterInput.Fishing.UseMovingPointer.performed -= OnUseMovingPointer;
         }
 
         public override void Tick()

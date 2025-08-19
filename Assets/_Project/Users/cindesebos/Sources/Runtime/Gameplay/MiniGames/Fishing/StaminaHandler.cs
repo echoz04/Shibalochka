@@ -21,7 +21,6 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         private ProjectConfig _projectConfig;
         private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         private CameraRotator _cameraRotator;
-        // private InventoryRoot _inventoryRoot;
 
         private Tween _staminaTween;
         [SerializeField] private bool _canHandle = true;
@@ -34,15 +33,14 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             _projectConfig = projectConfig;
             _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
             _cameraRotator = cameraRotator;
-            // _inventoryRoot = inventoryRoot;
         }
         
         void IStartable.Start()
         {
             _canHandle = true;
 
-            _characterInput.MiniGames.ShowStamina.started += Handle;
-            _characterInput.MiniGames.ShowStamina.canceled += BoostrapFishingMiniGame;
+            _characterInput.Game.StartPowerBar.started += Handle;
+            _characterInput.Game.StartPowerBar.canceled += LaunchFishing;
         }
 
         private void Handle(InputAction.CallbackContext context)
@@ -51,7 +49,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             if (_canHandle == false)
                 return;
 
-            _cameraRotator.SetActive(false);
+            _cameraRotator.SetState(false);
 
             _stamina.SetActive(true);
             _sliderImage.fillAmount = 0f;
@@ -62,7 +60,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
                 .SetLoops(-1);
         }
 
-        private void BoostrapFishingMiniGame(InputAction.CallbackContext context)
+        private void LaunchFishing(InputAction.CallbackContext context)
         {
             // if (_canHandle == false || _inventoryRoot.IsVisible == true)
             if (_canHandle == false)
@@ -84,13 +82,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         {
             _canHandle = true;
 
-            _cameraRotator.SetActive(true);
+            _cameraRotator.SetState(true);
         }
 
         private void OnDestroy()
         {
-            _characterInput.MiniGames.ShowStamina.started -= Handle;
-            _characterInput.MiniGames.ShowStamina.canceled -= BoostrapFishingMiniGame;
+            _characterInput.Game.StartPowerBar.started -= Handle;
+            _characterInput.Game.StartPowerBar.canceled -= LaunchFishing;
 
             if (_staminaTween != null && _staminaTween.IsActive())
                 _staminaTween.Kill();

@@ -60,7 +60,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
             _dependencies.ProjectConfig);
 
             _movableFishesMiniGame = new MovableFishesMiniGame(_dependencies.FishSlots, _dependencies.EdgePoints, _dependencies.ProjectConfig,
-            _dependencies.PointerSlider, _dependencies.Camera);
+            _dependencies.PointerSlider);
         }
 
         private async UniTask LaunchRandomMiniGame()

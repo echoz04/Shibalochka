@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using Sources._Project.Users.blindingred.Sources.Runtime.Interfaces;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,7 +9,7 @@ using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
-namespace blindingred
+namespace Sources.SceneManagement
 {
     public class SceneLoader : IAddressableSceneLoader, IInitializable
     {
