@@ -1,6 +1,9 @@
+using Sources.Runtime.Core.StateMachine;
+using Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States;
+
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine
 {
-    public class FishingMiniGameStateMachine : Sources.Runtime.Core.StateMachine.StateMachine
+    public class FishingMiniGameStateMachine : BaseStateMachine
     {
         public readonly LaunchState LaunchState;
         public readonly GameplayState GameplayState;

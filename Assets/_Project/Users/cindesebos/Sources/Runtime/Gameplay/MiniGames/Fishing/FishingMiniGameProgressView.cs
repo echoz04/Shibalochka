@@ -17,10 +17,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
                 _slider.value = _value;
 
-                // �������� ������� ����, ���� ����
                 _delayedSlider.DOKill();
 
-                // ��������� ����������
                 DOVirtual.DelayedCall(_delay, () =>
                 {
                     _delayedSlider.DOValue(_value, _delayDuration).SetEase(Ease.OutQuad);
@@ -47,23 +45,24 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
             if (_delayedSlider == null)
             {
                 var sliders = GetComponentsInChildren<Slider>();
+
                 if (sliders.Length > 1)
-                    _delayedSlider = sliders[1]; // ������������� ������� ��������
+                    _delayedSlider = sliders[1];
             }
         }
 
         public void AddValue(float newValue)
         {
             Value += newValue;
-            //RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
-            //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Success");
+            RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
+            RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Success");
         }
 
         public void RemoveValue(float newValue)
         {
             Value -= newValue;
-            //RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
-            //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Failure");
+            RuntimeManager.StudioSystem.setParameterByName("FishingMiniGameProgress", Value);
+            RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Failure");
         }
 
         public void SetValue(float newValue)

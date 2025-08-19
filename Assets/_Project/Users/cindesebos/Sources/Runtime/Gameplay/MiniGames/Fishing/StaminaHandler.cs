@@ -7,6 +7,8 @@ using Sources.Runtime.Services.ProjectConfigLoader;
 using DG.Tweening;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Gameplay.Inventory;
+using Sources.Runtime.Gameplay.Map;
+using FMODUnity;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {
@@ -22,19 +24,21 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         private FishingMiniGameBootstrapper _fishingMiniGameBootstrapper;
         private CameraRotator _cameraRotator;
         private InventoryRoot _inventoryRoot;
+        private MapView _mapView;
 
         private Tween _staminaTween;
         [SerializeField] private bool _canHandle = true;
 
         [Inject]
         private void Construct(CharacterInput characterInput, IProjectConfigLoader projectConfigLoader,
-        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator, InventoryRoot inventoryRoot)
+        FishingMiniGameBootstrapper fishingMiniGameBootstrapper, CameraRotator cameraRotator, InventoryRoot inventoryRoot, MapView mapView)
         {
             _characterInput = characterInput;
             _projectConfigLoader = projectConfigLoader;
             _fishingMiniGameBootstrapper = fishingMiniGameBootstrapper;
             _cameraRotator = cameraRotator;
             _inventoryRoot = inventoryRoot;
+            _mapView = mapView;
         }
 
         private void Start()
@@ -47,7 +51,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         private void Handle(InputAction.CallbackContext context)
         {
-            if (_canHandle == false || _inventoryRoot.IsVisible == true)
+            if (_canHandle == false || _inventoryRoot.IsVisible == true || _mapView.IsVisible == true)
                 return;
 
             _cameraRotator.Disable();
@@ -63,7 +67,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
         private void BoostrapFishingMiniGame(InputAction.CallbackContext context)
         {
-            if (_canHandle == false || _inventoryRoot.IsVisible == true)
+            if (_canHandle == false || _inventoryRoot.IsVisible == true || _mapView.IsVisible == true)
                 return;
 
             if (_staminaTween != null && _staminaTween.IsActive())
@@ -75,6 +79,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 
             _stamina.SetActive(false);
 
+            RuntimeManager.PlayOneShot("event:/SFX/GameSFX/Fishing_Rod");
             _fishingMiniGameBootstrapper.Launch(result);
         }
 

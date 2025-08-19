@@ -52,9 +52,9 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.Types
 
         public void Launch()
         {
-            //_loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
-            //_loopedSound.start();
-            //_loopedSound.setParameterByName("FishingMiniGame", 1);
+            _loopedSound = RuntimeManager.CreateInstance("event:/SFX/GameSFX/Fishing_Reel");
+            _loopedSound.start();
+            _loopedSound.setParameterByName("FishingMiniGame", 1);
 
             MoveFishes();
         }

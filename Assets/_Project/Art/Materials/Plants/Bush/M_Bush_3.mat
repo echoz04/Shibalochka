@@ -60,11 +60,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0.521
+    - _AlphaClip: 0.5
     - _Noise_Scale: 120
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Scale: 0.047
+    - _Scale: 0
     - _Smoothness: 0
     - _Speed: 1
     m_Colors: []

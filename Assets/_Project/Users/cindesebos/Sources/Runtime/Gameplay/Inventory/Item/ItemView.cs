@@ -1,13 +1,16 @@
 using DG.Tweening;
 using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.Configs.Items;
+using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {
     public class ItemView : MonoBehaviour
     {
+        [SerializeField] private ItemRoot _root;
         [SerializeField] private Image _view;
         [SerializeField] private RectTransform _parent;
         [SerializeField] private Sprite _arrowSprite;
@@ -18,17 +21,22 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         private RectTransform _target;
         private ItemConfig _config;
         private InventoryConfig _inventoryConfig;
-        private ItemRoot _root;
 
         private void OnValidate()
         {
+            _root ??= GetComponent<ItemRoot>();
             _view ??= GetComponentInChildren<Image>();
         }
 
-        public void Initialize(ItemRoot root, ItemConfig config, InventoryConfig inventoryConfig)
+        [Inject]
+        private void Construct(IProjectConfigLoader projectConfigLoader)
         {
-            _config = config;
-            _inventoryConfig = inventoryConfig;
+            _inventoryConfig = projectConfigLoader.ProjectConfig.InventoryConfig;
+        }
+
+        private void Start()
+        {
+            _config = _root.Config;
             _target = GetComponent<RectTransform>();
 
             _view.sprite = _config.Icon;
@@ -39,7 +47,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
             //UpdateArrowPositions();
             //ToggleArrows(false);
 
-            _root = root;
             _root.OnBeginDragging += OnDragBegan;
             _root.OnDragging += OnDragged;
             _root.OnEndDragging += OnDragEnded;

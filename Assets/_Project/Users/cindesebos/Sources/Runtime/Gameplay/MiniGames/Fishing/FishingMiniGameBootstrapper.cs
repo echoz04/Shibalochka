@@ -9,6 +9,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem;
 using Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine;
 using Sources.Runtime.Gameplay.Inventory;
+using Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes;
 
 namespace Sources.Runtime.Gameplay.MiniGames.Fishing
 {

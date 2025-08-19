@@ -39,7 +39,7 @@ namespace Sources.Editor
             {
                 if (_projectConfig == null || _projectConfig.ItemsConfig == null)
                 {
-                    Debug.LogError("❌ ProjectConfig or ItemsConfig is not assigned.");
+                    Debug.LogError("ProjectConfig or ItemsConfig is not assigned.");
                     return;
                 }
 
@@ -71,7 +71,7 @@ namespace Sources.Editor
             if (_itemQueue == null || _itemQueue.Count == 0)
             {
                 EditorApplication.update -= ProcessQueueStep;
-                Debug.Log($"✅ Completed generation for {_processedCount} items.");
+                Debug.Log($"Completed generation for {_processedCount} items.");
                 return;
             }
 
@@ -84,11 +84,9 @@ namespace Sources.Editor
             List<Vector3> points = GeneratePoints(currentItem);
             SetCellPoints(currentItem, points);
 
-            Debug.Log($"✅ {currentItem.name} — {points.Count} cells");
+            Debug.Log($"{currentItem.name} — {points.Count} cells");
             _processedCount++;
         }
-
-        // ... (все вспомогательные методы GeneratePoints, IsValidCell, etc. без изменений)
 
         private List<Vector3> GeneratePoints(ItemConfig itemConfig)
         {

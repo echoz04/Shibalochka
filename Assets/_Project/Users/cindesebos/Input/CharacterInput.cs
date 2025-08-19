@@ -235,6 +235,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMapVisibility"",
+                    ""type"": ""Button"",
+                    ""id"": ""57015c21-8e86-4ada-bf62-73c2ffb59084"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -246,6 +255,17 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleInventoryVisibility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26ee8caf-d5b6-481f-b061-8598a42850a3"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMapVisibility"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -267,6 +287,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_ToggleInventoryVisibility = m_UI.FindAction("ToggleInventoryVisibility", throwIfNotFound: true);
+        m_UI_ToggleMapVisibility = m_UI.FindAction("ToggleMapVisibility", throwIfNotFound: true);
     }
 
     ~@CharacterInput()
@@ -586,6 +607,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_ToggleInventoryVisibility;
+    private readonly InputAction m_UI_ToggleMapVisibility;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -601,6 +623,10 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/ToggleInventoryVisibility".
         /// </summary>
         public InputAction @ToggleInventoryVisibility => m_Wrapper.m_UI_ToggleInventoryVisibility;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/ToggleMapVisibility".
+        /// </summary>
+        public InputAction @ToggleMapVisibility => m_Wrapper.m_UI_ToggleMapVisibility;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -630,6 +656,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @ToggleInventoryVisibility.started += instance.OnToggleInventoryVisibility;
             @ToggleInventoryVisibility.performed += instance.OnToggleInventoryVisibility;
             @ToggleInventoryVisibility.canceled += instance.OnToggleInventoryVisibility;
+            @ToggleMapVisibility.started += instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.performed += instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.canceled += instance.OnToggleMapVisibility;
         }
 
         /// <summary>
@@ -644,6 +673,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @ToggleInventoryVisibility.started -= instance.OnToggleInventoryVisibility;
             @ToggleInventoryVisibility.performed -= instance.OnToggleInventoryVisibility;
             @ToggleInventoryVisibility.canceled -= instance.OnToggleInventoryVisibility;
+            @ToggleMapVisibility.started -= instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.performed -= instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.canceled -= instance.OnToggleMapVisibility;
         }
 
         /// <summary>
@@ -749,5 +781,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleInventoryVisibility(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleMapVisibility" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleMapVisibility(InputAction.CallbackContext context);
     }
 }

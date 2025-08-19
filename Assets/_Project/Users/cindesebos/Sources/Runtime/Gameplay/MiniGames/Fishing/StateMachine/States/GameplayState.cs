@@ -1,0 +1,138 @@
+using System.Linq;
+using Sources.Runtime.Core.StateMachine;
+using Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes;
+using UnityEngine.InputSystem;
+
+namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
+{
+    public class GameplayState : BaseState
+    {
+        private readonly FishingMiniGameDependencies _dependencies;
+
+        private bool _canMovePointer = true;
+        private float _timeToAllowMovePointer = 0;
+
+        public GameplayState(FishingMiniGameDependencies dependencies)
+        {
+            _dependencies = dependencies;
+        }
+
+        public override void Enter()
+        {
+            _dependencies.CharacterInput.MiniGames.UseMovingPointer.performed += OnUseMovingPointer;
+        }
+
+        public override void Exit()
+        {
+            _dependencies.CharacterInput.MiniGames.UseMovingPointer.performed -= OnUseMovingPointer;
+        }
+
+        public override void Tick()
+        {
+            if (_canMovePointer == true)
+                return;
+
+            if (_timeToAllowMovePointer > 0)
+                _timeToAllowMovePointer -= UnityEngine.Time.deltaTime;
+            else
+                _canMovePointer = true;
+        }
+
+        private void OnUseMovingPointer(InputAction.CallbackContext context)
+        {
+            if (_canMovePointer == false)
+                return;
+
+            _canMovePointer = false;
+
+            _timeToAllowMovePointer = _dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.FishingClickCooldown;
+
+            FishSlot caughtFish = TryCatchFish();
+
+            UpdateProgressView(caughtFish);
+
+            RefreshFishesVisibility();
+
+            CheckGamepalyResult();
+        }
+
+        private FishSlot TryCatchFish()
+        {
+            float pointerValue = _dependencies.PointerSlider.value;
+
+            FishSlot caughtSlot = null;
+
+            foreach (var slot in _dependencies.FishSlots)
+            {
+                if (slot.IsCaught(pointerValue))
+                {
+                    caughtSlot = slot;
+                    slot.CurrentFish.gameObject.SetActive(false);
+
+                    return caughtSlot;
+                }
+            }
+
+            return null;
+        }
+
+        private void RefreshFishesVisibility()
+        {
+            if (CheckIfAllFishesCaught() == true)
+            {
+                foreach (var slot in _dependencies.FishSlots)
+                {
+                    slot.CurrentFish.gameObject.SetActive(true);
+                }
+            }
+        }
+
+        private bool CheckIfAllFishesCaught()
+        {
+            int fishCount = _dependencies.FishSlots.Count();
+            int countedFishes = new int();
+
+            foreach (var slot in _dependencies.FishSlots)
+            {
+                if (slot.IsAlreadyCaught == true)
+                    countedFishes++;
+            }
+
+            if (fishCount == countedFishes)
+                return true;
+
+            return false;
+        }
+
+        private void UpdateProgressView(FishSlot caughtFish)
+        {
+            if (caughtFish != null)
+            {
+                if (caughtFish.CurrentFish.Type == FishType.Common)
+                    _dependencies.ProgressView.AddValue(_dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.ValueToAddOnCommonCatch);
+                else
+                    _dependencies.ProgressView.AddValue(_dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.ValueToAddOnGoldCatch);
+            }
+            else
+            {
+                _dependencies.ProgressView.RemoveValue(_dependencies.ProjectConfigLoader.ProjectConfig.UIConfig.ValueToRemoveOnMiss);
+            }
+        }
+
+        private void CheckGamepalyResult()
+        {
+            if (_dependencies.ProgressView.Value <= 0)
+            {
+                UnityEngine.Debug.Log("You lose");
+
+                _dependencies.StateMachine.SetState(_dependencies.StateMachine.EndState, false);
+            }
+            else if (_dependencies.ProgressView.Value >= 100)
+            {
+                UnityEngine.Debug.Log("You win");
+
+                _dependencies.StateMachine.SetState(_dependencies.StateMachine.EndState, true);
+            }
+        }
+    }
+}

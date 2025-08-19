@@ -52,7 +52,7 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
                     return rarity.Rarity;
             }
 
-            return rarities[0].Rarity;
+            return rarities.First().Rarity;
         }
 
         private ItemConfig GetRandomItem(Rarity rarity)

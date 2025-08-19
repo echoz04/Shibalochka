@@ -35,7 +35,9 @@ namespace Sources.Runtime.Gameplay.Inventory.Item.Configurer
                 cell.name = "CellPoint";
             }
 
+#if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty(this);
+#endif
         }
 
         [Button("Clear Cells")]
