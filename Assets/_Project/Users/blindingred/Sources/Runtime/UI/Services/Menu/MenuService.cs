@@ -18,7 +18,7 @@ namespace Sources.UI.Services
         [Inject]
         private void Construct(
             IAddressableSceneLoader sceneLoader,
-            [Key("scene_island")] AssetReference gameplayScene,
+            [Key(SceneKey.IslandTropical)] AssetReference gameplayScene,
             MenuView menuView)
         {
             _sceneLoader = sceneLoader;

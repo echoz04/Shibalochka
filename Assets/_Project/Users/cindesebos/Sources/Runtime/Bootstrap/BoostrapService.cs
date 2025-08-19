@@ -1,7 +1,4 @@
-
 using Cysharp.Threading.Tasks;
-using Sources.Runtime.Gameplay.Configs;
-using Sources.Runtime.Services.AssetLoader;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.SceneManagement;
 using UnityEngine.AddressableAssets;
@@ -21,8 +18,8 @@ namespace Sources.Runtime.Bootstrap
         [Inject]
         public BootstrapService(
             IAddressableSceneLoader sceneLoader, 
-            [Key("scene_ui")] AssetReference uiScene,
-            [Key("scene_menu")] AssetReference menuScene,
+            [Key(SceneKey.UI)] AssetReference uiScene,
+            [Key(SceneKey.Menu)] AssetReference menuScene,
             DiscordOverlayDisplayer discordOverlayDisplayer, 
             IMiniGameRewardService miniGameRewardService)
         {

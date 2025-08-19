@@ -12,6 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f14bcaabde419eb8120515c0b2a786, type: 3}
   m_Name: ScenesData
   m_EditorClassIdentifier: 
+  _sceneBindings:
+  - _sceneKey: 0
+    _scene:
+      m_AssetGUID: ed945bcb2dad3d647bd89b122ba058c2
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - _sceneKey: 1
+    _scene:
+      m_AssetGUID: 2ee847dbb1e9dd643aa8d1cc160560d5
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - _sceneKey: 2
+    _scene:
+      m_AssetGUID: 40e6e69cfb2f8ab4497da6cd47879189
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - _sceneKey: 3
+    _scene:
+      m_AssetGUID: 53f541c130c14fd4d829e4c952390545
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
   _scenes:
   - m_AssetGUID: 2ee847dbb1e9dd643aa8d1cc160560d5
     m_SubObjectName: 

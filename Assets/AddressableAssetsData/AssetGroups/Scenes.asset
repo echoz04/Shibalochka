@@ -16,22 +16,27 @@ MonoBehaviour:
   m_GUID: c73062913bf2b284db7fd8eed36392b6
   m_SerializeEntries:
   - m_GUID: 2ee847dbb1e9dd643aa8d1cc160560d5
-    m_Address: scene_ui
+    m_Address: scene_UI
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 99c9720ab356a0642a771bea13969a05
-    m_Address: scene_gameplay
+  - m_GUID: 40e6e69cfb2f8ab4497da6cd47879189
+    m_Address: scene_ShopIsland
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d3e89b27ffabc4b419fc1fc762d397b7
-    m_Address: scene_island
+  - m_GUID: 53f541c130c14fd4d829e4c952390545
+    m_Address: scene_IslandTropical
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89789f2242195384e8c42dd9c5acbfbe
+    m_Address: scene_Bootstrap
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ed945bcb2dad3d647bd89b122ba058c2
-    m_Address: scene_menu
+    m_Address: scene_Menu
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

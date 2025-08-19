@@ -37,9 +37,9 @@ namespace Sources
 
         private void RegisterScenes(IContainerBuilder builder)
         {
-            foreach (var scene in _scenesData.Scenes)
+            foreach (var sceneBinding in _scenesData.Scenes)
             {
-                builder.RegisterInstance(scene).As<AssetReference>().Keyed(scene.editorAsset.name);
+                builder.RegisterInstance(sceneBinding.Scene).As<AssetReference>().Keyed(sceneBinding.SceneKey);
             }
         }
 
