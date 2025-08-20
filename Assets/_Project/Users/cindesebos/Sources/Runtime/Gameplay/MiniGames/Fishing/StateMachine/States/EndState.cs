@@ -21,12 +21,13 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
         {
             if (_gameplayResult)
             {
+                _dependencies.InventoryRoot.ShowInventoryAfterMiniGame();
                 _dependencies.InventoryRoot.TryAddItem(_dependencies.RewardService.GetRandomItem());
-                //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Win");
+                RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Win");
             }
             else
             {
-                //RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Lose");
+                RuntimeManager.PlayOneShot("event:/SFX/MiniGames/MG_Lose");
             }
 
             _dependencies.StateMachine.CurrentMiniGame.End(_gameplayResult);

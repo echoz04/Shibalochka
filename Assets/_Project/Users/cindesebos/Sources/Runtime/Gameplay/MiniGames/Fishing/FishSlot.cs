@@ -16,6 +16,14 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing
         [field: SerializeField] public Transform SpawnPoint { get; set; }
         [field: SerializeField] public float CatchRange { get; set; }
 
-        public bool IsCaught(float pointerValue) => Mathf.Abs(pointerValue - CatchCenterValue) <= CatchRange;
+        public bool IsAlreadyCaught => !CurrentFish.gameObject.activeInHierarchy;
+
+        public bool IsCaught(float pointerValue)
+        {
+            if (IsAlreadyCaught == true)
+                return false;
+
+            return Mathf.Abs(pointerValue - CatchCenterValue) <= CatchRange;
+        }
     }
 }

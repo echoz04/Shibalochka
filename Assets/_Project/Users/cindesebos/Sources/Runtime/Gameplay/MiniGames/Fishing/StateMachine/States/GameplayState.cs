@@ -1,3 +1,4 @@
+using System.Linq;
 using Sources.Runtime.Core.StateMachine;
 using Sources.Runtime.Gameplay.MiniGames.Fishing.FishTypes;
 using UnityEngine;
@@ -51,6 +52,8 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
 
             UpdateProgressView(caughtFish);
 
+            RefreshFishesVisibility();
+
             CheckGamepalyResult();
         }
 
@@ -65,12 +68,41 @@ namespace Sources.Runtime.Gameplay.MiniGames.Fishing.StateMachine.States
                 if (slot.IsCaught(pointerValue))
                 {
                     caughtSlot = slot;
+                    slot.CurrentFish.gameObject.SetActive(false);
 
                     return caughtSlot;
                 }
             }
 
             return null;
+        }
+
+        private void RefreshFishesVisibility()
+        {
+            if (CheckIfAllFishesCaught() == true)
+            {
+                foreach (var slot in _dependencies.FishSlots)
+                {
+                    slot.CurrentFish.gameObject.SetActive(true);
+                }
+            }
+        }
+
+        private bool CheckIfAllFishesCaught()
+        {
+            int fishCount = _dependencies.FishSlots.Count();
+            int countedFishes = new int();
+
+            foreach (var slot in _dependencies.FishSlots)
+            {
+                if (slot.IsAlreadyCaught == true)
+                    countedFishes++;
+            }
+
+            if (fishCount == countedFishes)
+                return true;
+
+            return false;
         }
 
         private void UpdateProgressView(FishSlot caughtFish)
