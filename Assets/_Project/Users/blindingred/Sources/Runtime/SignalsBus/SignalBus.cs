@@ -27,12 +27,11 @@ namespace Sources.Signals
 
         public void Subscribe<TSignal>(Action<TSignal> signal, bool replayLast = true)
         {
-            Debug.Log($"Subscribing to {signal.GetType().Name}");
             if (!_subscribers.TryGetValue(typeof(TSignal), out var handlers))
             {
                 _subscribers[typeof(TSignal)] = handlers = new List<Delegate>();
             }
-            Debug.Log($"Adding to handlers {signal.GetType().Name}");
+            
             handlers.Add(signal);
             
             if (replayLast && _lastSignals.TryGetValue(typeof(TSignal), out var last))

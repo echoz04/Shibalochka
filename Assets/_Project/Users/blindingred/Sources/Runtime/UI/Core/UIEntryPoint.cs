@@ -1,3 +1,5 @@
+using Sources.Signals;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -5,17 +7,18 @@ namespace Sources
 {
     public class UIEntryPoint: IInitializable
     {
-        private UIScreenManager _uiScreenManager;
+        private ISignalBus _signalBus;
         
         [Inject]
-        private void Construct(UIScreenManager screenManager)
+        private void Construct(ISignalBus signalBus)
         {
-           _uiScreenManager = screenManager;
+            _signalBus = signalBus;
         }
 
         public void Initialize()
         {
-            _uiScreenManager.OpenUIScreen<MenuScreen>();
+            Debug.Log("UIEntryPoint::Initialize()");
+            _signalBus.Fire(new ScreenChangeSignal(typeof(MenuScreen)));
         }
     }
 }

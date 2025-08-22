@@ -5686,8 +5686,6 @@ MonoBehaviour:
   _gridContent: {fileID: 38570089}
   _controlButtons: {fileID: 337792036}
   _rewardsPanel: {fileID: 1480736311}
-  _unUsedItems: []
-  _storingFishes: []
 --- !u!114 &650771062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16219,7 +16217,7 @@ MonoBehaviour:
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: -18.4
+    Value: -18.399994
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -18589,6 +18587,7 @@ MonoBehaviour:
     GoldFishPrefab: {fileID: 1309913143429456720, guid: bb25e1ccc39c537fea2bc5e2cca28246, type: 3}
     CameraRotator: {fileID: 1786899476}
     Camera: {fileID: 365973914}
+    ProjectConfig: {fileID: 0}
     InventoryRoot: {fileID: 0}
 --- !u!1 &1626971498984391867
 GameObject:

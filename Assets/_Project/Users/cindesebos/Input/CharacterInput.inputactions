@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenMap",
+                    "type": "Button",
+                    "id": "1bbfd568-1876-48d7-b26c-6f84e8d56a36",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -104,6 +113,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0637f036-4414-44f2-9e01-bb33b1677484",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenMap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -248,6 +268,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleMapVisibility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Map",
+            "id": "afe33f8b-38e6-4f80-a345-6dc102600192",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "5e9c0e20-217a-4df5-9de2-c35270dc19d0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2efaf307-1e5e-4874-87b8-a85ea83056cc",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

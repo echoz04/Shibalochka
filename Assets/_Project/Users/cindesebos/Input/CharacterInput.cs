@@ -135,6 +135,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bbfd568-1876-48d7-b26c-6f84e8d56a36"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -190,6 +199,17 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0637f036-4414-44f2-9e01-bb33b1677484"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -275,6 +295,15 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMapVisibility"",
+                    ""type"": ""Button"",
+                    ""id"": ""57015c21-8e86-4ada-bf62-73c2ffb59084"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -316,6 +345,45 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""action"": ""UseMovingPointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26ee8caf-d5b6-481f-b061-8598a42850a3"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMapVisibility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Map"",
+            ""id"": ""afe33f8b-38e6-4f80-a345-6dc102600192"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""5e9c0e20-217a-4df5-9de2-c35270dc19d0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2efaf307-1e5e-4874-87b8-a85ea83056cc"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -329,6 +397,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         m_Game_CatchFish = m_Game.FindAction("CatchFish", throwIfNotFound: true);
         m_Game_OpenMenu = m_Game.FindAction("OpenMenu", throwIfNotFound: true);
         m_Game_SwitchCursor = m_Game.FindAction("SwitchCursor", throwIfNotFound: true);
+        m_Game_OpenMap = m_Game.FindAction("OpenMap", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_ToggleCursor = m_Camera.FindAction("ToggleCursor", throwIfNotFound: true);
@@ -337,9 +406,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_CloseInventory = m_Inventory.FindAction("CloseInventory", throwIfNotFound: true);
+        m_Inventory_ToggleMapVisibility = m_Inventory.FindAction("ToggleMapVisibility", throwIfNotFound: true);
         // Fishing
         m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
         m_Fishing_UseMovingPointer = m_Fishing.FindAction("UseMovingPointer", throwIfNotFound: true);
+        // Map
+        m_Map = asset.FindActionMap("Map", throwIfNotFound: true);
+        m_Map_Newaction = m_Map.FindAction("New action", throwIfNotFound: true);
     }
 
     ~@CharacterInput()
@@ -348,6 +421,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, CharacterInput.Camera.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, CharacterInput.Inventory.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Fishing.enabled, "This will cause a leak and performance issues, CharacterInput.Fishing.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Map.enabled, "This will cause a leak and performance issues, CharacterInput.Map.Disable() has not been called.");
     }
 
     /// <summary>
@@ -428,6 +502,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_CatchFish;
     private readonly InputAction m_Game_OpenMenu;
     private readonly InputAction m_Game_SwitchCursor;
+    private readonly InputAction m_Game_OpenMap;
     /// <summary>
     /// Provides access to input actions defined in input action map "Game".
     /// </summary>
@@ -459,6 +534,10 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Game/SwitchCursor".
         /// </summary>
         public InputAction @SwitchCursor => m_Wrapper.m_Game_SwitchCursor;
+        /// <summary>
+        /// Provides access to the underlying input action "Game/OpenMap".
+        /// </summary>
+        public InputAction @OpenMap => m_Wrapper.m_Game_OpenMap;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -500,6 +579,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @SwitchCursor.started += instance.OnSwitchCursor;
             @SwitchCursor.performed += instance.OnSwitchCursor;
             @SwitchCursor.canceled += instance.OnSwitchCursor;
+            @OpenMap.started += instance.OnOpenMap;
+            @OpenMap.performed += instance.OnOpenMap;
+            @OpenMap.canceled += instance.OnOpenMap;
         }
 
         /// <summary>
@@ -526,6 +608,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @SwitchCursor.started -= instance.OnSwitchCursor;
             @SwitchCursor.performed -= instance.OnSwitchCursor;
             @SwitchCursor.canceled -= instance.OnSwitchCursor;
+            @OpenMap.started -= instance.OnOpenMap;
+            @OpenMap.performed -= instance.OnOpenMap;
+            @OpenMap.canceled -= instance.OnOpenMap;
         }
 
         /// <summary>
@@ -682,6 +767,7 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Inventory;
     private List<IInventoryActions> m_InventoryActionsCallbackInterfaces = new List<IInventoryActions>();
     private readonly InputAction m_Inventory_CloseInventory;
+    private readonly InputAction m_Inventory_ToggleMapVisibility;
     /// <summary>
     /// Provides access to input actions defined in input action map "Inventory".
     /// </summary>
@@ -697,6 +783,10 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Inventory/CloseInventory".
         /// </summary>
         public InputAction @CloseInventory => m_Wrapper.m_Inventory_CloseInventory;
+        /// <summary>
+        /// Provides access to the underlying input action "Inventory/ToggleMapVisibility".
+        /// </summary>
+        public InputAction @ToggleMapVisibility => m_Wrapper.m_Inventory_ToggleMapVisibility;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -726,6 +816,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @CloseInventory.started += instance.OnCloseInventory;
             @CloseInventory.performed += instance.OnCloseInventory;
             @CloseInventory.canceled += instance.OnCloseInventory;
+            @ToggleMapVisibility.started += instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.performed += instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.canceled += instance.OnToggleMapVisibility;
         }
 
         /// <summary>
@@ -740,6 +833,9 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @CloseInventory.started -= instance.OnCloseInventory;
             @CloseInventory.performed -= instance.OnCloseInventory;
             @CloseInventory.canceled -= instance.OnCloseInventory;
+            @ToggleMapVisibility.started -= instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.performed -= instance.OnToggleMapVisibility;
+            @ToggleMapVisibility.canceled -= instance.OnToggleMapVisibility;
         }
 
         /// <summary>
@@ -869,6 +965,102 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="FishingActions" /> instance referencing this action map.
     /// </summary>
     public FishingActions @Fishing => new FishingActions(this);
+
+    // Map
+    private readonly InputActionMap m_Map;
+    private List<IMapActions> m_MapActionsCallbackInterfaces = new List<IMapActions>();
+    private readonly InputAction m_Map_Newaction;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Map".
+    /// </summary>
+    public struct MapActions
+    {
+        private @CharacterInput m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public MapActions(@CharacterInput wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Map/Newaction".
+        /// </summary>
+        public InputAction @Newaction => m_Wrapper.m_Map_Newaction;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Map; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="MapActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(MapActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="MapActions" />
+        public void AddCallbacks(IMapActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MapActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MapActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="MapActions" />
+        private void UnregisterCallbacks(IMapActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MapActions.UnregisterCallbacks(IMapActions)" />.
+        /// </summary>
+        /// <seealso cref="MapActions.UnregisterCallbacks(IMapActions)" />
+        public void RemoveCallbacks(IMapActions instance)
+        {
+            if (m_Wrapper.m_MapActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="MapActions.AddCallbacks(IMapActions)" />
+        /// <seealso cref="MapActions.RemoveCallbacks(IMapActions)" />
+        /// <seealso cref="MapActions.UnregisterCallbacks(IMapActions)" />
+        public void SetCallbacks(IMapActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MapActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MapActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="MapActions" /> instance referencing this action map.
+    /// </summary>
+    public MapActions @Map => new MapActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Game" which allows adding and removing callbacks.
     /// </summary>
@@ -911,6 +1103,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchCursor(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenMap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenMap(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.
@@ -955,6 +1154,13 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCloseInventory(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleMapVisibility" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleMapVisibility(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Fishing" which allows adding and removing callbacks.
@@ -970,5 +1176,20 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseMovingPointer(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="MapActions.AddCallbacks(IMapActions)" />
+    /// <seealso cref="MapActions.RemoveCallbacks(IMapActions)" />
+    public interface IMapActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

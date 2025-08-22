@@ -1,24 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-using VContainer.Unity;
 
 namespace Sources.SceneManagement
 {
-    public class SceneLoader : IAddressableSceneLoader, IInitializable
+    public class SceneLoader : IAddressableSceneLoader
     {
-        private Dictionary<object, SceneInstance> _loadedScenes;
-
-        public void Initialize()
-        {
-            _loadedScenes = new Dictionary<object, SceneInstance>();
-        }
+        private readonly Dictionary<object, SceneInstance> _loadedScenes = new();
 
         public async UniTask LoadScenes(AssetReference[] sceneReferences, LoadSceneMode loadSceneMode, Action onComplete = null)
         {
@@ -56,54 +49,34 @@ namespace Sources.SceneManagement
             onComplete?.Invoke();
         }
 
-        public async UniTaskVoid ActivateScene(string sceneName, bool unloadPreviousScene)
+        public async UniTaskVoid ActivateScene(AssetReference sceneReference)
         {
-            var sceneToUnload = SceneManager.GetActiveScene();
-            
-            var sceneInstance = _loadedScenes.First(s => s.Value.Scene.name == sceneName).Value;
+            var sceneInstance = _loadedScenes[sceneReference.RuntimeKey];
             
             await sceneInstance.ActivateAsync();
-            
-            if (SceneManager.GetActiveScene().name == sceneToUnload.name)
-            {
-                SceneManager.SetActiveScene(sceneInstance.Scene);
-            }
-            
-            if (unloadPreviousScene)
-            {
-                await UnloadScene(sceneToUnload);
-            }
+            SceneManager.SetActiveScene(sceneInstance.Scene);
         }
 
-        public async UniTaskVoid ActivateAllScenes(bool unloadPreviousScene)
+        public async UniTask UnloadScene(AssetReference sceneReference)
         {
-            var sceneToUnload = SceneManager.GetActiveScene();
-            
-            foreach (var sceneInstance in _loadedScenes)
-            {
-                await sceneInstance.Value.ActivateAsync();
-                
-                if (SceneManager.GetActiveScene().name == sceneToUnload.name)
-                {
-                    SceneManager.SetActiveScene(sceneInstance.Value.Scene);
-                }
-            }
-            
-            if (unloadPreviousScene)
-            {
-                await UnloadScene(sceneToUnload);
-            }
-        }
-
-        private async UniTask UnloadScene(Scene sceneToUnload)
-        {
-            var unloadAsync = SceneManager.UnloadSceneAsync(sceneToUnload);
+            var sceneInstance = _loadedScenes[sceneReference.RuntimeKey];
+            var unloadAsync = SceneManager.UnloadSceneAsync(sceneInstance.Scene);
             if (unloadAsync != null)
             {
-                Debug.Log($"Unloading scene \"{sceneToUnload.name}\".");
+                Debug.Log($"Unloading scene \"{sceneInstance.Scene.name}\".");
                 await UniTask.WaitUntil(() => unloadAsync.isDone);
                 
             }
-        } 
+        }
+
+        public async UniTask UnloadScene(Scene scene)
+        {
+            var unloadAsync = SceneManager.UnloadSceneAsync(scene);
+            if (unloadAsync != null)
+            {
+                Debug.Log($"Unloading scene \"{scene.name}\".");
+                await UniTask.WaitUntil(() => unloadAsync.isDone);
+            }
+        }
     }
 }

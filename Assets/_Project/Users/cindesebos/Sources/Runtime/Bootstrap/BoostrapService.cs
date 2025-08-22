@@ -11,27 +11,21 @@ namespace Sources.Runtime.Bootstrap
     public class BootstrapService : IInitializable
     {
         private readonly IAddressableSceneLoader _sceneLoader;
-        private readonly AssetReference[] _scenesToLoad;
+        private readonly ScenesData _scenesData;
         private readonly DiscordOverlayDisplayer _discordOverlayDisplayer;
         private readonly IMiniGameRewardService _miniGameRewardService;
         
         [Inject]
         public BootstrapService(
             IAddressableSceneLoader sceneLoader, 
-            [Key(SceneKey.UI)] AssetReference uiScene,
-            [Key(SceneKey.Menu)] AssetReference menuScene,
+            ScenesData scenesData,
             DiscordOverlayDisplayer discordOverlayDisplayer, 
             IMiniGameRewardService miniGameRewardService)
         {
             _sceneLoader = sceneLoader;
+            _scenesData = scenesData;
             _discordOverlayDisplayer = discordOverlayDisplayer;
             _miniGameRewardService = miniGameRewardService;
-
-            _scenesToLoad = new[]
-            {
-                uiScene,
-                menuScene,
-            };
         }
 
         async void IInitializable.Initialize()
@@ -43,10 +37,22 @@ namespace Sources.Runtime.Bootstrap
         
         private async UniTask BootstrapScenes()
         {
+            var uiScene = _scenesData.GetSceneBindingByKey(SceneKey.UI).Scene;
+            var menuScene = _scenesData.GetSceneBindingByKey(SceneKey.Menu).Scene;
+            var bootsTrapScene = _scenesData.GetSceneBindingByKey(SceneKey.Bootstrap).Scene;
+            
+            var scenesToLoad = new [] {
+                uiScene,
+                menuScene
+            };
             await _sceneLoader.LoadScenes(
-                _scenesToLoad, 
+                scenesToLoad, 
                 LoadSceneMode.Additive,
-                () => _sceneLoader.ActivateAllScenes(true));
+                () =>
+                {
+                    _sceneLoader.ActivateScene(menuScene);
+                    _sceneLoader.UnloadScene(bootsTrapScene);
+                });
         }
     }
 }

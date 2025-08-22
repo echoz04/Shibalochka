@@ -7,5 +7,6 @@ namespace Sources.SceneManagement
         Shop,
         IslandTropical,
         IslandWinter,
+        Bootstrap,
     }
 }

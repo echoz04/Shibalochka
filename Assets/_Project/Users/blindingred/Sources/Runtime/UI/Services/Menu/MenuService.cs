@@ -1,8 +1,6 @@
-using Cysharp.Threading.Tasks;
 using Sources.SceneManagement;
+using Sources.Signals;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.SceneManagement;
 using VContainer;
 
 namespace Sources.UI.Services
@@ -10,7 +8,9 @@ namespace Sources.UI.Services
     public class MenuService : IUIService
     {
         private IAddressableSceneLoader _sceneLoader;
-        private AssetReference[] _scenesToLoad;
+        private ScenesData _scenesData;
+        
+        private ISignalBus _signalBus;
         
         private MenuView _view;
         public IUIView View => _view;
@@ -18,16 +18,14 @@ namespace Sources.UI.Services
         [Inject]
         private void Construct(
             IAddressableSceneLoader sceneLoader,
-            [Key(SceneKey.IslandTropical)] AssetReference gameplayScene,
-            MenuView menuView)
+            ScenesData scenesData,
+            MenuView menuView,
+            ISignalBus signalBus)
         {
             _sceneLoader = sceneLoader;
-            _scenesToLoad = new[]
-            {
-                gameplayScene
-            };
-            
+            _scenesData = scenesData;
             _view = menuView;
+            _signalBus = signalBus;
         }
 
         public void Enable()
@@ -60,10 +58,19 @@ namespace Sources.UI.Services
 
         private void OnStartGame()
         {
-            _sceneLoader.LoadScenes(
-                _scenesToLoad, LoadSceneMode.Additive,
-                () => _sceneLoader.ActivateAllScenes(false)
-            ).Forget();
+            var gameplayScene = _scenesData.GetSceneBindingByKey(SceneKey.IslandTropical).Scene;
+            // var menuScene = _scenesData.GetSceneBindingByKey(SceneKey.Menu).Scene;
+            
+            _signalBus.Fire(new LoadingSceneSignal(gameplayScene));
+            _signalBus.Fire(new ScreenChangeSignal(typeof(LoadingScreen)));
+            
+            // _sceneLoader.LoadScene(
+            //     gameplayScene, LoadSceneMode.Additive,
+            //     () =>
+            //     {
+            //         _sceneLoader.ActivateScene(gameplayScene);
+            //         _sceneLoader.UnloadScene(menuScene);
+            //     }).Forget();
         }
 
         private void OnSettings()

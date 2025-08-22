@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace Sources.UI.Services
 {
@@ -11,6 +13,17 @@ namespace Sources.UI.Services
         
         public readonly string InventoryKey = "Inventory";
         public readonly string SettingsKey = "Settings";
+        
+        [Inject]
+        private void Construct()
+        {
+            _actions = new Dictionary<string, Action>
+            {
+                {InventoryKey, null},
+                {SettingsKey, null},
+                
+            };
+        }
         
         public override void Show(Action onComplete = null)
         {

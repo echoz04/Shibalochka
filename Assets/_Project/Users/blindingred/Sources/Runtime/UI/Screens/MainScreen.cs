@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sources.UI.Services;
+using Sources.UI.Services.PowerBar;
 using VContainer;
 
 namespace Sources
@@ -9,12 +10,14 @@ namespace Sources
         [Inject]
         private void Construct(
             HUDService hudService,
-            WalletService walletService)
+            WalletService walletService,
+            PowerBarService powerBarService)
         {
             UIServices = new List<IUIService>
             {
                 hudService,
-                walletService
+                walletService,
+                powerBarService
             };
         }
     }

@@ -31,14 +31,14 @@ namespace Sources.UI.Services
             Subscribe();
             _view.Show();
             _characterInput.Game.Enable();
-            _isCursorVisible = false;
-            SwitchCursorState(_isCursorVisible);
+            SwitchCursorState(false);
         }
 
         public void Disable()
         {
             Unsubscribe();
             _view.Hide();
+            SwitchCursorState(true);
             _characterInput.Game.Disable();
         }
 
@@ -47,6 +47,8 @@ namespace Sources.UI.Services
             _view.Subscribe(_view.InventoryKey, OnInventory);
             _view.Subscribe(_view.SettingsKey, OnSettings);
             _characterInput.Game.SwitchCursor.performed += SwitchCursor;
+            _characterInput.Game.OpenMap.performed += OpenMap;
+            _characterInput.Game.OpenInventory.performed += ShowFade;
         }
 
         private void Unsubscribe()
@@ -54,6 +56,18 @@ namespace Sources.UI.Services
             _view.Unsubscribe(_view.InventoryKey, OnInventory);
             _view.Unsubscribe(_view.SettingsKey, OnSettings);
             _characterInput.Game.SwitchCursor.performed -= SwitchCursor;
+            _characterInput.Game.OpenMap.performed -= OpenMap;
+            _characterInput.Game.OpenInventory.performed += ShowFade;
+        }
+        
+        private void ShowFade(InputAction.CallbackContext obj)
+        {
+            _signalBus.Fire(new ScreenChangeSignal(typeof(LoadingScreen)));
+        }
+        
+        private void OpenMap(InputAction.CallbackContext obj)
+        {
+            _signalBus.Fire(new ScreenChangeSignal(typeof(MapScreen)));
         }
         
         private void SwitchCursor(InputAction.CallbackContext ctx)
@@ -65,7 +79,7 @@ namespace Sources.UI.Services
         {
             _signalBus.Fire(new SwitchCursorStateSignal(isVisible));
             _signalBus.Fire(new CameraRotatorStateSignal(!isVisible));
-            _isCursorVisible = !_isCursorVisible;
+            _isCursorVisible = isVisible;
         }
 
         private void OnInventory()

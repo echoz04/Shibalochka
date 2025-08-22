@@ -5,7 +5,6 @@ using Sources.Runtime.Services.AssetLoader;
 using Sources.SceneManagement;
 using Sources.Signals;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 
@@ -25,7 +24,7 @@ namespace Sources
             BindMiniGameRewardService(builder);
             
             RegisterProjectConfig(builder);
-            RegisterScenes(builder);
+            RegisterScenesData(builder);
             RegisterSignalBus(builder);
             RegisterCursorHandler(builder);
         }
@@ -35,12 +34,9 @@ namespace Sources
             builder.Register<ISignalBus, SignalBus>(Lifetime.Singleton);
         }
 
-        private void RegisterScenes(IContainerBuilder builder)
+        private void RegisterScenesData(IContainerBuilder builder)
         {
-            foreach (var sceneBinding in _scenesData.Scenes)
-            {
-                builder.RegisterInstance(sceneBinding.Scene).As<AssetReference>().Keyed(sceneBinding.SceneKey);
-            }
+            builder.RegisterInstance(_scenesData).AsSelf().AsImplementedInterfaces();
         }
 
         private void RegisterProjectConfig(IContainerBuilder builder)

@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +37,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -95,12 +95,408 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_0
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 529
+        width: 617
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48555860165e6d942a16bfa1010da86f
+      internalID: -567160889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_1
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 434
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9076fb7fa5182834989a4e585701b538
+      internalID: 935715735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_2
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 313
+        width: 193
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6abaf3896f59b3f4b8d59ba43aa31129
+      internalID: -1166207308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_3
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 88
+        width: 161
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b31f9417d9a8c974ea89e9d26618ef7b
+      internalID: -1617700446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_4
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 357
+        width: 60
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feb50b8039ceb76459416d7530ecd7b6
+      internalID: -346398686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_5
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 297
+        width: 80
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 024893ea9ca52ef469afb529b9173d54
+      internalID: 1034828668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_6
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 297
+        width: 60
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47aab84883a5d7442a179d5fd04d76be
+      internalID: 433513787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_7
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 96
+        width: 200
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daff6d0d693b3c6448705dd1bbe11249
+      internalID: 89034320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_8
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 92
+        width: 208
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 032b7dfc74e0f384a964e01210391fcb
+      internalID: -1685429732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_9
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 189
+        width: 32
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63d306ee3d3943f4aa11b2af0552cdc0
+      internalID: 1653309591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_10
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 229
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b0a2a1be605af1498950ef37107258f
+      internalID: -28763041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_11
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 190
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a9cf74ebb1f5714b9107b5431621803
+      internalID: 1127720332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_12
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 195
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 449b28cc5779be6468a48c856b3447eb
+      internalID: 1395797689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_13
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 190
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42500fe607589754d8a89d8b5aebae29
+      internalID: -1743505632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_14
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 89
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7c70403d8de33e4ca042ecac5b9f636
+      internalID: 1515190706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_15
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 89
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594397d61d827b04a944c17f9ba7ee74
+      internalID: 622581035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_16
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 89
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c21ad2a92e64e2458297c15f6a760b5
+      internalID: -1106073345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRG_Hud_Fishing_17
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 36
+        width: 756
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34af1c3f05ea2d74f888025fb7362d8c
+      internalID: -1268540401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0b2211edac3c43243b8ad58c3fbed784
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +505,25 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SPRG_Hud_Fishing_0: -567160889
+      SPRG_Hud_Fishing_1: 935715735
+      SPRG_Hud_Fishing_10: -28763041
+      SPRG_Hud_Fishing_11: 1127720332
+      SPRG_Hud_Fishing_12: 1395797689
+      SPRG_Hud_Fishing_13: -1743505632
+      SPRG_Hud_Fishing_14: 1515190706
+      SPRG_Hud_Fishing_15: 622581035
+      SPRG_Hud_Fishing_16: -1106073345
+      SPRG_Hud_Fishing_17: -1268540401
+      SPRG_Hud_Fishing_2: -1166207308
+      SPRG_Hud_Fishing_3: -1617700446
+      SPRG_Hud_Fishing_4: -346398686
+      SPRG_Hud_Fishing_5: 1034828668
+      SPRG_Hud_Fishing_6: 433513787
+      SPRG_Hud_Fishing_7: 89034320
+      SPRG_Hud_Fishing_8: -1685429732
+      SPRG_Hud_Fishing_9: 1653309591
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

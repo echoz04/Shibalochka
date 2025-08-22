@@ -41,6 +41,13 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 1
+  - _sceneKey: 5
+    _scene:
+      m_AssetGUID: 89789f2242195384e8c42dd9c5acbfbe
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
   _scenes:
   - m_AssetGUID: 2ee847dbb1e9dd643aa8d1cc160560d5
     m_SubObjectName: 

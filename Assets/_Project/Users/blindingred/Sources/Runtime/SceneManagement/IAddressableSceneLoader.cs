@@ -9,7 +9,8 @@ namespace Sources.SceneManagement
     {
         public UniTask LoadScenes(AssetReference[] sceneReferences,LoadSceneMode loadSceneMode, Action onComplete = null);
         public UniTask LoadScene(AssetReference sceneReference,LoadSceneMode loadSceneMode, Action onComplete = null);
-        public UniTaskVoid ActivateScene(string sceneName, bool unloadPreviousScene);
-        public UniTaskVoid ActivateAllScenes(bool unloadPreviousScene);
+        public UniTaskVoid ActivateScene(AssetReference sceneReference);
+        public UniTask UnloadScene(AssetReference sceneReference);
+        public UniTask UnloadScene(Scene scene);
     }
 }
