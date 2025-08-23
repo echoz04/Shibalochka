@@ -23,7 +23,6 @@ namespace Sources.Runtime.Gameplay
         void IInitializable.Initialize()
         {
             _signalBus.Fire(new ScreenChangeSignal(typeof(MainScreen)));
-            
 // #if UNITY_EDITOR
 //             ContentManagementSystem.Instance.InventoryRoot = _inventoryRoot;
 //             ContentManagementSystem.Instance.WalletRoot = _walletRoot;

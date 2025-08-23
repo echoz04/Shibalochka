@@ -1,6 +1,9 @@
+using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sources.Runtime.Gameplay.Configs;
 using Sources.Signals;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
 
@@ -46,13 +49,13 @@ namespace Sources.UI.Services.PowerBar
         private void Subscribe()
         {
             _characterInput.Game.StartPowerBar.started += StartThrow;
-            _characterInput.Game.StartPowerBar.canceled += LaunchFishing;
+            _characterInput.Game.StartPowerBar.canceled += EndThrow;
         } 
         
         private void Unsubscribe()
         {
             _characterInput.Game.StartPowerBar.started -= StartThrow;
-            _characterInput.Game.StartPowerBar.canceled -= LaunchFishing;
+            _characterInput.Game.StartPowerBar.canceled -= EndThrow;
         }
 
         private void StartThrow(InputAction.CallbackContext obj)
@@ -80,12 +83,24 @@ namespace Sources.UI.Services.PowerBar
             _powerValue = value;
         }
 
-        private void LaunchFishing(InputAction.CallbackContext obj)
+        private async void EndThrow(InputAction.CallbackContext context)
         {
-            _tween.Kill();
-            _view.Hide();
-            
-            
+            try
+            {
+                _tween.Kill();
+                if (_powerValue > 0.99f)
+                {
+                    await _view.ShowMaxPowerSign();
+                }
+                _view.Hide();
+                // TODO Запускать ожидание поклёвки и игру следом
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
         }
+
+        
     }
 }

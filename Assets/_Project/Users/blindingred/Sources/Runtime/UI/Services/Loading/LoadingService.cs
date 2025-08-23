@@ -93,9 +93,7 @@ namespace Sources.UI.Services.Loading
                     _sceneLoader.UnloadScene(currentScene);
                     
                     _view.Hide();
-                    _fadeService.FadeOut(
-                        () => _signalBus.Fire(new ScreenChangeSignal(typeof(MainScreen)))
-                    );
+                    _fadeService.FadeOut();
                 });
         }
     }

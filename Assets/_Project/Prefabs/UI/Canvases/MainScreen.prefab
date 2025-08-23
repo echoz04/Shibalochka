@@ -367,7 +367,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6505242520566560340
 RectTransform:
   m_ObjectHideFlags: 0
@@ -417,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stamina: {fileID: 3689382471738360235}
   _sliderImage: {fileID: 1130491451821702737}
+  _maxPowerSign: {fileID: 6042809095392391006}
 --- !u!1 &2945670914842016006
 GameObject:
   m_ObjectHideFlags: 0

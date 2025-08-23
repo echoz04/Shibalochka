@@ -30,7 +30,7 @@ namespace Sources.Runtime.Bootstrap
 
         async void IInitializable.Initialize()
         {
-                _discordOverlayDisplayer.Initialize();
+                // _discordOverlayDisplayer.Initialize();
                 _miniGameRewardService.Initialize();
                 await BootstrapScenes();
         }
