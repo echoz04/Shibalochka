@@ -1,8 +1,7 @@
-using FMODUnity;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Menu
 {

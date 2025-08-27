@@ -1,11 +1,8 @@
 using Sources.Runtime.Gameplay.Camera;
 using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
-using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Map
 {
@@ -31,12 +28,12 @@ namespace Sources.Runtime.Gameplay.Map
 
         private void Awake()
         {
-            _characterInput.UI.ToggleMapVisibility.performed += ctx => ToggleVisibility();
+            // _characterInput.UI.ToggleMapVisibility.performed += ctx => ToggleVisibility();
         }
 
         private void OnDestroy()
         {
-            _characterInput.UI.ToggleMapVisibility.performed -= ctx => ToggleVisibility();
+            // _characterInput.UI.ToggleMapVisibility.performed -= ctx => ToggleVisibility();
         }
 
         private void ToggleVisibility()
@@ -48,11 +45,11 @@ namespace Sources.Runtime.Gameplay.Map
 
             if (_canvas.enabled == true)
             {
-                _cameraRotator.Disable();
+                // _cameraRotator.Disable();
             }
             else
             {
-                _cameraRotator.Enable();
+                // _cameraRotator.Enable();
             }
         }
     }

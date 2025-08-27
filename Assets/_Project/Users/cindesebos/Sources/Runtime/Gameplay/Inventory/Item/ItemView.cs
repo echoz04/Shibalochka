@@ -1,10 +1,10 @@
 using DG.Tweening;
 using Sources.Runtime.Gameplay.Configs;
 using Sources.Runtime.Gameplay.Configs.Items;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {
@@ -14,7 +14,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         [SerializeField] private Image _view;
         [SerializeField] private RectTransform _parent;
         [SerializeField] private Sprite _arrowSprite;
-        [SerializeField] private Vector2 _arrrowSize = new Vector2(62f, 62f);
+        [SerializeField] private Vector2 _arrowSize = new(62f, 62f);
         [SerializeField] private float _offSet;
 
         private GameObject[] _currentArrows = new GameObject[4];
@@ -29,9 +29,9 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
         }
 
         [Inject]
-        private void Construct(IProjectConfigLoader projectConfigLoader)
+        private void Construct(ProjectConfig projectConfig)
         {
-            _inventoryConfig = projectConfigLoader.ProjectConfig.InventoryConfig;
+            _inventoryConfig = projectConfig.InventoryConfig;
         }
 
         private void Start()
@@ -71,6 +71,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
         public void OnDragged()
         {
+            transform.position = Mouse.current.position.ReadValue();
         }
 
         public void OnDragEnded()
@@ -99,7 +100,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item
 
                 Image instance = arrow.GetComponent<Image>();
                 instance.sprite = _arrowSprite;
-                instance.rectTransform.sizeDelta = _arrrowSize;
+                instance.rectTransform.sizeDelta = _arrowSize;
 
                 float angle = i switch
                 {

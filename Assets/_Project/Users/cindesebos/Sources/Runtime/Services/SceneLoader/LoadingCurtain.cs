@@ -1,5 +1,5 @@
 using UnityEngine;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Services.SceneLoader
 {

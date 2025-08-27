@@ -15,7 +15,7 @@ namespace Sources.Runtime.Gameplay.Inventory.Item.Configurer
         [Button("Initialize")]
         private void Initialize()
         {
-            if (_image == null)
+            if (!_image)
                 return;
 
             _image.sprite = _config.Icon;
@@ -34,10 +34,6 @@ namespace Sources.Runtime.Gameplay.Inventory.Item.Configurer
                 cell.transform.localPosition = localPos;
                 cell.name = "CellPoint";
             }
-
-#if UNITY_EDITOR
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
         }
 
         [Button("Clear Cells")]

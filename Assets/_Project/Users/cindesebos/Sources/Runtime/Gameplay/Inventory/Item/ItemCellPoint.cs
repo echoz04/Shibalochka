@@ -1,9 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using Sources.Runtime.Gameplay.Configs;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using Zenject;
 
 namespace Sources.Runtime.Gameplay.Inventory.Item
 {

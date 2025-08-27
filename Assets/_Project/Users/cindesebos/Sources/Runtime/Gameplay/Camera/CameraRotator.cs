@@ -1,40 +1,42 @@
+using System;
+using Sources.Signals;
 using UnityEngine;
-using Zenject;
-using UnityEngine.InputSystem;
-using Sources.Runtime.Services.ProjectConfigLoader;
 using Unity.Cinemachine;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.Camera
 {
-    public class CameraRotator : MonoBehaviour
+    public class CameraRotator : MonoBehaviour, IInitializable, IDisposable
     {
         [SerializeField] private CinemachineInputAxisController _cinemachineInputAxisController;
-
-        private CursorView _cursorView;
+        
+        private ISignalBus _signalBus;
 
         [Inject]
-        private void Construct(CursorView cursorView)
+        private void Construct(ISignalBus signalBus)
         {
-            _cursorView = cursorView;
+            _signalBus = signalBus;
         }
 
-        private void Start()
+        void IInitializable.Initialize()
         {
-            Enable();
+            _signalBus.Subscribe<CameraRotatorStateSignal>(SetState, true);
+        }
+        
+        void IDisposable.Dispose()
+        {
+            _signalBus.Unsubscribe<CameraRotatorStateSignal>(SetState);
         }
 
-        public void Enable()
+        private void SetState(CameraRotatorStateSignal signal)
         {
-            _cursorView.Hide();
-
-            _cinemachineInputAxisController.enabled = true;
+            SetState(signal.State);
         }
 
-        public void Disable()
+        public void SetState(bool state)
         {
-            _cursorView.Show();
-
-            _cinemachineInputAxisController.enabled = false;
+            _cinemachineInputAxisController.enabled = state;
         }
     }
 }

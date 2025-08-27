@@ -2,8 +2,7 @@ using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Services.SceneLoader;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Zenject;
+using VContainer;
 
 namespace Sources.Runtime.Gameplay.Map
 {

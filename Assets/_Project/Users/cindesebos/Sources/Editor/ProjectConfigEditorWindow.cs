@@ -31,7 +31,7 @@ namespace Sources.Editor
 
         [ShowIf(nameof(_projectConfig)), InlineProperty]
         [TabGroup("Configs", "Discord")] public DiscordConfig _discordConfig;
-
+        
         [Title("Edit ItemConfig"), PropertyOrder(10), Space(10)]
         [ShowIf(nameof(_projectConfig))]
         [TabGroup("Configs", "Items")]

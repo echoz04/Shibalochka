@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Sources.Runtime.Gameplay.Configs.Fish;
 using Sources.Runtime.Gameplay.Configs.Items;
 using UnityEngine;
 

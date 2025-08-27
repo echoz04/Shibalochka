@@ -2,26 +2,27 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Sources.Runtime.Services.ProjectConfigLoader;
-using Zenject;
+using Sources.Runtime.Gameplay.Configs;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Gameplay.Inventory
 {
-    public class InventoryView : MonoBehaviour
+    public class InventoryView : MonoBehaviour, IInitializable
     {
         private InventoryRoot _root;
-        private IProjectConfigLoader _projectConfigLoader;
+        private ProjectConfig _projectConfig;
 
         [Inject]
-        private void Construct(IProjectConfigLoader projectConfigLoader, InventoryRoot root)
+        private void Construct(ProjectConfig projectConfig, InventoryRoot root)
         {
-            _projectConfigLoader = projectConfigLoader;
+            _projectConfig = projectConfig;
             _root = root;
         }
 
-        public void Initialize()
+        void IInitializable.Initialize()
         {
-            if (_root == null)
+            if (!_root)
                 return;
 
             _root.OnBuildCells += BuildCells;
@@ -33,8 +34,8 @@ namespace Sources.Runtime.Gameplay.Inventory
 
         private async UniTaskVoid AnimateCellsAsync(List<InventoryCell> cells)
         {
-            float animationDuration = _projectConfigLoader.ProjectConfig.InventoryConfig.CellsSpawnAnimationDuration;
-            float delay = _projectConfigLoader.ProjectConfig.InventoryConfig.DelayBetweenCellsSpawnAnimation;
+            float animationDuration = _projectConfig.InventoryConfig.CellsSpawnAnimationDuration;
+            float delay = _projectConfig.InventoryConfig.DelayBetweenCellsSpawnAnimation;
 
             foreach (var cell in cells)
             {

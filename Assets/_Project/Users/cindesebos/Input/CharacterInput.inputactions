@@ -2,20 +2,11 @@
     "name": "CharacterInput",
     "maps": [
         {
-            "name": "MiniGames",
+            "name": "Game",
             "id": "505a0d2e-1f22-4b49-9db0-008383aa560f",
             "actions": [
                 {
-                    "name": "UseMovingPointer",
-                    "type": "Button",
-                    "id": "96e7e602-a261-49e8-9aa1-6cbcfccce711",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "ShowStamina",
+                    "name": "StartPowerBar",
                     "type": "Button",
                     "id": "9bb38e9f-b57a-4b5a-a537-81e5ace522f9",
                     "expectedControlType": "",
@@ -24,9 +15,45 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "OpenInventory",
+                    "type": "Button",
+                    "id": "5d38c495-aac8-4819-b35e-ea138c8f69fc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CatchFish",
                     "type": "Button",
-                    "id": "1370c978-c915-4ca4-9196-fad2897adf9c",
+                    "id": "dd375e22-734f-4d90-8cbb-d72ef8c8cd9f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenMenu",
+                    "type": "Button",
+                    "id": "a0bebc22-1752-409f-9683-9f5b3ae60e51",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchCursor",
+                    "type": "Button",
+                    "id": "987b6f48-ecb1-4fbe-a998-e9ac0faf0eb7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenMap",
+                    "type": "Button",
+                    "id": "1bbfd568-1876-48d7-b26c-6f84e8d56a36",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -36,34 +63,67 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "5c1b383f-0887-4093-b814-7d5520adeff6",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UseMovingPointer",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d76a91a9-1695-4dc1-9794-5f8288f75ff0",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ShowStamina",
+                    "action": "StartPowerBar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ca415b5a-b922-456b-8cdd-818138121805",
+                    "id": "41c50fd0-d94f-4511-b1fc-c87beb3b7959",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3856a3f3-a4ca-4a04-9910-679617e2b403",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "CatchFish",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0fbc6ff-3b08-461c-a52b-a0f08153fbe0",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d05389b-3423-4d3a-b4e1-17d988a69291",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchCursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0637f036-4414-44f2-9e01-bb33b1677484",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenMap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -138,13 +198,13 @@
             ]
         },
         {
-            "name": "UI",
-            "id": "469c89d5-7cb0-4ac0-82fa-a2bc9f131fb9",
+            "name": "Inventory",
+            "id": "3a375571-580f-4c6d-b57c-62dadaa8e41f",
             "actions": [
                 {
-                    "name": "ToggleInventoryVisibility",
+                    "name": "CloseInventory",
                     "type": "Button",
-                    "id": "8d8a1fad-0384-4095-898e-127174f7a273",
+                    "id": "ba209d5c-8650-4b53-ae04-47ccc3886fcb",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -163,12 +223,40 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "e48c66ab-d1ea-40b3-9996-d365a250460f",
+                    "id": "335e7f8d-d8fa-4758-8c24-062aecdd7e10",
                     "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ToggleInventoryVisibility",
+                    "action": "CloseInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Fishing",
+            "id": "514bc25c-0221-4daf-ace7-a85a8d59cd45",
+            "actions": [
+                {
+                    "name": "UseMovingPointer",
+                    "type": "Button",
+                    "id": "63dea696-e7e9-4bdc-9f0a-a9d1fbe9008f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "57cf5cfb-4c75-4e53-8dfc-47dffe84d392",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseMovingPointer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -180,6 +268,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleMapVisibility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Map",
+            "id": "afe33f8b-38e6-4f80-a345-6dc102600192",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "5e9c0e20-217a-4df5-9de2-c35270dc19d0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2efaf307-1e5e-4874-87b8-a85ea83056cc",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,51 +1,58 @@
-using Zenject;
 using Cysharp.Threading.Tasks;
-using Sources.Runtime.Services.AssetLoader;
-using Sources.Runtime.Services.SceneLoader;
-using UnityEngine;
-using Sources.Runtime.Services.ProjectConfigLoader;
-using Sources.Runtime.Gameplay.Inventory;
 using Sources.Runtime.Gameplay.MiniGames.Fishing;
-using Sources.Runtime.Project;
+using Sources.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
+using VContainer;
+using VContainer.Unity;
 
 namespace Sources.Runtime.Bootstrap
 {
     public class BootstrapService : IInitializable
     {
-        private readonly IAssetLoader _assetLoader;
-        private readonly ISceneLoader _sceneLoader;
-        private readonly IProjectConfigLoader _projectConfigLoader;
-        private readonly Scene _sceneToLoad;
+        private readonly IAddressableSceneLoader _sceneLoader;
+        private readonly ScenesData _scenesData;
         private readonly DiscordOverlayDisplayer _discordOverlayDisplayer;
         private readonly IMiniGameRewardService _miniGameRewardService;
-
-        public BootstrapService(IAssetLoader assetLoader, ISceneLoader sceneLoader, IProjectConfigLoader projectConfigLoader, Scene sceneToLoad,
-        DiscordOverlayDisplayer discordOverlayDisplayer, IMiniGameRewardService miniGameRewardService)
+        
+        [Inject]
+        public BootstrapService(
+            IAddressableSceneLoader sceneLoader, 
+            ScenesData scenesData,
+            DiscordOverlayDisplayer discordOverlayDisplayer, 
+            IMiniGameRewardService miniGameRewardService)
         {
-            _assetLoader = assetLoader;
             _sceneLoader = sceneLoader;
-            _projectConfigLoader = projectConfigLoader;
-            _sceneToLoad = sceneToLoad;
+            _scenesData = scenesData;
             _discordOverlayDisplayer = discordOverlayDisplayer;
             _miniGameRewardService = miniGameRewardService;
         }
 
-        public async void Initialize()
+        async void IInitializable.Initialize()
         {
-            {
-                await _projectConfigLoader.LoadProjectConfigAsync();
-                _discordOverlayDisplayer.Initialize();
+                // _discordOverlayDisplayer.Initialize();
                 _miniGameRewardService.Initialize();
-#if UNITY_EDITOR
-                ContentManagementSystem.Instance.ProjectConfigLoader = _projectConfigLoader;
-
-                Debug.Log($"Loading scene: {ContentManagementSystem.Instance.SceneToLoad}");
-
-                await _sceneLoader.LoadSceneAsync(ContentManagementSystem.Instance.SceneToLoad);
-#else
-                await _sceneLoader.LoadSceneAsync(_sceneToLoad);
-#endif
-            }
+                await BootstrapScenes();
+        }
+        
+        private async UniTask BootstrapScenes()
+        {
+            var uiScene = _scenesData.GetSceneBindingByKey(SceneKey.UI).Scene;
+            var menuScene = _scenesData.GetSceneBindingByKey(SceneKey.Menu).Scene;
+            var bootsTrapScene = _scenesData.GetSceneBindingByKey(SceneKey.Bootstrap).Scene;
+            
+            var scenesToLoad = new [] {
+                uiScene,
+                menuScene
+            };
+            await _sceneLoader.LoadScenes(
+                scenesToLoad, 
+                LoadSceneMode.Additive,
+                () =>
+                {
+                    _sceneLoader.ActivateScene(menuScene);
+                    _sceneLoader.UnloadScene(bootsTrapScene);
+                });
         }
     }
 }

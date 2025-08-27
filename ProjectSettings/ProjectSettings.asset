@@ -144,6 +144,7 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 408d032a475972c45a8d283ffeecd076, type: 3}
   - {fileID: 11400000, guid: 837fa4634cd2b3f42936281d8642e917, type: 2}
+  - {fileID: 11400000, guid: 6faa00826847e0343985738c5dd6fb15, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -935,11 +936,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 2af8bbce-66a4-423c-b78b-64ba40e594d2
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Shibalochka
-  organizationId: y07programmer
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
