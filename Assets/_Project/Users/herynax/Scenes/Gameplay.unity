@@ -15,16 +15,16 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 0
-  m_FogColor: {r: 0.6666667, g: 0.9568628, b: 0.9960785, a: 1}
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.007
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.57112503, g: 0.45078585, b: 0.27049786, a: 1}
+  m_AmbientSkyColor: {r: 0.2756764, g: 0.5505723, b: 0.990566, a: 1}
   m_AmbientEquatorColor: {r: 0.7681514, g: 0.57112503, b: 0.30054384, a: 1}
   m_AmbientGroundColor: {r: 0.5840786, g: 0.31398875, b: 0.12743773, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 1
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.37798145, g: 0.43654484, b: 0.5849056, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 617d9be015db68348a623b01ea51a8c5, type: 2}
   m_HaloStrength: 1
@@ -2044,8 +2044,6 @@ MonoBehaviour:
   _gridContent: {fileID: 616503687}
   _controlButtons: {fileID: 573247571}
   _rewardsPanel: {fileID: 467509212}
-  _unUsedItems: []
-  _storingFishes: []
 --- !u!1001 &100643557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2409,6 +2407,7 @@ GameObject:
   - component: {fileID: 119081262}
   - component: {fileID: 119081261}
   - component: {fileID: 119081263}
+  - component: {fileID: 119081264}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2426,7 +2425,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.9557064, b: 0.8349056, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2489,7 +2488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119081260}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46433827, y: -0.09257676, z: 0.1537506, w: 0.8672832}
+  m_LocalRotation: {x: -0.061628457, y: 0.70441604, z: 0.70441604, w: 0.061628457}
   m_LocalPosition: {x: 0.96208954, y: 15.349998, z: 6.572336}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2519,6 +2518,22 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &119081264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119081260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df61ccb26f4367840bd67e07fe00e2f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directionalLight: {fileID: 119081261}
+  preset: {fileID: 11400000, guid: 6996cd17be2837f47a804fde7de6f383, type: 2}
+  timeOfDay: 0
+  dayLengthInSeconds: 24
 --- !u!1 &120712177 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7446732879817801200, guid: 015dc0e21c0c9974796f2056e2be9eaf, type: 3}
@@ -5181,6 +5196,7 @@ Transform:
   m_Children:
   - {fileID: 1926372544}
   - {fileID: 1437802605}
+  - {fileID: 1743296712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &238178959
@@ -11188,6 +11204,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4944738759097233750, guid: df08f35134cbc3545943c56a778294b9, type: 3}
   m_PrefabInstance: {fileID: 473757125}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &473757127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6318362069101142076, guid: df08f35134cbc3545943c56a778294b9, type: 3}
+  m_PrefabInstance: {fileID: 473757125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &478379000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16828,6 +16849,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2673118235411853001, guid: 9af7525640cb834429f792d94742d86f, type: 3}
   m_PrefabInstance: {fileID: 725147891}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &726285263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 726285265}
+  - component: {fileID: 726285264}
+  m_Layer: 0
+  m_Name: RainEmmiter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &726285264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726285263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2098028005
+      Data2: 1296306737
+      Data3: -1859459157
+      Data4: 760770510
+    Path: event:/SFX/Ambience/Water
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &726285265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726285263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 56.129097, y: 45.865997, z: 35.45563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &726416205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18884,14 +18968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78be9dee621ebc5c7b0038d1a3fadd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fishingMiniGameBootstrapper: {fileID: 1764708060}
-  _staminaHandler: {fileID: 685006685}
-  _inventoryRoot: {fileID: 91321808}
-  _inventoryView: {fileID: 91321807}
-  _cameraRotator: {fileID: 1848025299}
-  _itemRootPrefab: {fileID: 1783771171914294077, guid: da823d099b37aa65aab1b3e652c47f65, type: 3}
-  _walletView: {fileID: 1162562215}
-  _mapView: {fileID: 1594982548}
 --- !u!1001 &844986612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30003,11 +30079,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -2098028005
-      Data2: 1296306737
-      Data3: -1859459157
-      Data4: 760770510
-    Path: event:/SFX/Ambience/Water
+      Data1: -149165343
+      Data2: 1252849759
+      Data3: -148257382
+      Data4: 482449869
+    Path: event:/SFX/Ambience/Tropical
   Event: 
   EventPlayTrigger: 1
   EventStopTrigger: 2
@@ -39716,6 +39792,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 193d7950bcd2aa84dbf9ba7b0ae3dc2d, type: 3}
   m_PrefabInstance: {fileID: 1738557004}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1743296711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743296712}
+  - component: {fileID: 1743296713}
+  m_Layer: 0
+  m_Name: WeatherManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1743296712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743296711}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 233385015}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1743296713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743296711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e53081a77144d454f96bb2fcb80b217d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rainParticles: {fileID: 473757127}
+  rainEvent:
+    Guid:
+      Data1: -1557048988
+      Data2: 1310188442
+      Data3: 83526816
+      Data4: 2143277561
+    Path: event:/SFX/Ambience/Rain
+  minDelayBetweenRainsMinutes: 0.1
+  maxDelayBetweenRainsMinutes: 3
+  minRainDurationMinutes: 0.5
+  maxRainDurationMinutes: 2
+  fadeOutTime: 3
 --- !u!1 &1744426564
 GameObject:
   m_ObjectHideFlags: 0
@@ -40399,6 +40532,7 @@ MonoBehaviour:
     GoldFishPrefab: {fileID: 1309913143429456720, guid: bb25e1ccc39c537fea2bc5e2cca28246, type: 3}
     CameraRotator: {fileID: 1848025299}
     Camera: {fileID: 1708742629}
+    ProjectConfig: {fileID: 0}
     InventoryRoot: {fileID: 0}
 --- !u!1001 &1765441880
 PrefabInstance:
@@ -44402,26 +44536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers:
-  - {fileID: 844205033}
-  _installerPrefabs: []
-  _autoRun: 1
-  OnPreInstall:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPostInstall:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPreResolve:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPostResolve:
-    m_PersistentCalls:
-      m_Calls: []
-  _parentNewObjectsUnderSceneContext: 0
-  _contractNames: []
-  _parentContractNames: []
 --- !u!1001 &1929752856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49233,3 +49347,4 @@ SceneRoots:
   - {fileID: 591583563}
   - {fileID: 1848025298}
   - {fileID: 1298564894}
+  - {fileID: 726285265}
