@@ -1,8 +1,8 @@
 using System;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Sources.Runtime.Gameplay.Configs;
 using Sources.Signals;
+using Sources.UI.Services.Fishing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
@@ -11,12 +11,13 @@ namespace Sources.UI.Services.PowerBar
 {
     public class PowerBarService : IUIService
     {
-
         private ISignalBus _signalBus;
         private PowerBarView _view;
         private CharacterInput _characterInput;
         private Tween _tween;
         private ProjectConfig _projectConfig;
+        private FishingGame _fishingGame;
+        private FishingConfig _fishingConfig;
 
         private float _powerValue;
         
@@ -27,13 +28,17 @@ namespace Sources.UI.Services.PowerBar
             PowerBarView view,
             ISignalBus signalBus,
             CharacterInput characterInput,
-            ProjectConfig projectConfig
+            ProjectConfig projectConfig,
+            FishingGame fishingGame,
+            FishingConfig fishingConfig
         )
         {
             _view = view;
             _signalBus = signalBus;
             _characterInput = characterInput;
             _projectConfig = projectConfig;
+            _fishingGame = fishingGame;
+            _fishingConfig = fishingConfig;
         }
 
         public void Enable()
@@ -93,7 +98,9 @@ namespace Sources.UI.Services.PowerBar
                     await _view.ShowMaxPowerSign();
                 }
                 _view.Hide();
-                // TODO Запускать ожидание поклёвки и игру следом
+
+                var data = _fishingConfig.GetFishingData();
+                _fishingGame.StartGame(data);
             }
             catch (Exception e)
             {

@@ -2,7 +2,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Sources.Signals
 {
-    public class LoadingSceneSignal
+    public struct LoadingSceneSignal
     {
         public AssetReference SceneToLoad { get; }
 

@@ -59,18 +59,9 @@ namespace Sources.UI.Services
         private void OnStartGame()
         {
             var gameplayScene = _scenesData.GetSceneBindingByKey(SceneKey.IslandTropical).Scene;
-            // var menuScene = _scenesData.GetSceneBindingByKey(SceneKey.Menu).Scene;
             
             _signalBus.Fire(new LoadingSceneSignal(gameplayScene));
-            _signalBus.Fire(new ScreenChangeSignal(typeof(LoadingScreen)));
-            
-            // _sceneLoader.LoadScene(
-            //     gameplayScene, LoadSceneMode.Additive,
-            //     () =>
-            //     {
-            //         _sceneLoader.ActivateScene(gameplayScene);
-            //         _sceneLoader.UnloadScene(menuScene);
-            //     }).Forget();
+            _signalBus.Fire(new ScreenChangeSignal(typeof(LoadingScreen)));   
         }
 
         private void OnSettings()

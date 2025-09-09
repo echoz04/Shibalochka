@@ -332,6 +332,24 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pull"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb74eb22-d9a4-4475-80ee-598c33391411"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SmashBarrier"",
+                    ""type"": ""Button"",
+                    ""id"": ""792c0496-3b77-4f87-b184-107fb0a2c93d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -354,6 +372,28 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleMapVisibility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e8a2715-1d39-406b-a2fa-6956a80a330c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""112646b1-f8bb-4f68-80ab-8fcde68a6107"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SmashBarrier"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -410,6 +450,8 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         // Fishing
         m_Fishing = asset.FindActionMap("Fishing", throwIfNotFound: true);
         m_Fishing_UseMovingPointer = m_Fishing.FindAction("UseMovingPointer", throwIfNotFound: true);
+        m_Fishing_Pull = m_Fishing.FindAction("Pull", throwIfNotFound: true);
+        m_Fishing_SmashBarrier = m_Fishing.FindAction("SmashBarrier", throwIfNotFound: true);
         // Map
         m_Map = asset.FindActionMap("Map", throwIfNotFound: true);
         m_Map_Newaction = m_Map.FindAction("New action", throwIfNotFound: true);
@@ -874,6 +916,8 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Fishing;
     private List<IFishingActions> m_FishingActionsCallbackInterfaces = new List<IFishingActions>();
     private readonly InputAction m_Fishing_UseMovingPointer;
+    private readonly InputAction m_Fishing_Pull;
+    private readonly InputAction m_Fishing_SmashBarrier;
     /// <summary>
     /// Provides access to input actions defined in input action map "Fishing".
     /// </summary>
@@ -889,6 +933,14 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Fishing/UseMovingPointer".
         /// </summary>
         public InputAction @UseMovingPointer => m_Wrapper.m_Fishing_UseMovingPointer;
+        /// <summary>
+        /// Provides access to the underlying input action "Fishing/Pull".
+        /// </summary>
+        public InputAction @Pull => m_Wrapper.m_Fishing_Pull;
+        /// <summary>
+        /// Provides access to the underlying input action "Fishing/SmashBarrier".
+        /// </summary>
+        public InputAction @SmashBarrier => m_Wrapper.m_Fishing_SmashBarrier;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -918,6 +970,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @UseMovingPointer.started += instance.OnUseMovingPointer;
             @UseMovingPointer.performed += instance.OnUseMovingPointer;
             @UseMovingPointer.canceled += instance.OnUseMovingPointer;
+            @Pull.started += instance.OnPull;
+            @Pull.performed += instance.OnPull;
+            @Pull.canceled += instance.OnPull;
+            @SmashBarrier.started += instance.OnSmashBarrier;
+            @SmashBarrier.performed += instance.OnSmashBarrier;
+            @SmashBarrier.canceled += instance.OnSmashBarrier;
         }
 
         /// <summary>
@@ -932,6 +990,12 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
             @UseMovingPointer.started -= instance.OnUseMovingPointer;
             @UseMovingPointer.performed -= instance.OnUseMovingPointer;
             @UseMovingPointer.canceled -= instance.OnUseMovingPointer;
+            @Pull.started -= instance.OnPull;
+            @Pull.performed -= instance.OnPull;
+            @Pull.canceled -= instance.OnPull;
+            @SmashBarrier.started -= instance.OnSmashBarrier;
+            @SmashBarrier.performed -= instance.OnSmashBarrier;
+            @SmashBarrier.canceled -= instance.OnSmashBarrier;
         }
 
         /// <summary>
@@ -1176,6 +1240,20 @@ public partial class @CharacterInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseMovingPointer(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Pull" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPull(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SmashBarrier" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSmashBarrier(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Map" which allows adding and removing callbacks.

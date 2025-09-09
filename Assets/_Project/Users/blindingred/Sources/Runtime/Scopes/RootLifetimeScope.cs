@@ -4,6 +4,7 @@ using Sources.Runtime.Gameplay.MiniGames.Fishing;
 using Sources.Runtime.Services.AssetLoader;
 using Sources.SceneManagement;
 using Sources.Signals;
+using Sources.UI.Services.Fishing;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,19 +15,27 @@ namespace Sources
     {
         [SerializeField] private ProjectConfig _projectConfig;
         [SerializeField] private ScenesData _scenesData;
+        [SerializeField] private FishingConfig _fishingConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
             BindSceneLoader(builder);
-            BindInput(builder);
+            RegisterScenesData(builder);
             
-            BindDiscordOverlayDisplayer(builder);
-            BindMiniGameRewardService(builder);
+            BindInput(builder);
+            RegisterCursorHandler(builder);
             
             RegisterProjectConfig(builder);
-            RegisterScenesData(builder);
+           
             RegisterSignalBus(builder);
-            RegisterCursorHandler(builder);
+
+            RegisterFishingGame(builder);
+        }
+
+        private void RegisterFishingGame(IContainerBuilder builder)
+        {
+            builder.Register<FishingGame>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.RegisterInstance(_fishingConfig).AsSelf().AsImplementedInterfaces();
         }
 
         private void RegisterSignalBus(IContainerBuilder builder)
@@ -42,11 +51,6 @@ namespace Sources
         private void RegisterProjectConfig(IContainerBuilder builder)
         {
             builder.RegisterInstance(_projectConfig);
-        }
-
-        private void BindMiniGameRewardService(IContainerBuilder builder)
-        {
-            builder.Register<MiniGameRewardService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
         }
 
         private void BindDiscordOverlayDisplayer(IContainerBuilder builder)

@@ -18,20 +18,14 @@ namespace Sources.Runtime.Bootstrap
         [Inject]
         public BootstrapService(
             IAddressableSceneLoader sceneLoader, 
-            ScenesData scenesData,
-            DiscordOverlayDisplayer discordOverlayDisplayer, 
-            IMiniGameRewardService miniGameRewardService)
+            ScenesData scenesData)
         {
             _sceneLoader = sceneLoader;
             _scenesData = scenesData;
-            _discordOverlayDisplayer = discordOverlayDisplayer;
-            _miniGameRewardService = miniGameRewardService;
         }
 
         async void IInitializable.Initialize()
         {
-                // _discordOverlayDisplayer.Initialize();
-                _miniGameRewardService.Initialize();
                 await BootstrapScenes();
         }
         

@@ -1,4 +1,5 @@
 using Sources.UI.Services;
+using Sources.UI.Services.Fishing;
 using Sources.UI.Services.Loading;
 using Sources.UI.Services.PowerBar;
 using VContainer;
@@ -22,6 +23,7 @@ namespace Sources
             RegisterFade(builder);
             RegisterLoading(builder);
             RegisterPowerBar(builder);
+            RegisterFishingMinigame(builder);
         }
 
         private void RegisterUIScreens(IContainerBuilder builder)
@@ -29,6 +31,7 @@ namespace Sources
             builder.RegisterComponentInHierarchy<MenuScreen>().AsSelf().AsImplementedInterfaces();
             builder.RegisterComponentInHierarchy<MainScreen>().AsSelf().AsImplementedInterfaces();
             builder.RegisterComponentInHierarchy<MapScreen>().AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponentInHierarchy<FishingScreen>().AsSelf().AsImplementedInterfaces();
             builder.RegisterComponentInHierarchy<LoadingScreen>().AsSelf().AsImplementedInterfaces();
         }
 
@@ -72,6 +75,11 @@ namespace Sources
         {
             builder.Register<PowerBarService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.RegisterComponentInHierarchy<PowerBarView>().AsSelf().AsImplementedInterfaces();
+        }
+        private void RegisterFishingMinigame(IContainerBuilder builder)
+        {
+            builder.Register<FishingService>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.RegisterComponentInHierarchy<FishingView>().AsSelf().AsImplementedInterfaces();
         }
     }
 }

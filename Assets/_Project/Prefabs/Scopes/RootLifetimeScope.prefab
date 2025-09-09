@@ -50,3 +50,4 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _projectConfig: {fileID: 11400000, guid: 82330c3153f6db7c2aa4443f51c445e4, type: 2}
   _scenesData: {fileID: 11400000, guid: a0ad9772d4d5d4740ab7dfdf70e0f609, type: 2}
+  _fishingConfig: {fileID: 11400000, guid: ad4f95c4758e59842832b46735abda40, type: 2}

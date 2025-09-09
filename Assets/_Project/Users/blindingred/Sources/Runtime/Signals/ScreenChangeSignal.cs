@@ -2,7 +2,7 @@ using System;
 
 namespace Sources.Signals
 {
-    public class ScreenChangeSignal
+    public struct ScreenChangeSignal
     {
         public Type ScreenType { get; }
 

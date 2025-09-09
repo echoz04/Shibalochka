@@ -49,6 +49,7 @@ namespace Sources.UI.Services
             _characterInput.Game.SwitchCursor.performed += SwitchCursor;
             _characterInput.Game.OpenMap.performed += OpenMap;
             _characterInput.Game.OpenInventory.performed += ShowFade;
+            _characterInput.Game.CatchFish.performed += TestFishing;
         }
 
         private void Unsubscribe()
@@ -57,7 +58,8 @@ namespace Sources.UI.Services
             _view.Unsubscribe(_view.SettingsKey, OnSettings);
             _characterInput.Game.SwitchCursor.performed -= SwitchCursor;
             _characterInput.Game.OpenMap.performed -= OpenMap;
-            _characterInput.Game.OpenInventory.performed += ShowFade;
+            _characterInput.Game.OpenInventory.performed -= ShowFade;
+            _characterInput.Game.CatchFish.performed -= TestFishing;
         }
         
         private void ShowFade(InputAction.CallbackContext obj)
@@ -90,6 +92,11 @@ namespace Sources.UI.Services
         private void OnSettings()
         {
             Debug.Log("Settings");
+        }
+
+        private void TestFishing(InputAction.CallbackContext ctx)
+        {
+            // _signalBus.Fire(new ScreenChangeSignal(typeof(FishingScreen)));
         }
     }
 }

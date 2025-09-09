@@ -19,6 +19,7 @@ namespace Sources
         {
             Debug.Log("UIEntryPoint::Initialize()");
             _signalBus.Fire(new ScreenChangeSignal(typeof(MenuScreen)));
+            // _signalBus.Fire(new ScreenChangeSignal(typeof(FishingScreen)));
         }
     }
 }
