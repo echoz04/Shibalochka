@@ -65,6 +65,7 @@ namespace Sources.UI.Services.Fishing
             _characterInput.Fishing.Disable();
             _characterInput.Fishing.Pull.performed -= Pull;
             _characterInput.Fishing.Pull.canceled -= CancelPull;
+            _characterInput.Fishing.SmashBarrier.performed -= SmashBarrier;
         }
 
         private void Pull(InputAction.CallbackContext obj)
