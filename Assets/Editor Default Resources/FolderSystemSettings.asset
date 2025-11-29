@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 241033feccdeaed47935ff023d3344ae, type: 3}
   m_Name: FolderSystemSettings
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Gaskellgames.FolderSystem::Gaskellgames.FolderSystem.EditorOnly.FolderSystemSettings_SO
   projectFolderState: 1
   userGeneratedLinks:
     serializedDictionary: []
